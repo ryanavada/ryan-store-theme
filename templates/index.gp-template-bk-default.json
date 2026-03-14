@@ -1,1 +1,360 @@
-{"order":["rich_text_QxGeJB","collection_list_GCwGhV","featured-collection-0","featured_product_HLVW7h","multicolumn_Etge8c"],"sections":{"collection_list_GCwGhV":{"block_order":["featured_collection_7WYtAG","featured_collection_w7pzUF","featured_collection_DiC4VL"],"blocks":{"featured_collection_7WYtAG":{"settings":{"collection":"bestseller"},"type":"featured_collection"},"featured_collection_DiC4VL":{"settings":{"collection":"women-s-collection"},"type":"featured_collection"},"featured_collection_w7pzUF":{"settings":{"collection":"men-s-collection"},"type":"featured_collection"}},"name":"t:sections.collection-list.presets.name","settings":{"color_scheme":"","columns_desktop":3,"columns_mobile":"1","heading_size":"h1","image_ratio":"square","padding_bottom":36,"padding_top":36,"show_view_all":false,"swipe_on_mobile":false,"title":"Collections"},"type":"collection-list"},"featured-collection-0":{"settings":{"collection":"all","color_scheme":"scheme-1","columns_desktop":4,"columns_mobile":"2","description":"","description_style":"body","enable_desktop_slider":false,"full_width":false,"heading_size":"h2","image_ratio":"portrait","image_shape":"default","padding_bottom":60,"padding_top":60,"products_to_show":4,"quick_add":"standard","show_description":false,"show_rating":false,"show_secondary_image":false,"show_vendor":false,"show_view_all":false,"swipe_on_mobile":false,"title":"Featured products","view_all_style":"solid"},"type":"featured-collection"},"featured_product_HLVW7h":{"block_order":["text_WFQ96Y","title_qNjbQ4","price_nYBd8K","variant_picker_qCQXCb","quantity_selector_qmCecc","buy_buttons_cTMiPa","share_ri4yRf"],"blocks":{"buy_buttons_cTMiPa":{"settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true},"type":"buy_buttons"},"price_nYBd8K":{"settings":{},"type":"price"},"quantity_selector_qmCecc":{"settings":{},"type":"quantity_selector"},"share_ri4yRf":{"settings":{"share_label":"Share"},"type":"share"},"text_WFQ96Y":{"settings":{"text":"{{ section.settings.product.vendor }}","text_style":"uppercase"},"type":"text"},"title_qNjbQ4":{"settings":{"heading_size":"h1"},"type":"title"},"variant_picker_qCQXCb":{"settings":{"picker_type":"button","swatch_shape":"circle"},"type":"variant_picker"}},"name":"t:sections.featured-product.presets.name","settings":{"color_scheme":"","constrain_to_viewport":true,"enable_video_looping":false,"hide_variants":false,"image_zoom":"lightbox","media_fit":"contain","media_position":"left","media_size":"medium","padding_bottom":36,"padding_top":36,"product":"mens-wool-piper-go","secondary_background":false},"type":"featured-product"},"multicolumn_Etge8c":{"block_order":["column_YfJyMp","column_mncHnC","column_QB7QUE"],"blocks":{"column_QB7QUE":{"settings":{"link":"","link_label":"","text":"\u003cp\u003eWe replace petroleum-based synthetics with natural alternatives wherever we can. Like using wool, tree fiber, and sugarcane. They’re soft, breathable, and better for the planet—win, win, win.\u003c/p\u003e","title":"Materials From The Earth"},"type":"column"},"column_YfJyMp":{"settings":{"link":"","link_label":"","text":"\u003cp\u003eLightweight, bouncy, and wildly comfortable, Allbirds shoes make any outing feel effortless. Slip in, lace up, or slide them on and enjoy the comfy support.\u003c/p\u003e","title":"Wear All Day Comfort"},"type":"column"},"column_mncHnC":{"settings":{"link":"","link_label":"","text":"\u003cp\u003eFrom materials to transport, we’re working to reduce our carbon footprint to near zero. Holding ourselves accountable and striving for climate goals isn’t a 30-year goal—it’s now.\u003c/p\u003e","title":"Sustainability In Every Step"},"type":"column"}},"name":"t:sections.multicolumn.presets.name","settings":{"background_style":"primary","button_label":"Button label","button_link":"","color_scheme":"","column_alignment":"left","columns_desktop":3,"columns_mobile":"1","heading_size":"h1","image_ratio":"adapt","image_width":"full","padding_bottom":36,"padding_top":36,"swipe_on_mobile":false,"title":"Multicolumn"},"type":"multicolumn"},"rich_text_QxGeJB":{"block_order":["heading_JX3x7N","text_mHB7gN","button_UVDVc3"],"blocks":{"button_UVDVc3":{"settings":{"button_label":"SHOW MEN","button_label_2":"SHOP WOMEN","button_link":"shopify://collections/men-s-collection","button_link_2":"shopify://collections/women-s-collection","button_style_secondary":false,"button_style_secondary_2":false},"type":"button"},"heading_JX3x7N":{"settings":{"heading":"30% Off Sitewide","heading_size":"h1"},"type":"heading"},"text_mHB7gN":{"settings":{"text":"\u003cp\u003ePlus free shipping + 50% off faves\u003cbr/\u003e\u003c/p\u003e"},"type":"text"}},"name":"t:sections.rich-text.presets.name","settings":{"color_scheme":"","content_alignment":"center","desktop_content_position":"center","full_width":true,"padding_bottom":52,"padding_top":40},"type":"rich-text"}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "order": [
+    "rich_text_QxGeJB",
+    "collection_list_GCwGhV",
+    "featured_collection_3tMNqL",
+    "17655234056c6e8b9e",
+    "featured_product_HLVW7h",
+    "1765175250fc3b9ac1",
+    "multicolumn_Etge8c",
+    "1767496365c57e8d81"
+  ],
+  "sections": {
+    "1765175250fc3b9ac1": {
+      "block_order": [
+        "air_product_reviews_app_block_testimonials_kMfiJW"
+      ],
+      "blocks": {
+        "air_product_reviews_app_block_testimonials_kMfiJW": {
+          "settings": {},
+          "type": "shopify://apps/air-product-reviews/blocks/app-block-testimonials/c4e1e9ca-4d46-4e76-bc39-7e42417cb327"
+        }
+      },
+      "settings": {
+        "include_margins": true
+      },
+      "type": "apps"
+    },
+    "17655234056c6e8b9e": {
+      "block_order": [
+        "shopvid_mp_tiktok_block_TfPMff"
+      ],
+      "blocks": {
+        "shopvid_mp_tiktok_block_TfPMff": {
+          "settings": {
+            "mp_tiktok_feed_id": "2112-742875"
+          },
+          "type": "shopify://apps/shopvid/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022"
+        }
+      },
+      "settings": {
+        "include_margins": true
+      },
+      "type": "apps"
+    },
+    "1767496365c57e8d81": {
+      "block_order": [
+        "air_product_reviews_app_block_all_review_GH7FDi"
+      ],
+      "blocks": {
+        "air_product_reviews_app_block_all_review_GH7FDi": {
+          "settings": {
+            "air_allReviewsBlock_bgColor": "#ffffff",
+            "air_allReviewsBlock_heading": "",
+            "air_allReviewsBlock_hideProductThumbnails": false,
+            "air_allReviewsBlock_maxReview": 20,
+            "air_allReviewsBlock_onlyMedia": false,
+            "air_allReviewsBlock_onlyPositive": false,
+            "air_allReviewsBlock_selectedProduct": [],
+            "air_allReviewsBlock_summaryBgColor": "#f8f8f8",
+            "air_allReviewsBlock_useSimpleSummary": false
+          },
+          "type": "shopify://apps/air-product-reviews/blocks/app-block-all-review/c4e1e9ca-4d46-4e76-bc39-7e42417cb327"
+        }
+      },
+      "settings": {
+        "include_margins": true
+      },
+      "type": "apps"
+    },
+    "collection_list_GCwGhV": {
+      "block_order": [
+        "featured_collection_MpznNw",
+        "featured_collection_7WYtAG",
+        "featured_collection_w7pzUF",
+        "featured_collection_DiC4VL"
+      ],
+      "blocks": {
+        "featured_collection_7WYtAG": {
+          "settings": {
+            "collection": "bestseller"
+          },
+          "type": "featured_collection"
+        },
+        "featured_collection_DiC4VL": {
+          "settings": {
+            "collection": "women-s-collection"
+          },
+          "type": "featured_collection"
+        },
+        "featured_collection_MpznNw": {
+          "settings": {
+            "collection": "new-arrivals"
+          },
+          "type": "featured_collection"
+        },
+        "featured_collection_w7pzUF": {
+          "settings": {
+            "collection": "men-s-collection"
+          },
+          "type": "featured_collection"
+        }
+      },
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "show_view_all": false,
+        "swipe_on_mobile": false,
+        "title": "Collections"
+      },
+      "type": "collection-list"
+    },
+    "featured_collection_3tMNqL": {
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "new-arrivals",
+        "color_scheme": "",
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "description": "",
+        "description_style": "body",
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "heading_size": "h1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "products_to_show": 4,
+        "quick_add": "none",
+        "show_description": false,
+        "show_rating": false,
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "title": "Featured products",
+        "view_all_style": "solid"
+      },
+      "type": "featured-collection"
+    },
+    "featured_product_HLVW7h": {
+      "block_order": [
+        "text_WFQ96Y",
+        "title_qNjbQ4",
+        "price_nYBd8K",
+        "variant_picker_qCQXCb",
+        "quantity_selector_qmCecc",
+        "avada_subscription_card_gxrEXN",
+        "buy_buttons_cTMiPa",
+        "share_ri4yRf"
+      ],
+      "blocks": {
+        "avada_subscription_card_gxrEXN": {
+          "settings": {
+            "accent_color": "#14b8a6",
+            "autoship_title": "Autoship",
+            "badge_background": "#dc2626",
+            "badge_border_radius": 8,
+            "badge_text_color": "#ffffff",
+            "benefit_no_commitment": "No commitment. Cancel anytime",
+            "benefit_packed_at_origin": "Packed and roasted at origin",
+            "benefit_pay_upfront": "Pay upfront and save more",
+            "border_radius": 8,
+            "card_background": "#ffffff",
+            "card_border": "#e5e7eb",
+            "card_selected_background": "#f0fdfa",
+            "card_selected_border": "#14b8a6",
+            "card_spacing": "normal",
+            "deliver_every_title": "Deliver every:",
+            "horizontal_margin": 0,
+            "layout_style": "vertical_cards",
+            "learn_more_link": "/",
+            "learn_more_text": "Learn more",
+            "muted_text_color": "#6b7280",
+            "one_time_title": "One-time",
+            "prepaid_options_title": "Prepaid options:",
+            "prepaid_title": "Prepaid",
+            "save_from_text": "Save from",
+            "text_color": "#1a1a1a",
+            "title_color": "#1a1a1a",
+            "title_heading": "h3",
+            "title_heading_size": 20,
+            "vertical_margin": 24,
+            "widget_title": "Choose your plan"
+          },
+          "type": "avada_subscription_card"
+        },
+        "buy_buttons_cTMiPa": {
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          },
+          "type": "buy_buttons"
+        },
+        "price_nYBd8K": {
+          "settings": {},
+          "type": "price"
+        },
+        "quantity_selector_qmCecc": {
+          "settings": {},
+          "type": "quantity_selector"
+        },
+        "share_ri4yRf": {
+          "settings": {
+            "share_label": "Share"
+          },
+          "type": "share"
+        },
+        "text_WFQ96Y": {
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          },
+          "type": "text"
+        },
+        "title_qNjbQ4": {
+          "settings": {
+            "heading_size": "h1"
+          },
+          "type": "title"
+        },
+        "variant_picker_qCQXCb": {
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          },
+          "type": "variant_picker"
+        }
+      },
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "constrain_to_viewport": true,
+        "enable_video_looping": false,
+        "hide_variants": false,
+        "image_zoom": "lightbox",
+        "media_fit": "contain",
+        "media_position": "left",
+        "media_size": "medium",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "product": "mens-golf-dasher",
+        "secondary_background": false
+      },
+      "type": "featured-product"
+    },
+    "multicolumn_Etge8c": {
+      "block_order": [
+        "column_YfJyMp",
+        "column_mncHnC",
+        "column_QB7QUE"
+      ],
+      "blocks": {
+        "column_QB7QUE": {
+          "settings": {
+            "link": "",
+            "link_label": "",
+            "text": "<p>We replace petroleum-based synthetics with natural alternatives wherever we can. Like using wool, tree fiber, and sugarcane. They’re soft, breathable, and better for the planet—win, win, win.</p>",
+            "title": "Materials From The Earth"
+          },
+          "type": "column"
+        },
+        "column_YfJyMp": {
+          "settings": {
+            "link": "",
+            "link_label": "",
+            "text": "<p>Lightweight, bouncy, and wildly comfortable, Allbirds shoes make any outing feel effortless. Slip in, lace up, or slide them on and enjoy the comfy support.</p>",
+            "title": "Wear All Day Comfort"
+          },
+          "type": "column"
+        },
+        "column_mncHnC": {
+          "settings": {
+            "link": "",
+            "link_label": "",
+            "text": "<p>From materials to transport, we’re working to reduce our carbon footprint to near zero. Holding ourselves accountable and striving for climate goals isn’t a 30-year goal—it’s now.</p>",
+            "title": "Sustainability In Every Step"
+          },
+          "type": "column"
+        }
+      },
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "background_style": "primary",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "column_alignment": "left",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "heading_size": "h1",
+        "image_ratio": "adapt",
+        "image_width": "full",
+        "padding_bottom": 36,
+        "padding_top": 36,
+        "swipe_on_mobile": false,
+        "title": "Multicolumn"
+      },
+      "type": "multicolumn"
+    },
+    "rich_text_QxGeJB": {
+      "block_order": [
+        "heading_JX3x7N",
+        "text_mHB7gN",
+        "button_UVDVc3"
+      ],
+      "blocks": {
+        "button_UVDVc3": {
+          "settings": {
+            "button_label": "SHOW MEN",
+            "button_label_2": "SHOP WOMEN",
+            "button_link": "shopify://collections/men-s-collection",
+            "button_link_2": "shopify://collections/women-s-collection",
+            "button_style_secondary": false,
+            "button_style_secondary_2": false
+          },
+          "type": "button"
+        },
+        "heading_JX3x7N": {
+          "settings": {
+            "heading": "30% Off Sitewide",
+            "heading_size": "h1"
+          },
+          "type": "heading"
+        },
+        "text_mHB7gN": {
+          "settings": {
+            "text": "<p>Plus free shipping + 50% off faves<br/></p>"
+          },
+          "type": "text"
+        }
+      },
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "content_alignment": "center",
+        "desktop_content_position": "center",
+        "full_width": true,
+        "padding_bottom": 52,
+        "padding_top": 40
+      },
+      "type": "rich-text"
+    }
+  }
+}

@@ -139,6 +139,10 @@
   
   <div gp-el-wrapper style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:0px" class="gn4M7wQpkZ ">
       {% unless product %}<p>{{ 'gempages.ProductTitle.product_not_found' | t }}</p>{% else %}
+      <gp-product-title
+        gp-data='{"setting":{"linkProduct":false},"uid":"gn4M7wQpkZ"}'
+      >
+        
     {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
     <div data-id="gn4M7wQpkZ"
         class="gn4M7wQpkZ"
@@ -154,6 +158,9 @@
         </h1>
       </div>
     </div>
+    
+      </gp-product-title>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-title-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
     {% endunless %}
       </div>
     
@@ -1005,7 +1012,7 @@
       role="presentation"
       data-id="gede7hUzYD"
       style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:6px;--bbrr:6px;--btlr:6px;--btrr:6px;--ta:center"
-      class="gp-group/image gp-relative force-publish-1764305001866 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gede7hUzYD"
+      class="gp-group/image gp-relative force-publish-1773500601799 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gede7hUzYD"
     >
       <div
         
@@ -1127,7 +1134,7 @@
       [object Object]
       
       style="--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:14px;--size-tablet:13px;--size-mobile:12px;--lh:130%;--lh-tablet:150%;--lh-mobile:130%;--ls:normal;--c:var(--g-c-text-1, text-1);word-break:break-word;overflow:hidden"
-      element-attrs='{"pageContext":{"pageType":"GP_PRODUCT","sectionName":"","isPreviewing":false,"isOptimizePlan":false,"isTranslateWithLocale":false,"isLazyLoadSection":true,"isLazyLoadImage":false,"hasCollectionHandle":true,"numberOfProductOfProductList":0,"pageBackground":"","fontType":"google","primaryLocale":"","showPriceCurrency":false,"enableLazyLoadImage":false},"setting":{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"customFormat":"","customText":"Expected delivery","enableCustomText":true,"estimateTime":5,"globalSize":{"desktop":{"gap":"","width":"1000px"}},"ifOutOfStock":"hide","maxEstimate":5,"minEstimate":2,"translate":"customText","typeEstimate":"range","typeFormat":"%b %d"},"isReact":false,"builderProps":{"uid":"gjZrT--UBs","builderData":{"advanced":{"border":{"desktop":{"normal":{"border":"none","borderType":"none","borderWidth":"1px","color":"#121212","isCustom":true,"width":"1px 1px 1px 1px"}}},"boxShadow":{"desktop":{"normal":{"angle":49,"blur":"4px","color":"rgba(18, 18, 18, 0.7)","distance":"4px","spread":"4px","type":"shadow-1"}}},"d":{"desktop":true,"mobile":true,"tablet":true},"hasBoxShadow":{"desktop":{"normal":false}},"op":{"desktop":"100%"},"pageType":"GP_PRODUCT","rounded":{"desktop":{"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}}},"spacing-setting":{"desktop":{"link":false,"margin":{"bottom":0},"padding":{"left":"12px","right":"32px"}},"tablet":{"link":false,"margin":{"bottom":0},"padding":{"left":"10px","right":"28px"}}}},"label":"Delivery Date","settings":{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"customFormat":"","customText":"Expected delivery","enableCustomText":true,"estimateTime":5,"globalSize":{"desktop":{"gap":"","width":"1000px"}},"ifOutOfStock":"hide","maxEstimate":5,"minEstimate":2,"translate":"customText","typeEstimate":"range","typeFormat":"%b %d"},"styles":{"align":{"desktop":"left"},"typoCustom":{"attrs":{"color":"text-1"},"custom":{"fontSize":{"desktop":"14px","mobile":"12px","tablet":"13px"},"fontStyle":"normal","fontWeight":"400","hasShadowText":false,"letterSpacing":{"desktop":"normal"},"lineHeight":{"desktop":"130%","mobile":"130%","tablet":"150%"},"textShadow":{"angle":37,"blur":"2px","color":"rgba(0, 0, 0, 0.6)","distance":"4px","type":"custom"}},"type":"paragraph-2"},"typoDate":{"attrs":{"bold":true,"color":"#343454"},"custom":{"fontSize":{"desktop":"13px","mobile":"12px","tablet":"13px"},"fontStyle":"normal","fontWeight":"400","hasShadowText":false,"letterSpacing":{"desktop":"normal"},"lineHeight":{"desktop":"130%","mobile":"130%","tablet":"130%"},"textShadow":{"angle":37,"blur":"2px","color":"rgba(0, 0, 0, 0.6)","distance":"4px","type":"custom"}},"type":"paragraph-2"}},"tag":"EstimateDate","uid":"gjZrT--UBs","childrens":[],"type":"component"}},"textWithTranslate":"{{ section.settings.ggjZrT--UBs_customText }}"}'
+      element-attrs='{"pageContext":{"pageType":"GP_PRODUCT","sectionName":"","isPreviewing":false,"isOptimizePlan":false,"isTranslateWithLocale":false,"isLazyLoadSection":true,"isLazyLoadImage":false,"hasCollectionHandle":true,"numberOfProductOfProductList":0,"pageBackground":"","fontType":"google","primaryLocale":"","showPriceCurrency":false,"enableLazyLoadImage":false,"mode":"PAGE"},"setting":{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"customFormat":"","customText":"Expected delivery","enableCustomText":true,"estimateTime":5,"globalSize":{"desktop":{"gap":"","width":"1000px"}},"ifOutOfStock":"hide","maxEstimate":5,"minEstimate":2,"translate":"customText","typeEstimate":"range","typeFormat":"%b %d"},"isReact":false,"builderProps":{"uid":"gjZrT--UBs","builderData":{"advanced":{"border":{"desktop":{"normal":{"border":"none","borderType":"none","borderWidth":"1px","color":"#121212","isCustom":true,"width":"1px 1px 1px 1px"}}},"boxShadow":{"desktop":{"normal":{"angle":49,"blur":"4px","color":"rgba(18, 18, 18, 0.7)","distance":"4px","spread":"4px","type":"shadow-1"}}},"d":{"desktop":true,"mobile":true,"tablet":true},"hasBoxShadow":{"desktop":{"normal":false}},"op":{"desktop":"100%"},"pageType":"GP_PRODUCT","rounded":{"desktop":{"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}}},"spacing-setting":{"desktop":{"link":false,"margin":{"bottom":0},"padding":{"left":"12px","right":"32px"}},"tablet":{"link":false,"margin":{"bottom":0},"padding":{"left":"10px","right":"28px"}}}},"label":"Delivery Date","settings":{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"customFormat":"","customText":"Expected delivery","enableCustomText":true,"estimateTime":5,"globalSize":{"desktop":{"gap":"","width":"1000px"}},"ifOutOfStock":"hide","maxEstimate":5,"minEstimate":2,"translate":"customText","typeEstimate":"range","typeFormat":"%b %d"},"styles":{"align":{"desktop":"left"},"typoCustom":{"attrs":{"color":"text-1"},"custom":{"fontSize":{"desktop":"14px","mobile":"12px","tablet":"13px"},"fontStyle":"normal","fontWeight":"400","hasShadowText":false,"letterSpacing":{"desktop":"normal"},"lineHeight":{"desktop":"130%","mobile":"130%","tablet":"150%"},"textShadow":{"angle":37,"blur":"2px","color":"rgba(0, 0, 0, 0.6)","distance":"4px","type":"custom"}},"type":"paragraph-2"},"typoDate":{"attrs":{"bold":true,"color":"#343454"},"custom":{"fontSize":{"desktop":"13px","mobile":"12px","tablet":"13px"},"fontStyle":"normal","fontWeight":"400","hasShadowText":false,"letterSpacing":{"desktop":"normal"},"lineHeight":{"desktop":"130%","mobile":"130%","tablet":"130%"},"textShadow":{"angle":37,"blur":"2px","color":"rgba(0, 0, 0, 0.6)","distance":"4px","type":"custom"}},"type":"paragraph-2"}},"tag":"EstimateDate","uid":"gjZrT--UBs","childrens":[],"type":"component"}},"textWithTranslate":"{{ section.settings.ggjZrT--UBs_customText }}"}'
     >
       {{ section.settings.ggjZrT--UBs_customText }}
     </span>
@@ -1138,7 +1145,7 @@
       style="--fs:normal;--ff:var(--g-font-body, body);--size:13px;--size-tablet:13px;--size-mobile:12px;--lh:130%;--lh-tablet:130%;--lh-mobile:130%;--ls:normal;--weight:bold;--c:#343454;word-break:break-word;overflow:hidden"
       element-attrs='undefined'
     >
-      Nov 30 - Dec 03
+      Mar 16 - Mar 19
     </span>
   
         </div>
@@ -1201,6 +1208,7 @@
       gp-label-unavailable="{{ section.settings.ggB6HDQ7E4M_unavailableLabel }}"
       gp-data='{"styles":{"errorTypo":{"attrs":{"color":"error"},"type":"paragraph-2"},"successTypo":{"attrs":{"color":"success"},"type":"paragraph-2"}},"setting":{"errorType":"built-in","actionEffect":"go-to-url","enableMessage":true,"label":"Add to cart","errorMessage":"Cannot add product to cart","successMessage":"Add product to cart successfully","outOfStockLabel":"Out of stock","customURL":{"link":"https://builder.gempages.net/post-purchase/preview?url=/post-purchase/preview&pageID=576951192974787323&title=Upsell%20Page&shopToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnZW14IiwiZXhwIjoxNzUzNDM2NzE2LCJpYXQiOjE3NTMzNTAzMTYsImp0aSI6IjQzNDc3NjQ2Mzg3NTUwNzE0NSJ9.Q5YwdwVdWhk71Q-eMal_cDuT35IjqhIJfoMewtmXyBYMyOUKYJQstsssqGulmwkeffiw3g5SJgw0MwwMEZ85NBgFk8o8BFFZ32KiDca-4agYUGz5sHgKb_AKciEuDhJakcffnpkdc2oY7bzhoBTkzrUkY3acSOXfd1fnNbGrtP1wo8gXhWz7GB5H5lw1J7s_xowS1CYB3HWG_odPCQ4V2GiO0Yo7LkA55BrCLgDM2ZK_xHMVzFxy4D9bFyTHSIvePYqNKractLim5aqjpAkJcmnkPZ08NQfpkfus-LNv29lm_Pa0FIywry1MpeA_LpdZ6SXszEEZ4O62WEmCoSewkeP0Wyt2IltsxwBDRusoZWBvwjYmShT_eo4diTZKQddilSy89HKyGL071V7GHJ82nyWa8kuAykfQsdtNFAeDtdnqHo51qmH8aTA9ASjnY2ALvL5PefYE8V07jXeblHqOnUgI96PxaI03lAAXfC8hF_Tq1gMfmFN2HOLVjsOfo5zqORISmw4OiwFyImWR_RkOuUDJgzCegANhTayEtlFAmoMCdjdNqFAQUV765-Er7OZi8CsQGT6uWF-LQAU32or04pWVGARJzwu4rhLTcIwZRZ-VH4YnYTw9HLH0rpAiCUZpkRngYdxX5WXsIqf3uEtrKbj39eYU1yNKY9vxSNPO4fQ&shopID=432750572815254551&shopName=seal-commerce-asia&publicShopToken=c2VhbC1jb21tZXJjZS1hc2lhLmdlbXBhZ2VzLmxpdmUtMmM3OTM1MjctOTI3Mi00MTYwLWFiNTMtMTU0MDc1NTkwN2ZiLTE2Njc0NjkwNDM&currentOfferID=576951201665385289&pageType=POST_PURCHASE&moneyFormat=${{amount}}&moneyWithCurrencyFormat=${{amount}}%20USD","target":"_self"}},"variantID":"{{variant.id}}","disabled":"{{variant.available}}","totalVariant":"{{total_combinations}}"}'
       data-variant-selection-required-message="{{ section.settings.ggB6HDQ7E4M_variantSelectionRequiredMessage }}"
+      gp-enable-third-partycart="{{shop.metafields.GEMPAGES.enableThirdPartyCart}}"
     >
       
     <gp-button
@@ -1562,7 +1570,7 @@
       role="presentation"
       data-id="gpGbrGPCCa"
       style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#F3F3F3;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center"
-      class="gp-group/image gp-relative force-publish-1764305001891 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gpGbrGPCCa"
+      class="gp-group/image gp-relative force-publish-1773500601806 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gpGbrGPCCa"
     >
       <div
         
@@ -1609,7 +1617,7 @@
       role="presentation"
       data-id="gJ1JVyHR1z"
       style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#F3F3F3;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center"
-      class="gp-group/image gp-relative force-publish-1764305001891 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gJ1JVyHR1z"
+      class="gp-group/image gp-relative force-publish-1773500601806 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gJ1JVyHR1z"
     >
       <div
         
@@ -1656,7 +1664,7 @@
       role="presentation"
       data-id="gjqP-ogIC1"
       style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#F3F3F3;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center"
-      class="gp-group/image gp-relative force-publish-1764305001891 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gjqP-ogIC1"
+      class="gp-group/image gp-relative force-publish-1773500601807 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gjqP-ogIC1"
     >
       <div
         
@@ -1703,7 +1711,7 @@
       role="presentation"
       data-id="gPBGt8SuM_"
       style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#F3F3F3;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center"
-      class="gp-group/image gp-relative force-publish-1764305001892 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gPBGt8SuM_"
+      class="gp-group/image gp-relative force-publish-1773500601807 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gPBGt8SuM_"
     >
       <div
         
@@ -1750,7 +1758,7 @@
       role="presentation"
       data-id="gpMCNMeATQ"
       style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#F3F3F3;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:center"
-      class="gp-group/image gp-relative force-publish-1764305001892 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gpMCNMeATQ"
+      class="gp-group/image gp-relative force-publish-1773500601808 gp-flex-none gp-h-auto mobile:gp-flex-none mobile:gp-h-auto tablet:gp-flex-none tablet:gp-h-auto gpMCNMeATQ"
     >
       <div
         
