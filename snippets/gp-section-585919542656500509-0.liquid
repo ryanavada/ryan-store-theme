@@ -1,0 +1,2091 @@
+<div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="gqaEiwZK8N gp-relative gp-flex gp-flex-col"
+    >
+      <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s)" class="ghrvdBOb_G ">
+      
+    {%- liquid
+      assign current_variant = variant
+      assign available = current_variant.available | default: false
+      assign inventory_management = current_variant.inventory_management | default: null
+      assign inventory_policy = current_variant.inventory_policy | default: 'deny'
+      assign inventory_quantity = current_variant.inventory_quantity | default: 0
+      assign scarcityThreshold = true
+      assign check_display = true
+
+      if inventory_management != null and available == false and inventory_quantity <= 0 and inventory_policy != 'continue'
+        assign is_out_of_stock = true
+        else
+        assign is_out_of_stock = false
+      endif
+
+      if check_display == true
+        assign should_display = true
+      elsif true and inventory_quantity >= 0 and inventory_quantity < 12
+        assign should_display = true
+      else
+        assign should_display = false
+      endif
+
+      if false and available == false
+        assign should_display = false
+      endif
+
+      if false and available
+        assign show_progress_bar = true
+      else
+        assign show_progress_bar = false
+      endif
+    -%}
+    {% capture variant_policy_list %}
+      {
+        {% for variant in product.variants %}
+        "{{ variant.id }}":"{{ variant.inventory_policy }}",
+        "{{ variant.id }}_management":"{{ variant.inventory_management }}"{% if forloop.last == false %},{% endif %}
+        {% endfor %}
+      }
+    {% endcapture %}
+    <gp-product-stock-counter data-id="ghrvdBOb_G" data-visible="{{ should_display }}" data-policy="{{ variant_policy_list | escape }}" gp-setting="{&#34;displayByDefault&#34;:true,&#34;displayProgressBar&#34;:false,&#34;scarcityThreshold&#34;:12,&#34;template&#34;:&#34;Hurry up! Only %number% left in stock&#34;,&#34;outOfStockMessage&#34;:&#34;OUT OF STOCK&#34;,&#34;continueSelling&#34;:&#34;Restock soon! PREORDER NOW&#34;,&#34;unlimitedQuantityMessage&#34;:&#34;Hurry! LET BUY NOW&#34;,&#34;color&#34;:&#34;#242424&#34;,&#34;hiddenCounterWhenOutOfStock&#34;:false,&#34;oosTextColor&#34;:&#34;#242424&#34;,&#34;typoColor&#34;:&#34;#242424&#34;}" class="gp-product-stock-counter data-[visible=true]:gp-block data-[visible=false]:gp-hidden"
+      >
+      <div class="gp-flex" style="--jc:left">
+      <style>
+      [data-id="ghrvdBOb_G"]  {
+          .gp-sc-progress-bar{
+            
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+          }
+          .gp-sc-progress-bar:before{
+            
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+          }
+      }</style>
+        <div
+          class="gp-inline-block gp-flex gp-flex-col"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--c:#242424"
+        >
+          <div class="gp-flex gp-items-baseline gp-gap-x-1 gp-flex-row">
+            
+              {% if is_out_of_stock %}<div
+                    data-slot-type="oos-icon" data-visible="true"
+                    class="gp-stock-counter-icon data-[visible=true]:gp-block data-[visible=false]:gp-hidden [&>svg]:!gp-h-[var(--w)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--w-tablet)] mobile:[&>svg]:!gp-h-[var(--w-mobile)] gp-shrink-0 "
+                    style="--c:#EA3335;--w:16px;--w-tablet:16px;--w-mobile:16px"
+                  >
+                    <svg data-name="package-regular" style="width: 100%; height: 100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path fill="currentColor" strokelinecap="round" strokelinejoin="round" d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg>
+                  </div>
+              <div
+                    data-slot-type="has-stock-icon" data-visible="false"
+                     data-slot-type="false"
+                    class="gp-stock-counter-icon data-[visible=true]:gp-block data-[visible=false]:gp-hidden [&>svg]:!gp-h-[var(--w)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--w-tablet)] mobile:[&>svg]:!gp-h-[var(--w-mobile)] gp-shrink-0 "
+                    style="--c:#EA3335;--w:16px;--w-tablet:16px;--w-mobile:16px"
+                >
+                  <svg height="20" width="20" data-name="bell-filled" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 256 256" fill="currentColor" data-id="508817720084988264">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216Z" /></svg>
+                </div>{% else %} <div
+                    data-slot-type="oos-icon" data-visible="false"
+                    class="gp-stock-counter-icon data-[visible=true]:gp-block data-[visible=false]:gp-hidden [&>svg]:!gp-h-[var(--w)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--w-tablet)] mobile:[&>svg]:!gp-h-[var(--w-mobile)] gp-shrink-0 "
+                    style="--c:#EA3335;--w:16px;--w-tablet:16px;--w-mobile:16px"
+                >
+                  <svg data-name="package-regular" style="width: 100%; height: 100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor"><path fill="currentColor" strokelinecap="round" strokelinejoin="round" d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg>
+              </div>
+              <div
+                    data-slot-type="has-stock-icon" data-visible="true"
+                    class="gp-stock-counter-icon data-[visible=true]:gp-block data-[visible=false]:gp-hidden [&>svg]:!gp-h-[var(--w)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--w-tablet)] mobile:[&>svg]:!gp-h-[var(--w-mobile)] gp-shrink-0 "
+                    style="--c:#EA3335;--w:16px;--w-tablet:16px;--w-mobile:16px"
+                >
+                  <svg height="20" width="20" data-name="bell-filled" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 256 256" fill="currentColor" data-id="508817720084988264">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216Z" /></svg>
+                </div>{% endif %}
+            
+            
+    <div class="gp-hidden gp-text-white gp-py-1 gp-px-2 gp-mr-1 gp-inline-block gp-my-[1px] gp-text-g-#242424 gp-bg-g-#242424" >
+      <div id="template">{{ section.settings.gghrvdBOb_G_template | replace: '<$quantity$>', inventory_quantity | replace: '&lt;$quantity$&gt;', inventory_quantity }}</div>
+      <div id="out-of-stock-message">{{ section.settings.gghrvdBOb_G_outOfStockMessage }}</div>
+      <div id="continue-selling">{{ section.settings.gghrvdBOb_G_continueSelling }}</div>
+      <div id="unlimited-quantity-message">{{ section.settings.gghrvdBOb_G_unlimitedQuantityMessage }}</div>
+    </div>
+            
+              {% if is_out_of_stock %}<p
+                data-slot-type="message"
+                class="gp-stock-counter-mark"
+                style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--c:#242424"
+              >
+                {% if inventory_management == null and inventory_quantity <= 0 %}
+                    {{ section.settings.gghrvdBOb_G_unlimitedQuantityMessage }}
+                  {% elsif available == false %}
+                    {{ section.settings.gghrvdBOb_G_outOfStockMessage }}
+                  {% elsif available and inventory_policy == 'continue' and inventory_quantity <= 0 %}
+                    {{ section.settings.gghrvdBOb_G_continueSelling }}
+                  {% else %}
+                    {{ section.settings.gghrvdBOb_G_template | replace: '<$quantity$>', inventory_quantity | replace: '&lt;$quantity$&gt;', inventory_quantity }}
+                  {% endif %}
+              </p>{% else %}<p
+                data-slot-type="message"
+                class="gp-stock-counter-mark"
+                style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--c:#242424"
+              >
+                {% if inventory_management == null and inventory_quantity <= 0 %}
+                    {{ section.settings.gghrvdBOb_G_unlimitedQuantityMessage }}
+                  {% elsif available == false %}
+                    {{ section.settings.gghrvdBOb_G_outOfStockMessage }}
+                  {% elsif available and inventory_policy == 'continue' and inventory_quantity <= 0 %}
+                    {{ section.settings.gghrvdBOb_G_continueSelling }}
+                  {% else %}
+                    {{ section.settings.gghrvdBOb_G_template | replace: '<$quantity$>', inventory_quantity | replace: '&lt;$quantity$&gt;', inventory_quantity }}
+                  {% endif %}
+              </p>{% endif %}
+              
+
+          </div>
+
+          <div
+            data-slot-type="progress-bar" data-visible="{{ show_progress_bar }}"
+            style="--h:10px;--h-tablet:10px;--h-mobile:10px;--bg:linear-gradient(90deg, #eee 50%, transparent 50%);--bgc:var(--g-c-line-3, line-3);--bgp:20% center"
+            class="gp-stock-counter-progress gp-mt-2 data-[visible=true]:gp-block data-[visible=false]:gp-hidden gp-sc-progress-bar gp-relative gp-w-full -gp-scale-100 !gp-bg-[length:200%] before:gp-absolute before:gp-left-0 before:gp-h-full before:gp-w-full before:gp-animate-shift before:gp-content-[''] before:gp-bg-stock-counter-animate before:gp-bg-[length:60px_100%] before:gp-shadow-stock-counter"
+          ></div>
+        </div>
+        </div>
+      </gp-product-stock-counter>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-stock-counter-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-l)" class="g6AQ6eDBAz ">
+      {% unless product %}<p>{{ 'gempages.ProductTitle.product_not_found' | t }}</p>{% else %}
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="g6AQ6eDBAz"
+        class="g6AQ6eDBAz"
+        style="--dynamic-source-color:#F4F4F4"
+      >
+      <div  >
+        <h2
+          data-gp-text
+          class=" gp-text-instant"
+          style="--w:100%;--tdt:auto;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#242424;--fs:normal;--ff:var(--g-font-heading, heading);--weight:700;--size:38px;--size-tablet:38px;--size-mobile:33px;--lh:120%;--lh-tablet:120%;--lh-mobile:120%;--ls:normal;word-break:break-word;overflow:hidden"
+        >
+          {{ product.title }}
+        </h2>
+      </div>
+    </div>
+    {% endunless %}
+      </div>
+    
+
+    
+
+    
+    <gp-row gp-data='{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"giXuxnR4Hg"}' data-id="giXuxnR4Hg" id="giXuxnR4Hg" data-same-height-subgrid-container class="giXuxnR4Hg gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl);--cg:var(--g-s-l);--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="g2Gu6glT0l gp-relative gp-flex gp-flex-col"
+    >
+      
+    
+    <div data-id="g-41BWGyhv"  style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+      <div class="gp-flex gp-flex-wrap" style="--cg:var(--g-s-xxs);--jc:left">
+            <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="ggRMd9vQl2 ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="giOs07ZEaU" class="gp-leading-[0] giOs07ZEaU" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="giOs07ZEaU" class="icon-wrapper gp-inline-flex gp-overflow-hidden giOs07ZEaU " style="--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:20px;--h:20px;--minw:20px;--height-desktop:20px;--height-tablet:20px;--height-mobile:20px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="g6xLCRfC0V ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="glRXb49k6e" class="gp-leading-[0] glRXb49k6e" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="glRXb49k6e" class="icon-wrapper gp-inline-flex gp-overflow-hidden glRXb49k6e " style="--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:20px;--h:20px;--minw:20px;--height-desktop:20px;--height-tablet:20px;--height-mobile:20px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gs2YB4nRU0 ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="gXX9bSFAEt" class="gp-leading-[0] gXX9bSFAEt" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="gXX9bSFAEt" class="icon-wrapper gp-inline-flex gp-overflow-hidden gXX9bSFAEt " style="--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:20px;--h:20px;--minw:20px;--height-desktop:20px;--height-tablet:20px;--height-mobile:20px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gXZKN6Fe7i ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="g7v8myCJrY" class="gp-leading-[0] g7v8myCJrY" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="g7v8myCJrY" class="icon-wrapper gp-inline-flex gp-overflow-hidden g7v8myCJrY " style="--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:20px;--h:20px;--minw:20px;--height-desktop:20px;--height-tablet:20px;--height-mobile:20px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gTG2_AU7yl ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="g7hPEjfMmB" class="gp-leading-[0] g7hPEjfMmB" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="g7hPEjfMmB" class="icon-wrapper gp-inline-flex gp-overflow-hidden g7hPEjfMmB " style="--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:20px;--h:20px;--minw:20px;--height-desktop:20px;--height-tablet:20px;--height-mobile:20px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div>
+          </div>
+    </div>
+  
+    </div><div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gxK_WmqWOC gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="ge0fULzdaL"
+        class="ge0fULzdaL"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class="gp-text-g-text-1 gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.gge0fULzdaL_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    </div>
+
+      
+    </gp-row>
+  
+  
+    
+
+    
+
+    
+    <gp-row gp-data='{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"gcssoYRcnI"}' data-id="gcssoYRcnI" id="gcssoYRcnI" data-same-height-subgrid-container class="gcssoYRcnI gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:42px;--cg:var(--g-s-s);--gtc:minmax(0, auto) minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gIjn95ZG85 gp-relative gp-flex gp-flex-col"
+    >
+      
+      <gp-product-price
+        id="shopify-text-element-geD5lIIeux" data-id="geD5lIIeux"
+        class="gp-product-price group-data-[state=loading]:gp-invisible data-[hidden=true]:!gp-hidden geD5lIIeux"
+        style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px"
+        gp-data='{"priceType":"regular","uid":"geD5lIIeux","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+      >
+        
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div id="p-price-geD5lIIeux" data-id
+        
+        style="--dynamic-source-color:#F4F4F4"
+      >
+      <div  >
+        <div
+          data-gp-text
+          class="gp-price gp-money  gp-text-instant"
+          style="--w:100%;--tdc:#242424;--tdt:1px;--ta:left;--c:#242424;--fs:normal;--ff:var(--g-font-heading, heading);--weight:700;--size:38px;--size-tablet:38px;--size-mobile:33px;--lh:120%;--lh-tablet:120%;--lh-mobile:120%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          
+     {% if variant.price %}
+       {{ variant.price | money}}
+     {% endif %}
+   
+        </div>
+      </div>
+    </div>
+    
+      </gp-product-price>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-price-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+    </div><div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gijixcXv-X gp-relative gp-flex gp-flex-col"
+    >
+      
+      <gp-product-price
+        id="shopify-text-element-gD9NK-dnfJ" data-id="gD9NK-dnfJ" data-hidden="{% if variant.compare_at_price > variant.price and variant.compare_at_price >= 0 %}false{% else %}true{% endif %}"
+        class="gp-product-price group-data-[state=loading]:gp-invisible data-[hidden=true]:!gp-hidden gD9NK-dnfJ"
+        style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px"
+        gp-data='{"priceType":"compare","uid":"gD9NK-dnfJ","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+      >
+        
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div id="p-price-gD9NK-dnfJ" data-id
+        
+        style="--dynamic-source-color:#F4F4F4"
+      >
+      <div  >
+        <div
+          data-gp-text
+          class="gp-price gp-product-compare-price  gp-text-instant"
+          style="--w:100%;--tdc:#B4B4B4;--tdt:auto;--ta:left;--c:#B4B4B4;--fs:normal;--ff:var(--g-font-heading, heading);--weight:400;--size:28px;--size-tablet:28px;--size-mobile:24px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:line-through"
+        >
+          
+      {% if variant.compare_at_price  %}
+        {{ variant.compare_at_price | money}}
+      {% else %}
+
+      {% endif %}
+    
+        </div>
+      </div>
+    </div>
+    
+      </gp-product-price>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-price-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+    </div><div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="ghiZsmojvp gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% if product %}
+      
+    {% assign content = section.settings.ggjDtayKTuK_displayContent %}
+
+    {%if content.size > 0 %}
+      {% if variant.compare_at_price and variant.compare_at_price > 0 %}
+        {% assign amountDiscount = variant.compare_at_price | minus: variant.price %}
+        {% assign percentDiscount = amountDiscount | times: 100.0 | divided_by: variant.compare_at_price | round%}
+      {% else %}
+        {% assign amountDiscount = 0 %}
+        {% assign percentDiscount = 0 %}
+      {% endif %}
+
+      {% assign percentDiscountValue = percentDiscount | append: "%" %}
+      {% assign amountDiscountValue = amountDiscount | money_without_trailing_zeros %}
+      {% assign price = variant.price | divided_by: 100 %}
+      {% assign minPriceValue = product.variants | map: "price" | sort | first | money_without_trailing_zeros %}
+      {% assign inventoryQuantityValue = variant.inventory_quantity %}
+
+      {% assign percentDiscountKey = "{percent_discount}" %}
+      {% assign amountDiscountKey = "{amount_discount}" %}
+      {% assign minPriceKey = "{min_price}" %}
+      {% assign inventoryQuantityKey = "{inventory_quantity}" %}
+    {% endif %}
+  
+      
+  {% assign isShow = true %}
+  {% assign conditionTriggers = "" %}
+  {% assign isInventoryStatus = false %}
+  {% assign isDiscountPrice = false %}
+  {% assign isPriceRange = false %}
+  {% assign isCreationDate = false %}
+  {% assign isProductTag = false %}
+  
+      {% assign type = "in_stock" %}
+      {% assign shouldContinue = false %}
+      {% if variant.inventory_policy == "continue" and type != "out_of_stock" %}
+        {% assign shouldContinue = true %}
+      {% endif %}
+      {% if variant.inventory_management == null or shouldContinue  %}
+        {% assign conditionTriggers = conditionTriggers | append: "," | append: true %}
+      {% elsif variant.inventory_quantity != null %}
+        {% assign compareValue = variant.inventory_quantity %}
+        {% if type == "in_stock" %}
+          {% assign conditionType = "exact_or_above" %}
+          {% assign from = 1 %}
+          {% assign to = 15 %}
+          
+    {% assign enabled = false %}
+    {% case conditionType %}
+      {% when "exact" %}
+        {% if compareValue == from %}
+          {% assign enabled = true %}
+        {% endif %}
+      {% when "above" %}
+        {% if compareValue > from %}
+          {% assign enabled = true %}
+        {% endif %}
+      {% when "below" %}
+        {% if compareValue < from %}
+          {% assign enabled = true %}
+        {% endif %}
+      {% when "exact_or_above" %}
+        {% if compareValue >= from %}
+          {% assign enabled = true %}
+        {% endif %}
+      {% when "exact_or_below" %}
+        {% if compareValue <= from %}
+          {% assign enabled = true %}
+        {% endif %}
+      {% when "between" %}
+        {% if compareValue >= from and compareValue <= to %}
+          {% assign enabled = true %}
+        {% endif %}
+      {% else %}
+        {% assign enabled = false %}
+    {% endcase %}
+  
+          {% if conditionType == "below" or conditionType == "exact_or_below" %}
+            {% assign min = 1 %}
+            {% assign from = 1 %}
+            {% assign to = from | minus: min | plus: 1 %}
+            {% if compareValue >= from and compareValue <= to %}
+              {% assign enabled = true %}
+            {% else %}
+              {% assign enabled = false %}
+            {% endif %}
+          {% endif %}
+          {% assign isInventoryStatus = enabled %}
+        {% else %}
+          {% if compareValue <= 0 and variant.inventory_policy != "continue"  %}
+            {% assign isInventoryStatus = true %}
+          {% endif %}
+        {% endif %}
+        {% assign conditionTriggers = conditionTriggers | append: "," | append: isInventoryStatus %}
+      {% else %}
+        {% assign conditionTriggers = conditionTriggers | append: "," | append: false %}
+      {% endif %}
+
+  
+  {% assign trigger_arr = conditionTriggers | split: "," %}
+  {% for trigger in trigger_arr %}
+    {% if trigger == "false" %}
+      {% assign isShow = false %}
+    {% endif %}
+  {% endfor %}
+  {% assign price = variant.price | times: 1.0 %}
+  {% assign salePrice = variant.compare_at_price | times: 1.0 %}
+  {% assign priceSave = salePrice | minus: price %}
+  {% assign isDiscountContent = true %}
+  {% assign isTextBadge = true %}
+  {% if priceSave <= 0 or isDiscountContent == false or isTextBadge == false %}
+    {% assign isShow = false %}
+  {% endif %}
+  {% if isShow %}
+    {% assign className = "" %}
+  {% else %}
+    {% assign className = "!gp-hidden" %}
+  {% endif %}
+  
+      <gp-product-badge
+        data-id="gjDtayKTuK" id="g-product-badge-gjDtayKTuK" gp-data-hidden="false"
+        gp-data='{"minPrice":"{{ minPriceValue | replace: '"', '\\"' | escape }}","variantIDs":"{{  product.variants | map: "id" | json | escape }}","variantInventoryQuantities":"{{ product.variants | map: "inventory_quantity" | json | escape }}","amountDiscount":"{{amountDiscountValue | replace: '"', '\\"' | escape }}","percentDiscount":"{{percentDiscountValue}}","price":"{{price}}","displayTrigger":[{"conditionType":"exact_or_above","from":"1","priority":0,"quantityType":"exact_or_above","to":"15","triggerEvent":"inventory_status","type":"in_stock"}],"uid":"gjDtayKTuK","productCreatedAt":"{{product.created_at | date: "%Y-%m-%d" }}","productTags":"{{ product.tags | join: "," | replace: '"', '\\"' | escape }}","isTextBadge":true}'
+        class="containerClass {{className}}"
+        style="z-index:2;--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px"
+        data-display-content="{{ section.settings.ggjDtayKTuK_displayContent }}"
+      >
+        <div class="gp-flex gp-justify-start ">
+          <div
+            data-product-id id="gjDtayKTuK"
+            class="gp-h-full"
+            style="--w:auto;--w-tablet:auto;--w-mobile:auto;--h:auto;--h-tablet:auto;--h-mobile:auto;--mb:0;opacity:1"
+          >
+            <style></style>
+            
+                <div class="gp-w-full gp-h-full gp-overflow-hidden product-badge-item">
+                  <div
+                    class="gp-w-full gp-h-full gp-flex gp-items-center gp-justify-center gp-overflow-hidden"
+                    style="--btlr:0px;--btlr-tablet:0px;--btlr-mobile:0px;--btrr:0px;--btrr-tablet:0px;--btrr-mobile:0px;--bblr:0px;--bblr-tablet:0px;--bblr-mobile:0px;--bbrr:0px;--bbrr-tablet:0px;--bbrr-mobile:0px;--bg:#EA3335;--bg-tablet:#EA3335;--bg-mobile:#EA3335;height:100%"
+                  >
+                    <pre
+                      id="product-badge-content"
+                      class="gp-break-words gp-text-center "
+                      style="--ws:pre-wrap;--ws-tablet:pre-wrap;--ws-mobile:pre-wrap;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--c:#FFFFFF;--ts:none;--pl:var(--g-s-xs);--pr:var(--g-s-xs);--pt:var(--g-s-s);--pb:var(--g-s-s)"
+                    >{{ content | replace: percentDiscountKey, percentDiscountValue | replace: amountDiscountKey, amountDiscountValue | replace: inventoryQuantityKey, inventoryQuantityValue | replace: minPriceKey, minPriceValue }}</pre>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </gp-product-badge>
+       <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-badge-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+    {% endif %}
+  
+    </div>
+
+      
+    </gp-row>
+  
+  <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s)" class="gt3aPDwvEw ">
+      {% if product.description == blank %}{% else %}
+    <gp-product-description
+      data-id="gt3aPDwvEw"
+      class="gp-product-description undefined"
+      gp-data='{"setting":{"lineClamp":{"desktop":3},"hasLineClamp":{"desktop":false},"viewMoreText":"Show more","viewLessText":"Show less","enableViewMoreIcon":true},"textStyle":{"--ts":"none","--c":"#242424","--fs":"normal","--ff":"var(--g-font-body, body)","--weight":"400","--size":"16px","--size-tablet":"16px","--size-mobile":"14px","--lh":"150%","--lh-tablet":"150%","--lh-mobile":"150%","--ls":"normal","--maxh":"none","--maxh-tablet":"none","--maxh-mobile":"none","--line-clamp":"unset","--line-clamp-tablet":"unset","--line-clamp-mobile":"unset"}}'
+      data-view-more-text="{{ section.settings.ggt3aPDwvEw_viewMoreText }}"
+      data-view-less-text="{{ section.settings.ggt3aPDwvEw_viewLessText }}"
+    >
+      <style>
+      .p-description-wrapper.gp-p-description-text * {
+        color: inherit;
+        line-height: inherit !important;
+      }</style>
+      <style>
+   .gp-p-description-text > :not(ol, ul, table, div, style, script) {
+      display: inline !important;
+    }
+
+    .gp-p-description-text > :not(ol, ul, table, div, style, script)::after {
+      content: "";
+      display: block; /* đảm bảo xuống dòng trên Safari/iOS */
+    }
+    .gp-p-description-text > table {
+      box-shadow: none;
+    }
+  </style>
+      <div class="gp-rotate-180 gp-hidden" ></div>
+      {% unless product %}<p>Product not found</p>{% else %}<div data-gp-text class="gp-relative  gp-p-description-text gp-break-words safari:[&_p]:gp-inline safari:[&_p]:after:gp-whitespace-pre p-description-wrapper gp-text-g-text-2 data-[browser=safari]:after:gp-content-[' '] data-[browser=safari]:after:gp-absolute data-[browser=safari]:after:gp-left-0 data-[browser=safari]:after:gp-right-0 data-[browser=safari]:after:gp-bottom-0 data-[browser=safari]:after:gp-w-full data-[browser=safari]:after:gp-h-1/2 data-[browser=safari]:after:gp-bg-gradient-to-t data-[browser=safari]:after:gp-from-white" style="--ts:none;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--maxh:none;--maxh-tablet:none;--maxh-mobile:none;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset">
+          {{product.description}}
+        </div>
+        {% unless product.description == blank %}<button type="button" class="p-description-show-more gp-items-center gp-mt-4 gp-w-full gp-transition-all hover:gp-opacity-80 " style="--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--c:#242424;--d:none;--d-mobile:inline-flex;--d-tablet:inline-flex">
+          <span class="gp-show-more-text">
+            {{ section.settings.ggt3aPDwvEw_viewMoreText }}
+          </span>
+          <span class="gp-show-more-icon gp-ml-1"><svg height="1em" width="1em" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg" ><path d="M1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L1.70711 0.292893ZM11 11L10.2929 11.7071C10.6834 12.0976 11.3166 12.0976 11.7071 11.7071L11 11ZM21.7071 1.70711C22.0976 1.31658 22.0976 0.683417 21.7071 0.292893C21.3166 -0.0976311 20.6834 -0.0976311 20.2929 0.292893L21.7071 1.70711ZM0.292893 1.70711L10.2929 11.7071L11.7071 10.2929L1.70711 0.292893L0.292893 1.70711ZM11.7071 11.7071L21.7071 1.70711L20.2929 0.292893L10.2929 10.2929L11.7071 11.7071Z"
+              fill="currentColor"/>
+        </svg></span>
+          </button>{% endunless %}{% endunless %}
+    </gp-product-description>
+
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-description-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  {% endif %}
+      </div>
+    
+
+    
+
+    
+    <gp-row gp-data='{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"gHS8Pooiiy"}' data-id="gHS8Pooiiy" id="gHS8Pooiiy" data-same-height-subgrid-container class="gHS8Pooiiy gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:32px;--cg:var(--g-s-2xl);--gtc:minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="giu2pjjq0G gp-relative gp-flex gp-flex-col"
+    >
+      
+    <gp-button
+      gp-data='{"btnLink":{"link":"#ggIE5jt7Gt","target":"_self","title":"Section"}}'
+      
+      class="gp-flex gp-flex-col"
+    >
+      <div style="--bs:none;--bw:0px 0px 0px 0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left" >
+        <style>[data-id="gP4Nh4196Y"].gp-button-base::before, [data-id="gP4Nh4196Y-interaction"].gp-button-base::before {
+      
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #234BC8;
+  
+    
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+  
+    }
+  
+      
+  [data-id="gP4Nh4196Y"]:hover::before, [data-id="gP4Nh4196Y-interaction"]:hover::before {
+    border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #242424;
+  
+    
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+  }</style>
+        <a
+            class="gp-trigger-button-link gp-hidden"
+            href=#ggIE5jt7Gt
+            target=_self
+          ></a>
+        <a
+          data-id="gP4Nh4196Y" dataId="gP4Nh4196Y" data-state="idle" aria-label="See All Specs"
+          
+          href="#ggIE5jt7Gt" target="_self"
+          style="--w:auto;--w-tablet:auto;--w-mobile:auto;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:0px;--pr:0px;--pt:0px;--pb:0px;--pl-tablet:0px;--pr-tablet:0px;--pt-tablet:0px;--pb-tablet:0px;--pl-mobile:0px;--pr-mobile:0px;--pt-mobile:0px;--pb-mobile:0px;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--bgi:;--hvr-bgi:;--hvr-bg:transparent;--bg:transparent;--hvr-c:#242424;--c:#234BC8;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal"
+          class="gP4Nh4196Y gp-text-center gp-button-base gp-group gp-relative gp-inline-flex gp-max-w-full gp-items-center gp-justify-center gp-no-underline gp-transition-colors gp-duration-200 disabled:gp-btn-disabled disabled:gp-opacity-30 "
+        >
+        
+        <div class="gp-inline-flex gp-flex-row-reverse">
+          
+    <span
+      style="--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;--ml:8px;--height-desktop:1em;--height-tablet:1em;--height-mobile:1em"
+      class="gp-button-icon gp-z-1 gp-inline-flex gp-shrink-0 gp-items-center gp-justify-center group-data-[state=loading]:gp-invisible [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)]"
+    >
+      <svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="m388.48 280.096 -175.424 153.472c-20.672 18.112 -53.056 3.392 -53.056 -24.096V102.528a32 32 0 0 1 53.088 -24.096l175.36 153.472a32 32 0 0 1 0 48.192z" /></svg>
+    </span>
+  
+          
+    <span
+      data-gp-text
+      style="--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word"
+      class="gp-content-product-button group-active/button:!gp-text-inherit gp-relative gp-flex gp-h-full gp-items-center gp-overflow-hidden gp-break-words group-data-[state=loading]:gp-invisible [&_p]:gp-whitespace-pre-line gp-text button-text"
+    >
+      {{ section.settings.ggP4Nh4196Y_label }}
+    </span>
+        </div>
+        
+        </a>
+      </div>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-button-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+    </gp-button>
+  
+    </div>
+
+      
+    </gp-row>
+  
+  
+    
+
+    
+
+    
+    <gp-row gp-data='{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"gIqzz1degR"}' data-id="gIqzz1degR" id="gIqzz1degR" data-same-height-subgrid-container class="gIqzz1degR gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--cg:var(--g-s-2xl);--gtc:minmax(0, 6fr) minmax(0, 6fr);--gtc-mobile:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="gizUv-dmgk gp-relative gp-flex gp-flex-col"
+    >
+      <div gp-el-wrapper  class="gbIU65-c7K ">
+      
+    
+    <div class="gp-flex" >
+    <div
+      data-id="gbIU65-c7K"
+       style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl);--w:100%;--w-tablet:100%;--w-mobile:100%;--ta:left;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+     
+     <ul
+        class="gp-inline-flex gp-flex-col"
+        style="--gg:var(--g-s-l)"
+        >
+        
+    <li
+      data-index="0" data-id="gOj4DNpiik"
+      class="gp-icon-list-item gp-flex gp-w-full gp-items-center gp-child-item-gbIU65-c7K"
+      style="--cg:var(--g-s-l)"
+    >
+    <div
+      data-same-height-display-contents
+      
+      class="gSxh1wXGSL gp-relative gp-flex gp-flex-col"
+    >
+      
+    <div id="gFsSh86bXX" class="gp-leading-[0] gFsSh86bXX" style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:auto;--pt:0px;--pl:0px;--pb:0px;--pr:0px;--ta:left">
+      <div data-id="gFsSh86bXX" class="icon-wrapper gp-inline-flex gp-overflow-hidden gFsSh86bXX " style="--pl:14px;--pr:14px;--pt:14px;--pb:14px;--bs:none;--bw:1px 1px 1px 1px;--bc:#000000;--bblr:999999px;--bbrr:999999px;--btlr:999999px;--btrr:999999px;--focus-bblr:999999px;--focus-bbrr:999999px;--focus-btlr:999999px;--focus-btrr:999999px;-undefined-bblr:999999px;-undefined-bbrr:999999px;-undefined-btlr:999999px;-undefined-btrr:999999px;--bg:#F5F7F8">
+      
+        <div >
+          <span style="--c:var(--g-c-line-3, line-3);--t:rotate(0deg);--w:28px;--w-tablet:28px;--w-mobile:28px;--h:28px;--h-tablet:28px;--h-mobile:28px;--minw:28px;--minw-tablet:28px;--minw-mobile:28px;--height-desktop:28px;--height-tablet:28px;--height-mobile:28px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] gp-text-g-line-3"><svg data-id="518535483106526358" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+<g clip-path="url(#clip0_2118_31874)">
+<path d="M27.2125 0.7875C26.1625 -0.2625 24.4125 -0.2625 23.3625 0.7875L17.2375 6.9125L13.475 6.125L14.6125 4.9875C14.9625 4.6375 14.9625 4.1125 14.6125 3.7625C14.2625 3.4125 13.7375 3.4125 13.3875 3.7625L11.6375 5.5125C11.55 5.6 11.4625 5.6875 11.4625 5.775L9.1 5.3375L9.3625 5.075C9.7125 4.725 9.7125 4.2 9.3625 3.85C9.0125 3.5 8.4875 3.5 8.1375 3.85L7.175 4.8125C7.0875 4.9 7.0875 4.9875 7 4.9875L4.4625 4.4625C4.2 4.375 4.025 4.4625 3.7625 4.55L1.1375 6.3C0.875003 6.475 0.700001 6.7375 0.787501 7C0.787501 7.2625 0.962501 7.6125 1.225 7.7L8.225 12.075C8.4 12.1625 8.4875 12.25 8.6625 12.25C8.925 12.25 9.275 12.075 9.3625 11.8125C9.625 11.375 9.5375 10.85 9.1 10.5875L3.2375 6.9125L4.4625 6.125L15.6625 8.4L8.3125 15.75H2.625C2.3625 15.75 2.1875 15.8375 2.0125 16.0125L0.262503 17.7625C0.0875027 17.9375 0 18.2875 0 18.55C0.0875 18.8125 0.262499 19.075 0.524999 19.1625L4.9 20.9125C4.9875 20.9125 5.075 21 5.25 21C5.6 21 5.95 20.825 6.0375 20.475C6.2125 20.0375 6.0375 19.5125 5.5125 19.3375L2.3625 18.1125L2.8875 17.5875H8.6625C8.925 17.5875 9.1 17.5 9.275 17.325L24.5 2.1C24.85 1.75 25.4625 1.75 25.9 2.1C26.25 2.45 26.25 3.0625 25.9 3.5L10.675 18.725C10.5 18.9 10.4125 19.075 10.4125 19.3375V25.1125L9.8875 25.6375L8.6625 22.4875C8.4875 22.05 7.9625 21.7875 7.525 21.9625C7.0875 22.1375 6.825 22.6625 7 23.1L8.75 27.475C8.8375 27.7375 9.1 27.9125 9.3625 28C9.45 28 9.45 28 9.5375 28C9.8 28 9.975 27.9125 10.15 27.7375L11.9 25.9875C12.075 25.8125 12.1625 25.6375 12.1625 25.375V19.6L19.5125 12.25L21.7875 23.45L21 24.675L17.325 18.8125C17.0625 18.375 16.5375 18.2875 16.1 18.55C15.6625 18.8125 15.575 19.3375 15.8375 19.775L20.2125 26.775C20.3875 27.0375 20.65 27.2125 20.9125 27.2125C21.175 27.2125 21.4375 27.0375 21.6125 26.8625L23.3625 24.2375C23.45 24.0625 23.5375 23.8 23.45 23.5375L22.925 21C23.0125 21 23.1 20.9125 23.1 20.9125L24.0625 20.0375C24.4125 19.6875 24.4125 19.1625 24.0625 18.8125C23.7125 18.4625 23.1875 18.4625 22.8375 18.8125L22.4875 19.075L22.05 16.7125C22.1375 16.7125 22.225 16.625 22.3125 16.5375L24.0625 14.7875C24.4125 14.4375 24.4125 13.9125 24.0625 13.5625C23.7125 13.2125 23.1875 13.2125 22.8375 13.5625L21.7 14.7L20.9125 10.9375L27.0375 4.8125C28.2625 3.5875 28.2625 1.8375 27.2125 0.7875Z" fill="#242424"/>
+</g>
+<defs>
+<clipPath id="clip0_2118_31874">
+<rect width="28" height="28" fill="white"/>
+</clipPath>
+</defs>
+</svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div><div
+      data-same-height-display-contents
+      
+      class="gXAVNcgo3P gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="g-uRWi23-i"
+        class="g-uRWi23-i"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s);--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.gg-uRWi23-i_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gJYgOaBJQJ"
+        class="gJYgOaBJQJ"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#424242;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.ggJYgOaBJQJ_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </li>
+      </ul>
+  </div>
+  </div>
+  
+      </div><div gp-el-wrapper  class="gsXcTwhhHa ">
+      
+    
+    <div class="gp-flex" >
+    <div
+      data-id="gsXcTwhhHa"
+       style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl);--w:100%;--w-tablet:100%;--w-mobile:100%;--ta:left;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+     
+     <ul
+        class="gp-inline-flex gp-flex-col"
+        style="--gg:var(--g-s-l)"
+        >
+        
+    <li
+      data-index="0" data-id="gUvXg0vkYz"
+      class="gp-icon-list-item gp-flex gp-w-full gp-items-center gp-child-item-gsXcTwhhHa"
+      style="--cg:var(--g-s-l)"
+    >
+    <div
+      data-same-height-display-contents
+      
+      class="gZtDTrqIfR gp-relative gp-flex gp-flex-col"
+    >
+      
+    <div id="gg2SuYrty7" class="gp-leading-[0] gg2SuYrty7" style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:auto;--pt:0px;--pl:0px;--pb:0px;--pr:0px;--ta:left">
+      <div data-id="gg2SuYrty7" class="icon-wrapper gp-inline-flex gp-overflow-hidden gg2SuYrty7 " style="--pl:14px;--pr:14px;--pt:14px;--pb:14px;--bs:none;--bw:1px 1px 1px 1px;--bc:#000000;--bblr:999999px;--bbrr:999999px;--btlr:999999px;--btrr:999999px;--focus-bblr:999999px;--focus-bbrr:999999px;--focus-btlr:999999px;--focus-btrr:999999px;-undefined-bblr:999999px;-undefined-bbrr:999999px;-undefined-btlr:999999px;-undefined-btrr:999999px;--bg:#F5F7F8">
+      
+        <div >
+          <span style="--c:var(--g-c-line-3, line-3);--t:rotate(0deg);--w:28px;--w-tablet:28px;--w-mobile:28px;--h:28px;--h-tablet:28px;--h-mobile:28px;--minw:28px;--minw-tablet:28px;--minw-mobile:28px;--height-desktop:28px;--height-tablet:28px;--height-mobile:28px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] gp-text-g-line-3"><svg data-id="518536059202569366" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+<g clip-path="url(#clip0_2118_31913)">
+<path d="M28 6.125C28 6.0375 28 5.95 27.9125 5.8625C27.9125 5.8625 27.9125 5.86251 27.9125 5.77501C27.9125 5.68751 27.825 5.6 27.7375 5.5125L27.65 5.425C27.65 5.425 27.5625 5.42501 27.5625 5.33751L15.3125 0.0875053C15.225 0.0875053 15.1375 0 15.05 0C15.05 0 15.05 0 14.9625 0H14.875C14.7875 0 14.7 5.33927e-06 14.7 0.0875053L8.57501 2.71251L2.45001 5.33751C2.45001 5.33751 2.36251 5.3375 2.36251 5.425C2.27501 5.425 2.27501 5.5125 2.27501 5.5125C2.18751 5.6 2.18751 5.68751 2.10001 5.77501C2.10001 5.77501 2.10001 5.775 2.10001 5.8625C2.10001 5.95 2.01251 6.0375 2.01251 6.125V14C2.01251 14.525 2.36251 14.875 2.88751 14.875C3.41251 14.875 3.76251 14.525 3.76251 14V7.4375L14.2625 11.9V25.375C14.2625 25.4625 14.2625 25.55 14.35 25.6375C14.35 25.6375 14.35 25.6375 14.35 25.725C14.35 25.8125 14.4375 25.9 14.525 25.9875L14.6125 26.075H14.7H14.7875C14.875 26.075 14.9625 26.1625 15.05 26.1625C15.1375 26.1625 15.3125 26.1625 15.4 26.075L27.65 20.825C28 20.65 28.175 20.3875 28.175 20.0375V6.125H28ZM21 7.78749L10.9375 3.5L14.875 1.83751L24.9375 6.125L21 7.78749ZM4.81251 6.125L8.75001 4.46251L18.8125 8.75L14.875 10.4125L4.81251 6.125ZM26.25 19.5125L15.75 23.975V11.9L26.25 7.4375V19.5125Z" fill="#242424"/>
+<path d="M21.175 19.4251C21.2625 19.4251 21.4375 19.4251 21.525 19.3376L23.975 18.2876C24.0625 18.2001 24.15 18.2001 24.2375 18.1126C24.2375 18.1126 24.325 18.0251 24.325 17.9376C24.325 17.8501 24.4125 17.8501 24.4125 17.7626C24.5 17.6751 24.5 17.5001 24.5 17.4126V14.7876C24.5 14.2626 24.15 13.9126 23.625 13.9126C23.1 13.9126 22.75 14.2626 22.75 14.7876V16.8001L20.825 17.5876C20.3875 17.7626 20.125 18.2876 20.3875 18.7251C20.475 19.1626 20.825 19.4251 21.175 19.4251Z" fill="#242424"/>
+<path d="M7 19.2501H3.5L4.9 18.2001C5.25 17.9376 5.3375 17.3251 5.075 16.9751C4.8125 16.6251 4.2 16.5376 3.85 16.8001L0.350001 19.4251C0.350001 19.4251 0.350001 19.4251 0.350001 19.5126L0.262503 19.6001C0.262503 19.6001 0.262503 19.6001 0.262503 19.6876C0.262503 19.6876 0.262497 19.7751 0.174997 19.7751C0.174997 19.7751 0.174999 19.8626 0.0874987 19.8626V19.9501V20.0376C0.0874987 20.0376 0.0874987 20.0376 0.0874987 20.1251C0.0874987 20.1251 0.0874987 20.1251 0.0874987 20.2126V20.3001V20.3876C0.0874987 20.3876 0.0874973 20.4751 0.174997 20.4751C0.174997 20.4751 0.175003 20.5626 0.262503 20.5626C0.262503 20.5626 0.262503 20.5626 0.262503 20.6501L0.350001 20.7376C0.350001 20.7376 0.350001 20.7376 0.350001 20.8251L3.85 23.4501C4.025 23.5376 4.2 23.6251 4.375 23.6251C4.6375 23.6251 4.9 23.5376 5.075 23.2751C5.3375 22.9251 5.25 22.3126 4.9 22.0501L3.5 21.0001H7C8.4875 21.0001 9.625 22.1376 9.625 23.6251C9.625 25.1126 8.4875 26.2501 7 26.2501H0.875C0.35 26.2501 0 26.6001 0 27.1251C0 27.6501 0.35 28.0001 0.875 28.0001H7C9.45 28.0001 11.375 26.0751 11.375 23.6251C11.375 21.1751 9.45 19.2501 7 19.2501Z" fill="#242424"/>
+</g>
+<defs>
+<clipPath id="clip0_2118_31913">
+<rect width="28" height="28" fill="white"/>
+</clipPath>
+</defs>
+</svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div><div
+      data-same-height-display-contents
+      
+      class="gwg3C1Z3Ll gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gA0qSi337w"
+        class="gA0qSi337w"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s);--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.ggA0qSi337w_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="ggZGxnZyZM"
+        class="ggZGxnZyZM"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#424242;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.gggZGxnZyZM_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </li>
+      </ul>
+  </div>
+  </div>
+  
+      </div>
+    </div><div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="gNsrIyrEzE gp-relative gp-flex gp-flex-col"
+    >
+      <div gp-el-wrapper  class="gHXzIzJms0 ">
+      
+    
+    <div class="gp-flex" >
+    <div
+      data-id="gHXzIzJms0"
+       style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl);--w:100%;--w-tablet:100%;--w-mobile:100%;--ta:left;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+     
+     <ul
+        class="gp-inline-flex gp-flex-col"
+        style="--gg:var(--g-s-l)"
+        >
+        
+    <li
+      data-index="0" data-id="gttd3g_yTz"
+      class="gp-icon-list-item gp-flex gp-w-full gp-items-center gp-child-item-gHXzIzJms0"
+      style="--cg:var(--g-s-l)"
+    >
+    <div
+      data-same-height-display-contents
+      
+      class="gB6mNLduAp gp-relative gp-flex gp-flex-col"
+    >
+      
+    <div id="grBSxpoPYy" class="gp-leading-[0] grBSxpoPYy" style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:auto;--pt:0px;--pl:0px;--pb:0px;--pr:0px;--ta:left">
+      <div data-id="grBSxpoPYy" class="icon-wrapper gp-inline-flex gp-overflow-hidden grBSxpoPYy " style="--pl:14px;--pr:14px;--pt:14px;--pb:14px;--bs:none;--bw:1px 1px 1px 1px;--bc:#000000;--bblr:999999px;--bbrr:999999px;--btlr:999999px;--btrr:999999px;--focus-bblr:999999px;--focus-bbrr:999999px;--focus-btlr:999999px;--focus-btrr:999999px;-undefined-bblr:999999px;-undefined-bbrr:999999px;-undefined-btlr:999999px;-undefined-btrr:999999px;--bg:#F5F7F8">
+      
+        <div >
+          <span style="--c:var(--g-c-line-3, line-3);--t:rotate(0deg);--w:28px;--w-tablet:28px;--w-mobile:28px;--h:28px;--h-tablet:28px;--h-mobile:28px;--minw:28px;--minw-tablet:28px;--minw-mobile:28px;--height-desktop:28px;--height-tablet:28px;--height-mobile:28px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] gp-text-g-line-3"><svg data-id="518536030714856598" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+<g clip-path="url(#clip0_2118_31887)">
+<path d="M11.7431 15.05C11.4806 14.875 11.1306 14.7875 10.7806 14.7875C8.85563 15.05 7.63063 14.0875 7.01813 13.475L6.93063 13.3875C6.49313 13.0375 5.79313 13.0375 5.35563 13.3875L5.18063 13.5625C4.56813 14.0875 3.43063 15.1375 1.41813 14.7875C1.06813 14.7 0.718129 14.875 0.455629 15.05C0.193129 15.3125 0.018129 15.6625 0.018129 16.0125C-0.069371 18.2875 -0.0693707 26.075 5.70563 27.9125C5.79313 27.9125 5.96813 28 6.05563 28C6.14313 28 6.31813 28 6.40563 27.9125C12.1806 25.9875 12.2681 18.2875 12.0931 16.0125C12.1806 15.6625 12.0056 15.3125 11.7431 15.05ZM6.14313 26.25C1.94313 24.7625 1.76813 18.725 1.76813 16.625C3.95563 16.8 5.35563 15.6625 6.14313 15.05C6.93063 15.6625 8.33063 16.7125 10.5181 16.625C10.5181 18.725 10.3431 24.675 6.14313 26.25Z" fill="#242424"/>
+<path d="M28.0181 6.125C28.0181 6.0375 28.0181 5.95 27.9306 5.8625C27.9306 5.8625 27.9306 5.86251 27.9306 5.77501C27.9306 5.68751 27.8431 5.6 27.7556 5.5125L27.6681 5.425C27.6681 5.425 27.5806 5.42501 27.5806 5.33751L15.3306 0.0875053C15.2431 0.0875053 15.1556 0 15.0681 0H14.9806C14.8931 0 14.8931 0 14.8056 0C14.7181 0 14.6306 0 14.6306 0L8.50562 2.625L2.38062 5.25C2.38062 5.25 2.29312 5.25001 2.29312 5.33751C2.20562 5.33751 2.20562 5.425 2.20562 5.425C2.11812 5.5125 2.11812 5.6 2.03062 5.6875C2.03062 5.6875 2.03062 5.68751 2.03062 5.77501C2.03062 5.86251 1.94312 5.94999 1.94312 6.03749V11.2875C1.94312 11.8125 2.29312 12.1625 2.81812 12.1625C3.34312 12.1625 3.69311 11.8125 3.69311 11.2875V7.34999L14.1931 11.8125V25.375C14.1931 25.4625 14.1931 25.55 14.2806 25.6375C14.2806 25.6375 14.2806 25.6375 14.2806 25.725C14.2806 25.8125 14.3681 25.9 14.4556 25.9875L14.5431 26.075H14.6306H14.7181C14.8056 26.075 14.8931 26.1625 14.9806 26.1625C15.0681 26.1625 15.2431 26.1625 15.3306 26.075L27.5806 20.825C27.9306 20.65 28.1056 20.3875 28.1056 20.0375V6.125C28.0181 6.125 28.0181 6.125 28.0181 6.125ZM21.0181 7.78749L10.9556 3.5L14.8931 1.83751L24.9556 6.125L21.0181 7.78749ZM4.83062 6.125L8.76812 4.46251L18.8306 8.75L14.8931 10.4125L4.83062 6.125ZM26.2681 19.5125L15.7681 23.975V11.9L26.2681 7.4375V19.5125Z" fill="#242424"/>
+<path d="M21.1931 19.4251C21.2806 19.4251 21.4556 19.4251 21.5431 19.3376L23.9931 18.2876C24.0806 18.2001 24.1681 18.2001 24.2556 18.1126C24.2556 18.1126 24.3431 18.0251 24.3431 17.9376C24.3431 17.8501 24.4306 17.8501 24.4306 17.7626C24.5181 17.6751 24.5181 17.5001 24.5181 17.4126V14.7876C24.5181 14.2626 24.1681 13.9126 23.6431 13.9126C23.1181 13.9126 22.7681 14.2626 22.7681 14.7876V16.8001L20.8431 17.5876C20.4056 17.7626 20.1431 18.2876 20.4056 18.7251C20.4931 19.1626 20.8431 19.4251 21.1931 19.4251Z" fill="#242424"/>
+</g>
+<defs>
+<clipPath id="clip0_2118_31887">
+<rect width="28" height="28" fill="white"/>
+</clipPath>
+</defs>
+</svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div><div
+      data-same-height-display-contents
+      
+      class="gbpTIMX3fD gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gtCthLFji2"
+        class="gtCthLFji2"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s);--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.ggtCthLFji2_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="g1K54DwtNN"
+        class="g1K54DwtNN"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#424242;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.gg1K54DwtNN_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </li>
+      </ul>
+  </div>
+  </div>
+  
+      </div><div gp-el-wrapper  class="giV0m7Me9h ">
+      
+    
+    <div class="gp-flex" >
+    <div
+      data-id="giV0m7Me9h"
+       style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl);--w:100%;--w-tablet:100%;--w-mobile:100%;--ta:left;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+     
+     <ul
+        class="gp-inline-flex gp-flex-col"
+        style="--gg:var(--g-s-l)"
+        >
+        
+    <li
+      data-index="0" data-id="giZu9V7bSt"
+      class="gp-icon-list-item gp-flex gp-w-full gp-items-center gp-child-item-giV0m7Me9h"
+      style="--cg:var(--g-s-l)"
+    >
+    <div
+      data-same-height-display-contents
+      
+      class="glgFO9OOUk gp-relative gp-flex gp-flex-col"
+    >
+      
+    <div id="g5FgUEWgaC" class="gp-leading-[0] g5FgUEWgaC" style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:auto;--pt:0px;--pl:0px;--pb:0px;--pr:0px;--ta:left">
+      <div data-id="g5FgUEWgaC" class="icon-wrapper gp-inline-flex gp-overflow-hidden g5FgUEWgaC " style="--pl:14px;--pr:14px;--pt:14px;--pb:14px;--bs:none;--bw:1px 1px 1px 1px;--bc:#000000;--bblr:999999px;--bbrr:999999px;--btlr:999999px;--btrr:999999px;--focus-bblr:999999px;--focus-bbrr:999999px;--focus-btlr:999999px;--focus-btrr:999999px;-undefined-bblr:999999px;-undefined-bbrr:999999px;-undefined-btlr:999999px;-undefined-btrr:999999px;--bg:#F5F7F8">
+      
+        <div >
+          <span style="--c:var(--g-c-line-3, line-3);--t:rotate(0deg);--w:28px;--w-tablet:28px;--w-mobile:28px;--h:28px;--h-tablet:28px;--h-mobile:28px;--minw:28px;--minw-tablet:28px;--minw-mobile:28px;--height-desktop:28px;--height-tablet:28px;--height-mobile:28px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] gp-text-g-line-3"><svg data-id="518536071953253526" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+<path d="M4.375 25.375H0.875C0.35 25.375 0 25.025 0 24.5V12.25C0 11.725 0.35 11.375 0.875 11.375H4.375C4.9 11.375 5.25 11.725 5.25 12.25V24.5C5.25 25.025 4.9 25.375 4.375 25.375ZM1.75 23.625H3.5V13.125H1.75V23.625Z" fill="#242424"/>
+<path d="M27.65 18.725C27.3875 18.2 26.95 17.5875 26.25 17.4125V3.5C26.25 2.975 25.9 2.625 25.375 2.625H19.25H14H7.875C7.35 2.625 7 2.975 7 3.5V14.35C6.125 14.6125 5.25 14.9625 4.6375 15.4C4.2 15.6625 4.1125 16.1875 4.375 16.625C4.6375 17.0625 5.16249 17.15 5.59999 16.8875C6.99999 16.0125 9.09999 15.4875 9.97499 15.925C10.0625 16.0125 10.2375 16.1875 10.4125 16.3625C11.025 17.15 11.9 18.2875 14.7 17.9375C15.8375 17.7625 16.7125 17.9375 17.15 18.55C17.4125 18.8125 17.5 19.1625 17.5 19.3375C17.4125 19.425 17.2375 19.425 17.15 19.5125C16.625 19.775 15.4875 20.2125 15.1375 20.125C14.4375 19.95 11.025 18.9875 9.7125 18.6375C9.275 18.55 8.74999 18.8125 8.66249 19.25C8.48749 19.6875 8.8375 20.2125 9.275 20.3C10.675 20.65 14.0875 21.6125 14.7875 21.7875C14.9625 21.875 15.1375 21.875 15.3125 21.875C16.1875 21.875 17.15 21.4375 17.9375 21.0875C18.2 21 18.375 20.9125 18.55 20.825C18.8125 20.7375 18.9875 20.5625 19.1625 20.3875C20.5625 20.2125 21.9625 19.8625 23.275 19.425C23.8 19.25 24.325 19.1625 24.7625 18.9875C25.9 18.725 26.075 19.075 26.1625 19.3375C26.25 19.6 26.3375 19.775 26.3375 19.8625C24.0625 21.175 17.2375 23.5375 15.6625 23.5375C13.825 23.5375 7.175 21.4375 4.8125 20.65C4.375 20.475 3.84999 20.7375 3.67499 21.175C3.49999 21.6125 3.7625 22.1375 4.2 22.3125C5.075 22.575 13.2125 25.2875 15.575 25.2875C17.675 25.2875 25.2875 22.575 27.475 21.175C28.0875 20.825 28.175 19.95 27.65 18.725ZM18.375 4.375V9.27501L17.2375 8.1375C17.0625 7.9625 16.8 7.875 16.625 7.875C16.45 7.875 16.1875 7.9625 16.0125 8.1375L14.875 9.27501V4.375H18.375ZM24.5 17.325C24.4125 17.325 24.325 17.325 24.15 17.4125C23.625 17.5875 23.1 17.675 22.575 17.85C21.4375 18.2 20.2125 18.4625 19.075 18.6375C18.725 17.2375 17.2375 15.8375 14.4375 16.1875C12.6875 16.45 12.3375 15.925 11.8125 15.3125C11.55 14.9625 11.2875 14.6125 10.85 14.35C10.2375 14 9.5375 13.9125 8.75 14V4.375H13.125V11.375C13.125 11.725 13.3 12.075 13.65 12.1625C14 12.3375 14.35 12.25 14.6125 11.9875L16.625 9.97499L18.6375 11.9875C18.8125 12.1625 18.9875 12.25 19.25 12.25C19.3375 12.25 19.5125 12.25 19.6 12.1625C19.95 11.9875 20.125 11.725 20.125 11.375V4.375H24.5V17.325Z" fill="#242424"/>
+</svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div><div
+      data-same-height-display-contents
+      
+      class="gJ5xQW28TD gp-relative gp-flex gp-flex-col"
+    >
+      
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gGjp8pHCkE"
+        class="gGjp8pHCkE"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s);--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.ggGjp8pHCkE_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gfKneyf3-c"
+        class="gfKneyf3-c"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#424242;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.ggfKneyf3-c_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </li>
+      </ul>
+  </div>
+  </div>
+  
+      </div>
+    </div>
+
+      
+    </gp-row>
+  
+  <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl)" class="g68pU_Ey8W ">
+      
+    {%- assign total_combinations = 1 -%}
+    {% for option in product.options_with_values %}{%- assign total_combinations = total_combinations | times: option.values.size -%}{% endfor %}
+    <gp-product-variants
+      data-id="g68pU_Ey8W" has-pre-selected="true" class
+      gp-data='{
+        "setting":{"blankText":"Please select an option","column":{"desktop":1},"combineFullWidth":{"desktop":true},"combineHeight":"45px","combineWidth":{"desktop":"100%"},"hasOnlyDefaultVariant":false,"hasPreSelected":true,"label":true,"layout":{"desktop":"vertical"},"optionAlign":{"desktop":"left"},"optionType":"singleOption","price":true,"showAsSwatches":true,"soldOutStyle":"line","variantPresets":[{"isEdited":true,"optionName":"base","optionType":"rectangle_list","presets":{"color":{"height":"45px","optionBgColor":{"active":"bg-3","hover":"bg-3","normal":"bg-3"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"normal":{"bblr":"999999px","bbrr":"999999px","btlr":"999999px","btrr":"999999px","radiusType":"circle"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"text-2","hover":"text-2","normal":"text-2"},"spacing":"8px","width":{"desktop":"45px","mobile":"45px","tablet":"45px"}},"dropdown":{"height":"45px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"#242424","hover":"text-2","normal":"#242424"},"width":{"desktop":"100%","mobile":"100%","tablet":"100%"}},"image":{"height":"64px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"text-2","hover":"text-2","normal":"text-2"},"spacing":"8px","width":{"desktop":"64px","mobile":"64px","tablet":"64px"}},"image_shopify":{"height":"64px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"text-2","hover":"text-2","normal":"text-2"},"spacing":"8px","width":{"desktop":"64px","mobile":"64px","tablet":"64px"}},"rectangle_list":{"height":"45px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"#242424","hover":"text-2","normal":"#242424"},"spacing":"8px","width":{"desktop":""}}}},{"isEdited":true,"optionName":"Storage","optionType":"rectangle_list","presets":{"color":{"height":"45px","optionBgColor":{"active":"bg-3","hover":"bg-3","normal":"bg-3"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"normal":{"bblr":"999999px","bbrr":"999999px","btlr":"999999px","btrr":"999999px","radiusType":"circle"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"text-2","hover":"text-2","normal":"text-2"},"spacing":"8px","width":{"desktop":"45px","mobile":"45px","tablet":"45px"}},"dropdown":{"height":"45px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"#242424","hover":"text-2","normal":"#242424"},"width":{"desktop":"100%","mobile":"100%","tablet":"100%"}},"image":{"height":"64px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"text-2","hover":"text-2","normal":"text-2"},"spacing":"8px","width":{"desktop":"64px","mobile":"64px","tablet":"64px"}},"image_shopify":{"height":"64px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"text-2","hover":"text-2","normal":"text-2"},"spacing":"8px","width":{"desktop":"64px","mobile":"64px","tablet":"64px"}},"rectangle_list":{"height":"56px","optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionTextColor":{"active":"#242424","hover":"text-2","normal":"#242424"},"spacing":"8px","width":{"desktop":"120px","mobile":"120px","tablet":"120px"}}}}]},
+        "styles":{"align":{"desktop":"left"},"dropdownItemWidth":{"desktop":"fill"},"fixedDropdownWidth":{"desktop":"240px"},"fullWidth":{"desktop":true},"labelColor":"#242424","labelSpacing":"8px","labelTypo":{"attrs":{"color":"#242424"},"custom":{"fontSize":{"desktop":"16px","mobile":"14px","tablet":"16px"},"fontStyle":"normal","fontVariants":["300","regular","500","600","700","800","900","300italic","italic","500italic","600italic","700italic","800italic","900italic"],"fontWeight":"700","letterSpacing":{"desktop":"normal"},"lineHeight":{"desktop":"150%","mobile":"150%","tablet":"150%"}},"type":"paragraph-1"},"labelTypography":{"type":"paragraph-1"},"marginBottom":{"desktop":"0px","mobile":"auto"},"optionBgColor":{"active":"text-3","hover":"bg-3","normal":"transparent"},"optionBorder":{"active":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"hover":{"border":"solid","borderLabel":"Style 3","borderType":"style-3","color":"#242424","isCustom":true,"width":"1px 1px 1px 1px"},"normal":{"border":"solid","borderLabel":"Style 2","borderType":"style-2","color":"#B4B4B4","isCustom":true,"width":"1px 1px 1px 1px"}},"optionHasShadow":{"normal":false},"optionRounded":{"active":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"hover":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"normal":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"}},"optionShadow":{"normal":{"type":"none"}},"optionSpacing":"30px","optionTextColor":{"active":"#242424","hover":"text-2","normal":"#242424"},"optionTransform":"default","optionTypo":{"custom":{"fontSize":{"desktop":"16px","mobile":"14px","tablet":"16px"},"fontStyle":"normal","fontVariants":["300","regular","500","600","700","800","900","300italic","italic","500italic","600italic","700italic","800italic","900italic"],"fontWeight":"700","letterSpacing":{"desktop":"normal"},"lineHeight":{"desktop":"150%","mobile":"150%","tablet":"150%"}},"type":"paragraph-1"},"optionTypography":{"custom":{"desktop":{"fontSize":"16px","fontStyle":"normal","fontWeight":"700","letterSpacing":"0px","lineHeight":"150%"},"mobile":{"fontSize":"14px"},"tablet":{"fontSize":"16px","lineHeight":"150%"}}},"swatchAutoWidth":{"desktop":true},"swatchHeight":{"desktop":"56px"},"swatchItemWidth":{"desktop":"fixed"},"swatchSpacing":"var(--g-s-m)","swatchWidth":{"desktop":"120px"},"width":{"desktop":"100%"}},
+        "variants":{{product.variants | json | escape}},
+        "optionsWithValues": {{product.options_with_values | json | escape}},
+        "variantSelected": {{ variant | json | escape }},
+        "variantInventoryQuantity": {{product.variants | map: 'inventory_quantity' | json | escape}},
+        "variantInventoryPolicy": {{product.variants | map: 'inventory_policy' | json | escape}},
+        "moneyFormat": {{shop.money_format | json | escape}},
+        "productId": {{product.id | json | escape}},
+        "productUrl": {{product.url | json | escape}},
+        "productHandle": {{product.handle | json | escape}},
+        "displayState": {"desktop":true,"mobile":true,"tablet":true},
+        "totalVariantCombinations": {{total_combinations}},
+        "firstAvailableVariant": {{product.selected_or_first_available_variant | json | escape}}
+      }
+    '>
+      <div class="gp-hidden" style="--hvr-shadow: none; --hvr-shadow-tablet: none; --hvr-shadow-mobile: none"></div>
+      {%- assign options = product.options_with_values -%}
+      {%- assign variants = product.variants -%}
+      {% if options.size == 0 or options.size == 1 and variants.size == 1 and variants[0].title == 'Default Title' and variants[0].option1 == 'Default Title' %}<div></div>{% else %}<div
+            class="gp-flex gp-flex-col !gp-ml-0"
+            style="--gtc:repeat(1, minmax(0, 1fr));--ta:left;--w:100%;--w-tablet:100%;--w-mobile:100%"
+          >
+          
+      {%- assign presets = "base($2)rectangle_list($1)Storage($2)rectangle_list" | split: '($1)' -%}
+      {% assign hiddenPresetOptions = "" | split: ',' %}
+      
+      {% assign all_option_names = options | map: 'name' %}
+      {% assign filtered_options_string = '' %}
+      {% assign delimiter = '||' %}
+      
+      {% for item_name in all_option_names %}
+        {% assign is_excluded = false %}
+        {% for exclude_name in hiddenPresetOptions %}
+          {% if item_name == exclude_name %}
+            {% assign is_excluded = true %}
+          {% endif %}
+        {% endfor %}
+        
+        {% unless is_excluded %}
+          {% if filtered_options_string == '' %}
+            {% assign filtered_options_string = item_name %}
+          {% else %}
+            {% assign filtered_options_string = filtered_options_string | append: delimiter | append: item_name %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+      
+      {% assign filtered_options_array = filtered_options_string | split: delimiter %}
+      
+      {% assign last_option_name = filtered_options_array | last %}
+      
+      {% for option in options %}
+        <div
+        option-name="{{option.name | escape}}"
+        class="gp-flex variant-inside gp-flex-col gp-items-start {% if hiddenPresetOptions contains option.name %}gp-hidden{% endif %}"
+        style="--mb: 0px;--mb-mobile: auto;{% if forloop.last or option.name == last_option_name %}--mb:0;--mb-mobile:0;--mb-tablet:0;{% endif %}"
+        >
+          {%- assign showVariantClass = 'variant-display' -%}
+          {%- assign optionName = option.name  -%}
+          {% for preset in presets %}
+            {%- assign presetDetail = preset | split: '($2)' -%}
+            {% if presetDetail[1] == 'dropdown' and presetDetail[0] == optionName %}{%- assign showVariantClass = '' -%} {%- break -%}{% endif %}
+          {% endfor %}
+          
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id
+        
+        style="--mr:0px;--mr-tablet:0px;--mr-mobile:0px;--dynamic-source-color:#F4F4F4"
+      >
+      <div  style="--w:fit-content;--w-tablet:fit-content;--w-mobile:fit-content">
+        <legend
+          data-gp-text
+          class="{{showVariantClass}}  gp-text-instant"
+          style="--w:100%;--tdt:auto;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--c:#242424;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{option.name}}
+        </legend>
+      </div>
+    </div>
+    
+          <div
+              variant-option-name="{{option.name | escape}}"
+              class="variant-option-group gp-flex gp-w-full gp-flex-wrap gp-items-center  gp-justify-start"
+              style="--rg: var(--g-s-m);--cg: var(--g-s-m);"
+            >
+              {%- assign values = option.values -%}
+              {%- assign rootForloop = forloop.index0 -%}
+              
+                {%- if option.position == 1 -%}
+                  {%- assign selectedValue = variant.option1 -%}
+                {%- elsif option.position == 2 -%}
+                  {%- assign selectedValue = variant.option2 -%}
+                {%- else -%}
+                  {%- assign selectedValue = variant.option3 -%}
+                {%- endif -%}
+              
+              
+              
+    {%- assign optionRendered = false -%}
+    {%- assign swatches = shop.metafields.GEMPAGES.swatches -%}
+    {%- assign swatchesItems = swatches | split: '($1)' -%}
+
+    {% for swatchesItem in swatchesItems %}
+      {%- assign colorArraysString = "" -%}
+      {%- assign labelsString = "" -%}
+      {%- assign imageUrlsString = "" -%}
+      {%- assign attrItems = swatchesItem | split: '($3)' -%}
+
+      {% for attrItem in attrItems %}{%- assign attrs = attrItem | split: '($2)' -%}
+          {%- assign optionKey = attrs[0] -%}
+          {%- assign optionValue = attrs[1] -%}
+          
+            {% if optionKey == 'optionTitle' %}
+            {% assign optionTitle = optionValue %}
+            {% elsif optionKey == 'optionType' %}
+              {% assign optionType = optionValue %}
+            {% endif %}
+          
+
+          {% if optionKey == 'optionValues' %}{%- assign opValueItems = optionValue | split: '($4)' -%}
+            {% for opValueItem in opValueItems %}{%- assign opValueItemAttrs = opValueItem | split: '($6)' -%}
+              {% for opValueItemAttr in opValueItemAttrs %}{%- assign attrs = opValueItemAttr | split: '($5)' -%}
+                {%- assign opValueItemKey = attrs[0] -%}
+                {%- assign opValueItemValue = attrs[1] -%}
+
+                {% if opValueItemKey == 'label' %}{%- assign labelsString = labelsString | append: opValueItemValue -%}{%- assign labelsString = labelsString | append: "($8)" -%}{% endif %}
+
+                {% if opValueItemKey == 'colors' %}{%- assign colorArraysString = colorArraysString | append: opValueItemValue -%}{%- assign colorArraysString = colorArraysString | append: "($8)" -%}{% endif %}
+
+                {% if opValueItemKey == 'imageUrl' %}{%- assign imageUrlsString = imageUrlsString | append: opValueItemValue -%}{%- assign imageUrlsString = imageUrlsString | append: "($8)" -%}{% endif %}{% endfor %}{% endfor %}{% endif %}
+        {% endfor %}
+
+      {%- assign labels = labelsString | split: '($8)' -%}
+      {%- assign colorStrings = colorArraysString | split: '($8)' -%}
+      {%- assign imageUrls = imageUrlsString | split: '($8)' -%}
+
+      {% if optionTitle == option.name %}
+        {%- assign variantPresetString = "base($1)rectangle_list($2)Storage($1)rectangle_list" -%}
+        {%- assign optionName = option.name | replace: "'", "&apos;" | replace: '"', "&quot;" -%}
+        {%- assign items = variantPresetString | split:'($2)' -%}
+        {%- assign type = 'dropdown' -%}
+        {% for item in items %}
+          {%- assign itemPreset = item | split:'($1)' -%}
+          {% if itemPreset[0] == optionName %}{%- assign type = itemPreset[1] -%}{% endif %}
+          {% if itemPreset[0] == "base" %}{%- assign type = itemPreset[1] -%}{% endif %}
+          {% endfor %}
+        {%- assign optionRendered = true -%}
+        {% for value in values %}
+    {%- liquid
+      assign option_disabled = true
+      for variantItem in product.variants
+        case option.position
+          when 1
+            if variantItem.available and variantItem.option1 == value
+              assign option_disabled = false
+            endif
+          when 2
+            if variantItem.available and variantItem.option2 == value
+              assign option_disabled = false
+            endif
+          when 3
+            if variantItem.available and variantItem.option3 == value
+              assign option_disabled = false
+            endif
+        endcase
+      endfor
+    -%}
+    {% assign option_disabled = false %}
+    <label
+      id="{{option.name | escape}}-{{value | escape}}"
+      for="{{product.id}}-g68pU_Ey8W-{{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+      class="option-item gp-group gp-relative gp-child-item-g68pU_Ey8W"
+      
+    >
+      <div class="gp-hidden !gp-max-w-[150px] gp-left-[50%] gp-translate-x-[-50%] gp-translate-y-0 gp-absolute gp-bottom-[calc(100%+20px)] gp-text-[12px] group-hover:gp-block gp-w-max gp-bg-[#333333] gp-text-[#F9F9F9] gp-px-[8px] gp-py-[4px] gp-rounded-[8px] gp-mb-[-10px] after:gp-content-[''] after:gp-absolute after:gp-p-[7px] after:gp-left-0 after:gp-w-full after:gp-bottom-[-10px]">
+        <p class="gp-text-[#F9F9F9]">{{value | escape}}</p>
+        <svg class="gp-absolute gp-left-[50%] gp-translate-x-[-50%] gp-translate-y-0 gp-z-10 gp-bottom-[-4px]" width="8" height="4" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 10L0 0L16 1.41326e-06L8 10Z" fill="#333333"/>
+        </svg>
+      </div>
+      <input
+        checked="{%- if option.selected_value == value -%}true{% else %}false{%- endif -%}"
+        name="{{product.id}}-options-{{option.name | escape}}"
+        id="{{product.id}}-g68pU_Ey8W-{{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+        value="{{value | escape}}"
+        type="radio"
+        class="gp-sr-only gp-absolute gp-bottom-0 gp-right-0"
+      />
+      <span class="gp-sr-only">{{value | escape}}</span>
+      <div
+        option-name="{{option.name | escape}}" option-name-value="{{value | escape}}" data-gp-option-value-id="{{value.id}}"
+        class="option-item-inner gp-w-auto gp-h-auto {% if option_disabled == true %} {% endif %}">
+        
+    {% case type %}
+      {% when "rectangle_list" %}
+      
+    <div
+      id="value-wrapper-{{option.name | escape | strip}}-{{value | escape | strip}}" option-data="{{option.name | escape}}" option-value="{{value | escape}}" option-position="{{option.position}}" data-gp-option-available="{{value.available}}" option-type="rectangle_list" data-disabled="{%- if option_disabled == true -%} disabled  {%- endif -%}" data-hidden="true"
+      class="gp-relative gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-text-center option-value-wrapper gp-overflow-hidden gp-w-full gp-h-full data-[disabled='disabled']:gp-pointer-events-none data-[disabled='disabled']:!gp-cursor-not-allowed
+  data-[hidden='false']:gp-flex {{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+      style="{% if selectedValue == value %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% else %}--c: default;--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% endif %}">
+      
+      <div
+        class="option-value gp-overflow-hidden gp-relative"
+        style=" --pl: 16px;--pr: 16px;--pl-tablet: 16px;--pr-tablet: 16px;--pl-mobile: 16px;--pr-mobile: 16px;--pt: 0px;--pb: 0px;">
+         
+        <span class="gp-text-center" style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal">{{value}}</span>
+      </div>
+    
+    </div>
+      {% when "color" %}
+      
+    {% assign colorsString = null %}
+    {% assign colors = null %}
+    {% for label in labels %}
+      {% if label == value %}
+        {% assign colorsString = colorStrings[forloop.index0] %}
+      {% endif %}
+    {% endfor %}
+    {% if colorsString != null %}
+      {% assign colors = colorsString | split: '($7)' %}
+    {% endif %}
+    
+    <div
+      id="value-wrapper-{{option.name | escape | strip}}-{{value | escape | strip}}" option-data="{{option.name | escape}}" option-value="{{value | escape}}" option-position="{{option.position}}" data-gp-option-available="{{value.available}}" option-type="color" data-disabled="{%- if option_disabled == true -%} disabled  {%- endif -%}" data-hidden="true"
+      class="gp-relative gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-text-center option-value-wrapper gp-overflow-hidden gp-w-full gp-h-full data-[disabled='disabled']:gp-pointer-events-none data-[disabled='disabled']:!gp-cursor-not-allowed
+  data-[hidden='false']:gp-flex {{option.name | escape}}-{{option.position}}-{{ forloop.index }} gp-p-[4px]"
+      style="{% if selectedValue == value %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--minw: 32px;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 999999px;--bbrr: 999999px;--btlr: 999999px;--btrr: 999999px;--hvr-bblr: 999999px;--hvr-bbrr: 999999px;--hvr-btlr: 999999px;--hvr-btrr: 999999px;--focus-bblr: 999999px;--focus-bbrr: 999999px;--focus-btlr: 999999px;--focus-btrr: 999999px;-undefined-bblr: 999999px;-undefined-bbrr: 999999px;-undefined-btlr: 999999px;-undefined-btrr: 999999px;{% else %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--minw: 32px;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 999999px;--bbrr: 999999px;--btlr: 999999px;--btrr: 999999px;--hvr-bblr: 999999px;--hvr-bbrr: 999999px;--hvr-btlr: 999999px;--hvr-btrr: 999999px;--focus-bblr: 999999px;--focus-bbrr: 999999px;--focus-btlr: 999999px;--focus-btrr: 999999px;-undefined-bblr: 999999px;-undefined-bbrr: 999999px;-undefined-btlr: 999999px;-undefined-btrr: 999999px;{% endif %}">
+      {% if colors != null and colors.size > 0 %}
+      {% for color in colors %}
+          {% assign backgroundType = "background-color" %}
+          {% if color contains "linear-gradient" %}{% assign backgroundType = "background-image" %}{% endif %}
+          <div
+            class="color gp-relative gp-h-full gp-w-full gp-overflow-hidden gp-min-w-fit gp-flex gp-color-circle"
+            data-test="{{ backgroundType }}: {{ color }}"
+            style="{{ backgroundType }}: {{ color }}; {% if selectedValue == value %}--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 999999px;--bbrr: 999999px;--btlr: 999999px;--btrr: 999999px;--hvr-bblr: 999999px;--hvr-bbrr: 999999px;--hvr-btlr: 999999px;--hvr-btrr: 999999px;--focus-bblr: 999999px;--focus-bbrr: 999999px;--focus-btlr: 999999px;--focus-btrr: 999999px;-undefined-bblr: 999999px;-undefined-bbrr: 999999px;-undefined-btlr: 999999px;-undefined-btrr: 999999px;{% else %}--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 999999px;--bbrr: 999999px;--btlr: 999999px;--btrr: 999999px;--hvr-bblr: 999999px;--hvr-bbrr: 999999px;--hvr-btlr: 999999px;--hvr-btrr: 999999px;--focus-bblr: 999999px;--focus-bbrr: 999999px;--focus-btlr: 999999px;--focus-btrr: 999999px;-undefined-bblr: 999999px;-undefined-bbrr: 999999px;-undefined-btlr: 999999px;-undefined-btrr: 999999px;{% endif %}"></div>
+        {% endfor %}
+      {% else %}
+      <div
+        class="option-value gp-overflow-hidden gp-relative color gp-line-clamp-2 gp-flex gp-h-full gp-w-full gp-items-center gp-justify-center"
+        style="{% if selectedValue == value %}--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 999999px;--bbrr: 999999px;--btlr: 999999px;--btrr: 999999px;--hvr-bblr: 999999px;--hvr-bbrr: 999999px;--hvr-btlr: 999999px;--hvr-btrr: 999999px;--focus-bblr: 999999px;--focus-bbrr: 999999px;--focus-btlr: 999999px;--focus-btrr: 999999px;-undefined-bblr: 999999px;-undefined-bbrr: 999999px;-undefined-btlr: 999999px;-undefined-btrr: 999999px;{% else %}--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 999999px;--bbrr: 999999px;--btlr: 999999px;--btrr: 999999px;--hvr-bblr: 999999px;--hvr-bbrr: 999999px;--hvr-btlr: 999999px;--hvr-btrr: 999999px;--focus-bblr: 999999px;--focus-bbrr: 999999px;--focus-btlr: 999999px;--focus-btrr: 999999px;-undefined-bblr: 999999px;-undefined-bbrr: 999999px;-undefined-btlr: 999999px;-undefined-btrr: 999999px;{% endif %} ">
+         
+        <span class="gp-text-center  gp-overflow-hidden gp-text-ellipsis gp-px-1" style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal">{{value}}</span>
+      </div>
+    {% endif %}
+    </div>
+  
+      {% when "image_shopify" %}
+      
+      {% assign imageUrl = null %}
+      {% for variant in variants %}
+        {% assign valueIncludesSelectedOption = false %}
+        {% for item in variant.options %}
+          {% if item == value %}
+          {% assign valueIncludesSelectedOption = true %}
+          {% endif %}
+        {% endfor %}
+        {% if valueIncludesSelectedOption and variant.featured_image or variant.featured_media%}
+          {% unless imageUrl %}
+            {% if variant.featured_media %}
+              {% assign imageUrl = variant.featured_media.preview_image.src | product_img_url: '200x'  %}
+            {% else %}
+              {% assign imageUrl = variant.featured_image.src | product_img_url: '200x'  %}
+            {% endif %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+      
+    <div
+      id="value-wrapper-{{option.name | escape | strip}}-{{value | escape | strip}}" option-data="{{option.name | escape}}" option-value="{{value | escape}}" option-position="{{option.position}}" data-gp-option-available="{{value.available}}" option-type="image_shopify" data-disabled="{%- if option_disabled == true -%} disabled  {%- endif -%}" data-hidden="true"
+      class="gp-relative gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-text-center option-value-wrapper gp-overflow-hidden gp-w-full gp-h-full data-[disabled='disabled']:gp-pointer-events-none data-[disabled='disabled']:!gp-cursor-not-allowed
+  data-[hidden='false']:gp-flex {{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+      style="{% if selectedValue == value %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% else %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% endif %}">
+      {% if imageUrl != null and imageUrl != "" %}
+      <img class="gp-object-cover gp-rounded-none" style="width: 64px; height: 64px" src="{{imageUrl}}" alt="" />
+    {% else %}
+      <div
+        class="option-value gp-overflow-hidden gp-relative gp-flex gp-flex-col gp-justify-center gp-items-center gp-gap-[6px"
+        style=" --pl: 16px;--pr: 16px;--pl-tablet: 16px;--pr-tablet: 16px;--pl-mobile: 16px;--pr-mobile: 16px;--pt: 0px;--pb: 0px;">
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="2" fill="#D6D6D6"></circle><path d="M0.196854 10.6453L2.40968 8.05946C2.4846 7.97175 2.57719 7.9008 2.68141 7.85124C2.78562 7.80168 2.89913 7.77461 3.01452 7.77181C3.12991 7.76902 3.2446 7.79055 3.3511 7.835C3.45761 7.87945 3.55353 7.94583 3.63262 8.02981L4.66733 9.12714L8.71205 4.29464C8.79123 4.19995 8.89077 4.1243 9.00325 4.07333C9.11573 4.02236 9.23827 3.99737 9.36176 4.00022C9.48524 4.00307 9.6065 4.03369 9.71651 4.08979C9.82651 4.1459 9.92245 4.22605 9.99717 4.32429L14.8329 10.6772C14.9254 10.7989 14.982 10.9441 14.9964 11.0962C15.0107 11.2484 14.9823 11.4016 14.9144 11.5385C14.8464 11.6754 14.7415 11.7907 14.6115 11.8713C14.4815 11.952 14.3316 11.9948 14.1786 11.995L0.822048 12C0.664945 11.9999 0.511148 11.9549 0.378853 11.8703C0.246557 11.7857 0.141299 11.6649 0.0755311 11.5224C0.00976323 11.3799 -0.013762 11.2216 0.00773837 11.0661C0.0292388 10.9107 0.0948652 10.7646 0.196854 10.6453Z" fill="#D6D6D6"></path></svg>
+        <span class="gp-text-center  gp-overflow-hidden gp-text-ellipsis gp-px-1" style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal">{{value}}</span>
+      </div>
+    {% endif %}
+    </div>
+  
+      {% when "image" %}
+      
+    {% assign imageUrl = null %}
+    {% for label in labels %}
+    {% if label == value %}
+      {% assign imageUrl = imageUrls[forloop.index0] %}
+    {% endif %}
+    {% endfor %}
+    
+    <div
+      id="value-wrapper-{{option.name | escape | strip}}-{{value | escape | strip}}" option-data="{{option.name | escape}}" option-value="{{value | escape}}" option-position="{{option.position}}" data-gp-option-available="{{value.available}}" option-type="image" data-disabled="{%- if option_disabled == true -%} disabled  {%- endif -%}" data-hidden="true"
+      class="gp-relative gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-text-center option-value-wrapper gp-overflow-hidden gp-w-full gp-h-full data-[disabled='disabled']:gp-pointer-events-none data-[disabled='disabled']:!gp-cursor-not-allowed
+  data-[hidden='false']:gp-flex {{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+      style="{% if selectedValue == value %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% else %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% endif %}">
+      {% if imageUrl != null and imageUrl != "" %}
+      <img class="gp-object-cover gp-rounded-none" style="width: 64px; height: 64px" src="{{imageUrl}}" alt="" />
+    {% else %}
+      <div
+        class="option-value gp-overflow-hidden gp-relative gp-flex gp-flex-col gp-justify-center gp-items-center gp-gap-[6px"
+        style=" --pl: 16px;--pr: 16px;--pl-tablet: 16px;--pr-tablet: 16px;--pl-mobile: 16px;--pr-mobile: 16px;--pt: 0px;--pb: 0px;">
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="2" fill="#D6D6D6"></circle><path d="M0.196854 10.6453L2.40968 8.05946C2.4846 7.97175 2.57719 7.9008 2.68141 7.85124C2.78562 7.80168 2.89913 7.77461 3.01452 7.77181C3.12991 7.76902 3.2446 7.79055 3.3511 7.835C3.45761 7.87945 3.55353 7.94583 3.63262 8.02981L4.66733 9.12714L8.71205 4.29464C8.79123 4.19995 8.89077 4.1243 9.00325 4.07333C9.11573 4.02236 9.23827 3.99737 9.36176 4.00022C9.48524 4.00307 9.6065 4.03369 9.71651 4.08979C9.82651 4.1459 9.92245 4.22605 9.99717 4.32429L14.8329 10.6772C14.9254 10.7989 14.982 10.9441 14.9964 11.0962C15.0107 11.2484 14.9823 11.4016 14.9144 11.5385C14.8464 11.6754 14.7415 11.7907 14.6115 11.8713C14.4815 11.952 14.3316 11.9948 14.1786 11.995L0.822048 12C0.664945 11.9999 0.511148 11.9549 0.378853 11.8703C0.246557 11.7857 0.141299 11.6649 0.0755311 11.5224C0.00976323 11.3799 -0.013762 11.2216 0.00773837 11.0661C0.0292388 10.9107 0.0948652 10.7646 0.196854 10.6453Z" fill="#D6D6D6"></path></svg>
+        <span class="gp-text-center  gp-overflow-hidden gp-text-ellipsis gp-px-1" style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal">{{value}}</span>
+      </div>
+    {% endif %}
+    </div>
+  
+      {% else %}
+    {% endcase %}
+    
+      </div>
+    </label>{% endfor %}
+        {% if type == 'dropdown' %}
+    <select
+      aria-label="{{option.name | escape}}" autocomplete="off" id="p-variant-dropdown-{{option.position}}" name="{%- if option -%}{{option.name | escape}}{% else %}Select Option{%- endif -%}" option-data="{{option.name}}" option-type="{{optionType}}" option-renderer="{{optionRendered}}"
+      class="dropdown-option-item gp-truncate gp-bg-auto gp-pl-4 gp-pr-6 gp-outline-none gp-shadow-none hover:gp-text-g-text-2 active:gp-bg-g-text-3 hover:gp-bg-g-bg-3"
+      style="--w:true;--w-tablet:auto;--w-mobile:auto;--h:[object Object];--shadow:none;--bg:transparent;--bs:solid;--bw:1px 1px 1px 1px;--bc:#B4B4B4;--tt:default;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;--hvr-c:var(--g-c-text-2, text-2);--c:#242424;--hvr-bg:var(--g-c-bg-3, bg-3);--hvr-bs:solid;--hvr-bw:1px 1px 1px 1px;--hvr-bc:#242424;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;appearance:none;background-image:url(https://cdn.shopify.com/s/files/1/1827/4239/t/1/assets/ico-select.svg?v=155563818344741998551488860031);background-repeat:no-repeat;background-position:right 16px center"
+    >
+      
+      {% for value in values %}{%- liquid
+      assign option_disabled = true
+      for variantItem in product.variants
+        case option.position
+          when 1
+            if variantItem.available and variantItem.option1 == value
+              assign option_disabled = false
+            endif
+          when 2
+            if variantItem.available and variantItem.option2 == value
+              assign option_disabled = false
+            endif
+          when 3
+            if variantItem.available and variantItem.option3 == value
+              assign option_disabled = false
+            endif
+        endcase
+      endfor
+    -%}
+    {% if value == selectedValue %}<option selected 
+  option-data="{{option.name | escape}}"
+  option-value="{{value | escape}}"
+  data-gp-option-value-id="{{value.id}}"
+  data-gp-option-available="{{value.available}}"
+  value="{{value | escape}}"
+  class="option-value-wrapper"
+  key="{{value | escape}}"
+ option-position="{{option.position}}">{{value}}</option>{% else %}<option 
+  option-data="{{option.name | escape}}"
+  option-value="{{value | escape}}"
+  data-gp-option-value-id="{{value.id}}"
+  data-gp-option-available="{{value.available}}"
+  value="{{value | escape}}"
+  class="option-value-wrapper"
+  key="{{value | escape}}"
+ option-position="{{option.position}}">{{value}}</option>{% endif %}{% endfor %}
+    </select>{% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if optionRendered == false %}{% for value in values %}
+    {%- liquid
+      assign option_disabled = true
+      for variantItem in product.variants
+        case option.position
+          when 1
+            if variantItem.available and variantItem.option1 == value
+              assign option_disabled = false
+            endif
+          when 2
+            if variantItem.available and variantItem.option2 == value
+              assign option_disabled = false
+            endif
+          when 3
+            if variantItem.available and variantItem.option3 == value
+              assign option_disabled = false
+            endif
+        endcase
+      endfor
+    -%}
+    {% assign option_disabled = false %}
+    <label
+      id="{{option.name | escape}}-{{value | escape}}"
+      for="{{product.id}}-g68pU_Ey8W-{{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+      class="option-item gp-group gp-relative gp-child-item-g68pU_Ey8W"
+      
+    >
+      <div class="gp-hidden !gp-max-w-[150px] gp-left-[50%] gp-translate-x-[-50%] gp-translate-y-0 gp-absolute gp-bottom-[calc(100%+20px)] gp-text-[12px] group-hover:gp-block gp-w-max gp-bg-[#333333] gp-text-[#F9F9F9] gp-px-[8px] gp-py-[4px] gp-rounded-[8px] gp-mb-[-10px] after:gp-content-[''] after:gp-absolute after:gp-p-[7px] after:gp-left-0 after:gp-w-full after:gp-bottom-[-10px]">
+        <p class="gp-text-[#F9F9F9]">{{value | escape}}</p>
+        <svg class="gp-absolute gp-left-[50%] gp-translate-x-[-50%] gp-translate-y-0 gp-z-10 gp-bottom-[-4px]" width="8" height="4" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 10L0 0L16 1.41326e-06L8 10Z" fill="#333333"/>
+        </svg>
+      </div>
+      <input
+        checked="{%- if option.selected_value == value -%}true{% else %}false{%- endif -%}"
+        name="{{product.id}}-options-{{option.name | escape}}"
+        id="{{product.id}}-g68pU_Ey8W-{{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+        value="{{value | escape}}"
+        type="radio"
+        class="gp-sr-only gp-absolute gp-bottom-0 gp-right-0"
+      />
+      <span class="gp-sr-only">{{value | escape}}</span>
+      <div
+        option-name="{{option.name | escape}}" option-name-value="{{value | escape}}" data-gp-option-value-id="{{value.id}}"
+        class="option-item-inner gp-w-auto gp-h-auto {% if option_disabled == true %} {% endif %}">
+        
+    
+    <div
+      id="value-wrapper-{{option.name | escape | strip}}-{{value | escape | strip}}" option-data="{{option.name | escape}}" option-value="{{value | escape}}" option-position="{{option.position}}" data-gp-option-available="{{value.available}}" option-type="optionType" data-disabled="{%- if option_disabled == true -%} disabled  {%- endif -%}" data-hidden="true"
+      class="gp-relative gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-text-center option-value-wrapper gp-overflow-hidden gp-w-full gp-h-full data-[disabled='disabled']:gp-pointer-events-none data-[disabled='disabled']:!gp-cursor-not-allowed
+  data-[hidden='false']:gp-flex {{option.name | escape}}-{{option.position}}-{{ forloop.index }}"
+      style="{% if selectedValue == value %}--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: none;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% else %}--c: default;--fs: normal;--ff: var(--g-font-body, body);--weight: 700;--size: 16px;--size-tablet: 16px;--size-mobile: 14px;--lh: 150%;--lh-tablet: 150%;--lh-mobile: 150%;--ls: normal;--d: flex;--jc: center;	--ai: center;--w: 100%;--h: 100%;--of: hidden;--bs: solid;--hvr-bs: solid;--bw: 1px 1px 1px 1px;--hvr-bw: 1px 1px 1px 1px;--bc: #B4B4B4;--hvr-bc: #242424;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;{% endif %}">
+      
+      <div
+        class="option-value gp-overflow-hidden gp-relative"
+        style=" --pl: 16px;--pr: 16px;--pl-tablet: 16px;--pr-tablet: 16px;--pl-mobile: 16px;--pr-mobile: 16px;--pt: 0px;--pb: 0px;">
+         
+        <span class="gp-text-center" style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal">{{value}}</span>
+      </div>
+    
+    </div>
+    
+      </div>
+    </label>{% endfor %}{% endif %}
+    
+          </div>
+      </div>{% endfor %}
+    
+        </div>{% endif %}
+    </gp-product-variants>
+
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-variant-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+      </div>
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="gALB9x0ZBM"
+        class="gALB9x0ZBM"
+        style="--ta:left;--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-l);--dynamic-source-color:#F4F4F4"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <div
+          data-gp-text
+          class=" gp-text-instant gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--tdt:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left;--line-clamp:0;--line-clamp-tablet:0;--line-clamp-mobile:0;--c:#242424;--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          {{ section.settings.ggALB9x0ZBM_text | replace: '$locationOrigin', locationOrigin }}
+        </div>
+      </div>
+    </div>
+    <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl)" class="gg7tXuyu2K ">
+      
+    {%- liquid
+      assign current_variant = product.selected_or_first_available_variant
+      assign available = current_variant.available | default: false
+    -%}
+      <gp-product-quantity
+        data-id="gg7tXuyu2K" data-disabled="{%- if available -%} false {%- else -%} true {%- endif -%}"
+        data-price="true"
+        class="quantityClass gp-relative gp-inline-flex gp-h-12 gp-w-full gp-bg-transparent gp-transition-all gp-duration-150 data-[disabled=true]:gp-opacity-60 "
+        style="--h:50px;--jc:left"
+      >
+        <div class="gp-inline-flex gp-w-full gp-overflow-hidden" style="--maxw:190px;--b:solid;--bc:#B4B4B4;--bw:1px 1px 1px 1px;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--shadow:none">
+          
+              <button
+              {% if available == false %} disabled {% endif %}
+               title="Decrement" aria-label="decrement" type="button"
+                class="gp-flex gp-aspect-square gp-h-full disabled:gp-cursor-not-allowed gp-cursor-pointer gp-items-center gp-justify-center gp-outline-none gp-minus "
+                style="--w:50px;--bg:transparent;--c:#424242"
+              >
+                <span class="gp-inline-flex gp-items-center gp-justify-center [&>*]:gp-h-full [&>*]:gp-w-full" style="--w:21px;--w-tablet:21px;--w-mobile:21px"
+                >
+                  <svg height="20px" width="20px" data-name="minus-regular" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" data-id="508817690725712232">
+              <path fill="currentColor" strokelinecap="round" strokelinejoin="round" d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path></svg>
+                </span>
+              </button>
+            
+          <input
+            {% if available == false %} disabled {% endif %}
+            type="text" name="quantity" step="1" min="1" aria-label="quantity" inputMode="numeric" quantity="current_variant.quantity" autocomplete="off" value="1"
+            class="gp-flex gp-w-full gp-shrink-[99999] gp-appearance-none gp-items-center gp-text-center gp-outline-none focus-visible:gp-shadow-none focus-visible:gp-outline-none gp-transition-all gp-duration-150 hover:gp-text-black disabled:gp-cursor-not-allowed"
+            style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--c:#242424;--bg:transparent;--brw:1px;--blw:1px;--brc:#B4B4B4;--blc:#B4B4B4"
+            inputMode="numeric"
+          />
+
+          
+            <button
+              {% if available == false %} disabled {% endif %}
+              title="Increment" aria-label="increment" type="button"
+              class="gp-flex gp-aspect-square gp-h-full disabled:gp-cursor-not-allowed gp-cursor-pointer gp-items-center gp-justify-center gp-outline-none gp-plus "
+              style="--w:50px;--bg:transparent;--c:#424242"
+            >
+              <span class="gp-inline-flex gp-items-center gp-justify-center [&>*]:gp-h-full [&>*]:gp-w-full" style="--w:21px;--w-tablet:21px;--w-mobile:21px">
+                <svg height="20px" width="20px" data-name="plus-regular" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" data-id="508817698760687976">
+              <path fill="currentColor" strokelinecap="round" strokelinejoin="round" d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
+              </span>
+            </button>
+          
+          </div>
+        </gp-product-quantity>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-quantity-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+      </div>
+    {%- assign total_combinations = 1 -%}
+    {% for option in product.options_with_values %}{%- assign total_combinations = total_combinations | times: option.values.size -%}{% endfor %}
+    {%- liquid
+      assign inventory_quantity = variant.inventory_quantity | default: 0
+      assign is_in_stock = variant.available
+    -%}
+    <gp-product-button
+      
+      gp-data-wrapper="true"
+      gp-href="{{ request.origin }}{{ routes.root_url | split: '/' | join: '/' }}/cart"
+      class="gp-product-button"
+      gp-label-out-of-stock="{{ section.settings.gg5bDYpJCiF_outOfStockLabel }}"
+      gp-label-unavailable="{{ section.settings.gg5bDYpJCiF_unavailableLabel }}"
+      gp-data='{"styles":{"errorTypo":{"attrs":{"color":"error"},"type":"paragraph-2"},"successTypo":{"attrs":{"color":"success"},"type":"paragraph-2"}},"setting":{"errorType":"built-in","actionEffect":"open-cart-drawer","enableMessage":true,"label":"ADD TO CART","errorMessage":"Cannot add product to cart","successMessage":"Add product to cart successfully","outOfStockLabel":"Out of stock","customURL":{"link":"/cart","target":"_self"}},"variantID":"{{variant.id}}","disabled":"{{variant.available}}","totalVariant":"{{total_combinations}}"}'
+      data-variant-selection-required-message="{{ section.settings.gg5bDYpJCiF_variantSelectionRequiredMessage }}"
+    >
+      
+    <gp-button
+      gp-data='{}'
+      
+      class="gp-flex gp-flex-col"
+    >
+      <div style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-l);--ta:left" class="{% unless variant.available %} !gp-hidden {% endunless %}">
+        <style>[data-id="g5bDYpJCiF"].gp-button-base::before, [data-id="g5bDYpJCiF-interaction"].gp-button-base::before {
+      
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+    
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+  
+    }
+  
+      
+  [data-id="g5bDYpJCiF"]:hover::before, [data-id="g5bDYpJCiF-interaction"]:hover::before {
+    border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+    
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+  }</style>
+        
+        <button
+          data-id="g5bDYpJCiF" dataId="g5bDYpJCiF" data-state="idle" aria-label="ADD TO CART"
+          name="add" gp-data-hidden="{% unless variant.available %}true{% endunless %}"
+          type="submit"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:24px;--pr:24px;--pt:16px;--pb:16px;--pl-tablet:24px;--pr-tablet:24px;--pt-tablet:16px;--pb-tablet:16px;--pl-mobile:24px;--pr-mobile:24px;--pt-mobile:16px;--pb-mobile:16px;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--bgi:;--hvr-bgi:;--hvr-bg:#242424;--bg:#234BC8;--c:var(--g-c-text-3, text-3);--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal"
+          class="gp-button-atc tcustomizer-submit-button g5bDYpJCiF gp-button-base gp-group gp-relative gp-inline-flex gp-max-w-full gp-items-center gp-justify-center gp-no-underline gp-transition-colors gp-duration-200 disabled:gp-btn-disabled disabled:gp-opacity-30 gp-text-g-text-3  undefined"
+        >
+        
+  <svg
+    class="gp-invisible gp-absolute gp-h-5 gp-w-5 group-data-[state=loading]:gp-animate-spin group-data-[state=loading]:gp-visible"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      class="gp-opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      stroke-width="4"
+    ></circle>
+    <path
+      class="gp-opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    ></path>
+  </svg>
+
+        <div class="gp-inline-flex">
+          
+          
+    <span
+      data-gp-text
+      style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word"
+      class="gp-content-product-button group-active/button:!gp-text-inherit gp-relative gp-flex gp-h-full gp-items-center gp-overflow-hidden gp-break-words group-data-[state=loading]:gp-invisible [&_p]:gp-whitespace-pre-line gp-text button-text"
+    >
+      {{ section.settings.gg5bDYpJCiF_label }}
+    </span>
+        </div>
+        
+    
+    
+  
+        </button>
+      </div>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-button-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+    </gp-button>
+  
+      
+    <gp-button
+      gp-data='{}'
+      
+      class="gp-flex gp-flex-col"
+    >
+      <div style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-l);--ta:left" class="{% if variant.available %} !gp-hidden {% endif %}">
+        <style>[data-id="g5bDYpJCiF-sold-out"].gp-button-base::before, [data-id="g5bDYpJCiF-sold-out-interaction"].gp-button-base::before {
+      
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    border-style: none;
+  border-width: 0px 0px 0px 0px;
+  border-color: transparent;
+  
+    
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+  
+    }
+  
+      
+  [data-id="g5bDYpJCiF-sold-out"]:hover::before, [data-id="g5bDYpJCiF-sold-out-interaction"]:hover::before {
+    
+    
+  }</style>
+        
+        <button
+          data-id="g5bDYpJCiF-sold-out" dataId="g5bDYpJCiF-sold-out" data-state="idle" aria-label="{{ section.settings.gg5bDYpJCiF_outOfStockLabel }}"
+          gp-data-hidden="{% if variant.available %}true{% endif %}"
+          type="button"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--h:Auto;--h-tablet:Auto;--h-mobile:Auto;--pl:24px;--pr:24px;--pt:16px;--pb:16px;--pl-tablet:24px;--pr-tablet:24px;--pt-tablet:16px;--pb-tablet:16px;--pl-mobile:24px;--pr-mobile:24px;--pt-mobile:16px;--pb-mobile:16px;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--bgi:;--hvr-bgi:;--bg:#234BC8;--hvr-bg:#234BC8;--c:var(--g-c-text-3, text-3);--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal"
+          class="gp-cursor-default gp-opacity-30 btn-disabled gp-button-sold-out g5bDYpJCiF-sold-out gp-button-base gp-group gp-relative gp-inline-flex gp-max-w-full gp-items-center gp-justify-center gp-no-underline gp-transition-colors gp-duration-200 disabled:gp-btn-disabled disabled:gp-opacity-30 "
+        >
+        
+        <div class="gp-inline-flex">
+          
+          
+    <span
+      data-gp-text
+      style="--fs:normal;--ff:var(--g-font-body, body);--weight:700;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word"
+      class="gp-content-product-button group-active/button:!gp-text-inherit gp-relative gp-flex gp-h-full gp-items-center gp-overflow-hidden gp-break-words group-data-[state=loading]:gp-invisible [&_p]:gp-whitespace-pre-line gp-text button-text"
+    >
+      {{ section.settings.gg5bDYpJCiF_outOfStockLabel }}
+    </span>
+        </div>
+        
+    
+    
+  
+        </button>
+      </div>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-button-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+    </gp-button>
+  
+    </gp-product-button>
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-button-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gIjVB4C1ZI ">
+      
+    {%- assign total_combinations = 1 -%}
+    {% for option in product.options_with_values %}{%- assign total_combinations = total_combinations | times: option.values.size -%}{% endfor %}
+    
+      {%- liquid
+        assign inventory_quantity = variant.inventory_quantity | default: 0
+        assign supported_payment_methods = shop.enabled_payment_types
+      -%}
+    
+    <gp-product-dynamic data-id="gIjVB4C1ZI" data-translate-label='Buy it now'  gp-data='{"setting":{"label":"Buy it now"},"totalVariant":"{{total_combinations}}"}
+    '>
+    <div class="gp-block wrap__button--unbranded__gIjVB4C1ZI [&_.shopify-payment-button\_\_button--unbranded]:gp-min-h-fit disabled:[&_.shopify-payment-button\_\_button--unbranded]:gp-pointer-events-none [&_.shopify-payment-button\_\_button--unbranded]:!gp-g-paragraph-1 ">
+        {{ form | payment_button }}
+    </div>
+    {% style %}
+      
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button {
+      display: inline-block;
+      min-height: unset !important;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button div {
+      width: 100%;
+      margin-top: 0px !important;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__more-options {
+      display: none;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded {
+      max-width: 100%;
+      min-width: unset;
+      min-height: unset !important;
+      background-color: unset !important;
+      position: relative;
+      border: none !important;
+      margin: 0;
+      z-index: 0;
+      border-radius: unset;
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
+      transition-duration: 0.2s;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded::after {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded::after:hover {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button > div {
+      max-width: 100%;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button > div > div {
+      max-width: 100%;
+    }
+
+    
+    .wrap__button--unbranded__gIjVB4C1ZI {
+      text-align: left !important;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button {
+      width: 100%;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded {
+      width: 100%;
+      text-transform: unset;
+      
+      
+    padding-top: 16px !important;;
+    padding-bottom: 16px !important;;
+    padding-left: 24px !important;;
+    padding-right: 24px !important;;
+  
+      
+    width: 100%;
+    height: Auto;
+  
+      
+      
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      
+      
+  ;
+  font-size: 21px !important;
+  color: #234BC8 !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  line-height: 150% !important;
+  ;
+  ;
+  ;
+  none;
+  
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded:hover {
+      
+      color: #242424 !important;
+      
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded::before {
+      border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #234BC8;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+      background-color: transparent;
+      
+      
+
+
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded:hover::before {
+      background-image : unset;
+      border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #242424;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+      background-color: transparent;
+      
+      
+    }
+  
+
+    @media only screen and (max-width: 1024px) and (min-width: 768px) {
+      
+    .wrap__button--unbranded__gIjVB4C1ZI {
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button {
+      width: 100%;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded {
+      width: 100%;
+      text-transform: unset;
+      
+        line-height: 150% !important;
+        font-size: 21px !important;
+        
+      
+      
+    padding-top: 16px !important;;
+    padding-bottom: 16px !important;;
+    padding-left: 24px !important;;
+    padding-right: 24px !important;;
+  
+      
+    width: 100%;
+    height: Auto;
+  
+      
+      
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded:hover {
+      
+      color: #242424 !important;
+      
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded::before {
+      border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #234BC8;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+      background-color: transparent;
+      
+      
+
+
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded:hover::before {
+      background-image : unset;
+      border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #242424;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+      background-color: transparent;
+      
+      
+    }
+  
+    }
+
+    @media only screen and (max-width: 767px) {
+      
+    .wrap__button--unbranded__gIjVB4C1ZI {
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button {
+      width: 100%;
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded {
+      width: 100%;
+      text-transform: unset;
+      
+        line-height: 150% !important;
+        font-size: 19px !important;
+        
+      
+      
+    padding-top: 16px !important;;
+    padding-bottom: 16px !important;;
+    padding-left: 24px !important;;
+    padding-right: 24px !important;;
+  
+      
+    width: 100%;
+    height: Auto;
+  
+      
+      
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded:hover {
+      
+      color: #242424 !important;
+      
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+      border-top-left-radius: 0px !important;
+      border-top-right-radius: 0px !important;
+      
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded::before {
+      border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #234BC8;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+      background-color: transparent;
+      
+      
+
+
+    }
+
+    .wrap__button--unbranded__gIjVB4C1ZI .shopify-payment-button .shopify-payment-button__button--unbranded:hover::before {
+      background-image : unset;
+      border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #242424;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+      background-color: transparent;
+      
+      
+    }
+  
+    }
+  
+    {% endstyle %}
+    </gp-product-dynamic>
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-dynamic-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+      </div>
+    </div>

@@ -1,0 +1,1508 @@
+{%- comment -%}
+  Subscription Card UI Component
+  
+  Renders a modern subscription purchase interface with:
+  - One-time purchase option (if product allows)
+  - Autoship (pay-as-you-go) and Prepaid subscription options with delivery frequency
+  
+  Parameters:
+  - product: The product object
+  - form_id: The product form ID
+  - block: The block object with settings
+{%- endcomment -%}
+
+{%- liquid
+  # Parse subscription plan data from metafields
+  assign subscription_data_raw = product.metafields.avada_subscription_plan.data.value
+  
+  # Check if data exists and is valid
+  if subscription_data_raw == blank
+    assign plans = null
+    assign requires_selling_plan = false
+  else
+    assign subscription_data = subscription_data_raw
+    assign plans = subscription_data.subscriptionProduct.plans
+    assign requires_selling_plan = product.requires_selling_plan
+  endif
+
+  # Get product price
+  assign product_price = product.selected_or_first_available_variant.price
+
+  # Group plans by payment type for rendering
+  assign pay_as_you_go_plans = plans | where: 'paymentType', 'pay-as-you-go'
+  assign prepaid_plans = plans | where: 'paymentType', 'prepaid'
+
+  # Calculate minimum discount across pay-as-you-go plans (use plan.discountValue only)
+  assign min_discount_autoship = ''
+  assign min_discount_type_autoship = ''
+  assign tier_price = null
+  if pay_as_you_go_plans.size > 0
+    for plan in pay_as_you_go_plans
+      if plan.discountConfig
+        assign tier_price = plan.discountConfig.tiers[0].value | times: 100
+      endif
+      if plan.enabledDiscount
+        if min_discount_autoship == ''
+          assign min_discount_autoship = plan.discountValue
+          assign min_discount_type_autoship = plan.discountType
+        else
+          if plan.discountValue < min_discount_autoship
+            assign min_discount_autoship = plan.discountValue
+            assign min_discount_type_autoship = plan.discountType
+          endif
+        endif
+      endif
+    endfor
+  endif
+
+  # Calculate minimum discount across prepaid plans (use plan.discountValue only)
+  assign min_discount_prepaid = ''
+  assign min_discount_type_prepaid = ''
+  if prepaid_plans.size > 0
+    for plan in prepaid_plans
+      if plan.enabledDiscount
+        if min_discount_prepaid == ''
+          assign min_discount_prepaid = plan.discountValue
+          assign min_discount_type_prepaid = plan.discountType
+        else
+          if plan.discountValue < min_discount_prepaid
+            assign min_discount_prepaid = plan.discountValue
+            assign min_discount_type_prepaid = plan.discountType
+          endif
+        endif
+      endif
+    endfor
+  endif
+
+  # Extract block settings with defaults
+  assign layout_style = block.settings.layout_style | default: 'vertical_cards'
+  assign card_spacing = block.settings.card_spacing | default: 'normal'
+  assign vertical_margin = block.settings.vertical_margin | default: 24
+  assign horizontal_margin = block.settings.horizontal_margin | default: 0
+  assign border_radius = block.settings.border_radius | default: 8
+  assign badge_border_radius = block.settings.badge_border_radius | default: 8
+  
+  # Colors
+  assign card_background = block.settings.card_background | default: '#ffffff'
+  assign card_border = block.settings.card_border | default: '#e5e7eb'
+  assign card_selected_background = block.settings.card_selected_background | default: '#f0fdfa'
+  assign card_selected_border = block.settings.card_selected_border | default: '#14b8a6'
+  assign accent_color = block.settings.accent_color | default: '#14b8a6'
+  assign title_color = block.settings.title_color | default: '#1a1a1a'
+  assign text_color = block.settings.text_color | default: '#1a1a1a'
+  assign muted_text_color = block.settings.muted_text_color | default: '#6b7280'
+  assign badge_background = block.settings.badge_background | default: '#dc2626'
+  assign badge_text_color = block.settings.badge_text_color | default: '#ffffff'
+  
+  # Texts
+  assign title_heading = block.settings.title_heading | default: 'h3'
+  assign widget_title = block.settings.widget_title | default: 'Opciones de compra'
+  assign one_time_title = block.settings.one_time_title | default: 'Compra única'
+  assign autoship_title = block.settings.autoship_title | default: 'Subscriu-te i estalvia'
+  assign prepaid_title = block.settings.prepaid_title | default: 'Prepaid'
+  assign deliver_every_title = block.settings.deliver_every_title | default: 'Frecuencia de entrega'
+  assign prepaid_options_title = block.settings.prepaid_options_title | default: 'Prepaid options:'
+  assign learn_more_text = block.settings.learn_more_text | default: 'Saber más'
+  assign learn_more_link = block.settings.learn_more_link | default: ''
+  
+  # Benefits
+  assign save_from_text = block.settings.save_from_text | default: 'Estalvia'
+  assign benefit_packed_at_origin = block.settings.benefit_packed_at_origin | default: 'Packed and roasted at origin'
+  assign benefit_no_commitment = block.settings.benefit_no_commitment | default: 'Sin compromiso, modifica o cancela tu suscripción en cualquier momento.'
+  assign benefit_pay_upfront = block.settings.benefit_pay_upfront | default: 'Pay upfront and save more'
+
+-%}
+
+<style>
+  .subscription-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: {% if card_spacing == 'tight' %}8px{% elsif card_spacing == 'loose' %}32px{% else %}16px{% endif %};
+    margin: {{ vertical_margin }}px {{ horizontal_margin }}px;
+    margin-top: 24px !important;
+  }
+
+  .subscription-card-wrapper * {
+    font-family: Trirong, serif;
+  }
+
+
+  .subscription-card__title {
+    font-size: 16px;
+   /* font-weight: 600; */
+    color: {{ title_color }};
+    text-align: left;
+    margin: 0;
+  }
+
+  /* Layout Styles */
+  {% if layout_style == 'horizontal_cards' %}
+  .subscription-card-wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .subscription-card__option {
+    flex: 1;
+    min-width: 280px;
+  }
+  {% elsif layout_style == 'toggle' %}
+  .subscription-card-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .subscription-card__toggle-buttons {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .subscription-card__toggle-button {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid {{ card_border }};
+    border-radius: {{ border_radius }}px;
+    background: {{ card_background }};
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: {{ text_color }};
+  }
+  
+  .subscription-card__toggle-button:hover {
+    border-color: {{ accent_color }};
+    opacity: 0.8;
+  }
+  
+  .subscription-card__toggle-button--selected {
+    background: {{ accent_color }};
+    border-color: {{ accent_color }};
+    color: #ffffff;
+  }
+  
+  .subscription-card__option {
+    display: none;
+  }
+  
+  .subscription-card__option--active {
+    display: block;
+  }
+  {% endif %}
+
+  /* Quantity Selector */
+  .subscription-card__quantity {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Purchase Option Cards */
+  .subscription-card__option {
+    position: relative;
+    border: 2px solid {{ card_border }};
+    border-radius: {{ border_radius }}px;
+    padding: 16px;
+    background: {{ card_background }};
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .subscription-card__option:hover {
+    border-color: {{ accent_color }};
+    opacity: 0.8;
+  }
+
+  .subscription-card__option--selected {
+    border-color: {{ card_selected_border }} !important;
+    background: {{ card_selected_background }};
+  }
+
+  .subscription-card__option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .subscription-card__option-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .subscription-card__radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid {{ card_border }};
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .subscription-card__option--selected .subscription-card__radio {
+    border-color: {{ accent_color }};
+  }
+
+  .subscription-card__option--selected .subscription-card__radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: {{ accent_color }};
+    border-radius: 50%;
+  }
+
+  .subscription-card__option-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: {{ text_color }};
+  }
+
+  .subscription-card__option-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: {{ text_color }};
+    font-family: "Quattrocento Sans", sans-serif;
+  }
+
+  /* Autoship specific */
+  .subscription-card__badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: {{ badge_background }};
+    color: {{ badge_text_color }};
+    padding: 4px 12px;
+    border-radius: 0 {{ border_radius }}px 0 {{ badge_border_radius }}px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .subscription-card__autoship-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .subscription-card__price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Quattrocento Sans", sans-serif;
+  }
+
+  .subscription-card__price-original {
+    font-size: 16px;
+    color: {{ muted_text_color }};
+    text-decoration: line-through;
+    font-family: "Quattrocento Sans", sans-serif;
+  }
+
+  .subscription-card__price-discounted {
+    font-size: 16px;
+    font-weight: 700;
+    color: {{ accent_color }};
+    font-family: "Quattrocento Sans", sans-serif;
+  }
+
+  .subscription-card__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .subscription-card__benefit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: {{ text_color }};
+  }
+
+  .subscription-card__benefit-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .subscription-card__benefit-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .subscription-card__benefit-icon svg circle {
+    fill: {{ accent_color }};
+  }
+
+  .subscription-card__learn-more {
+    font-size: 13px;
+    color: {{ accent_color }};
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .subscription-card__learn-more:hover {
+    cursor: pointer;
+  }
+
+  .subscription-card__learn-more:not(a) {
+    cursor: default;
+    text-decoration: none;
+  }
+
+  /* Delivery Frequency */
+  .subscription-card__frequency {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .subscription-card__frequency-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: {{ text_color }};
+  }
+
+  .subscription-card__frequency-options {
+    {% comment %} display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px; {% endcomment %}
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .subscription-card__frequency-pill {
+    border: 2px solid {{ card_border }};
+    border-radius: {{ border_radius }}px;
+    padding: 12px 16px;
+    text-align: center;
+    cursor: pointer;
+    background: {{ card_background }};
+    transition: all 0.2s ease;
+    min-width: 0; /* Allow items to shrink below content size */
+  }
+  
+  /* Last row fill styles - applied via JavaScript */
+  .subscription-card__frequency-pill--last-row-2 {
+    grid-column: span 1;
+  }
+  
+  .subscription-card__frequency-pill--last-row-1 {
+    grid-column: span 1;
+  }
+
+  .subscription-card__frequency-pill:hover {
+    border-color: {{ accent_color }};
+    opacity: 0.8;
+  }
+
+  .subscription-card__frequency-pill--selected {
+    background: {{ accent_color }};
+    border-color: {{ accent_color }};
+  }
+
+  .subscription-card__frequency-weeks {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ text_color }};
+  }
+
+  .subscription-card__frequency-pill--selected .subscription-card__frequency-weeks {
+    color: #ffffff;
+  }
+
+  .subscription-card__frequency-save {
+    font-size: 12px;
+    color: {{ muted_text_color }};
+    margin-top: 2px;
+  }
+
+  .subscription-card__frequency-pill--selected .subscription-card__frequency-save {
+    color: #ffffff;
+    opacity: 0.9;
+  }
+
+  /* Hidden radio inputs */
+  .subscription-card__radio-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .subscription-card__frequency-options {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+<div class="subscription-card-wrapper">
+
+  {%- if widget_title != blank -%}
+    <{{ title_heading }} class="subscription-card__title">{{ widget_title }}</{{ title_heading }}>
+  {%- endif -%}
+
+  {%- if layout_style == 'toggle' -%}
+    <!-- Toggle Layout -->
+    <div class="subscription-card__toggle-buttons">
+      {%- unless requires_selling_plan -%}
+        <button type="button" class="subscription-card__toggle-button subscription-card__toggle-button--selected" data-purchase-type="one-time">
+          {{ one_time_title }}
+        </button>
+      {%- endunless -%}
+      {%- if pay_as_you_go_plans != blank -%}
+        <button type="button" class="subscription-card__toggle-button {% if requires_selling_plan %}subscription-card__toggle-button--selected{% endif %}" data-purchase-type="autoship">
+          {{ autoship_title }}
+        </button>
+      {%- endif -%}
+      {%- if prepaid_plans != blank -%}
+        <button type="button" class="subscription-card__toggle-button" data-purchase-type="prepaid">
+          {{ prepaid_title }}
+        </button>
+      {%- endif -%}
+    </div>
+
+    <div class="subscription-card__shared-content">
+      <!-- One-time Content -->
+      {%- unless requires_selling_plan -%}
+        <div class="subscription-card__option subscription-card__option--active" data-purchase-type="one-time">
+          <input type="radio" name="purchase_type" value="one-time" class="subscription-card__radio-input" checked />
+          <div class="subscription-card__option-header">
+            <div class="subscription-card__option-left">
+              <span class="subscription-card__option-title">{{ one_time_title }}</span>
+            </div>
+            <span class="subscription-card__option-price">{{ product_price | money }} EUR</span>
+          </div>
+        </div>
+      {%- endunless -%}
+
+      <!-- Autoship Content -->
+      {%- if pay_as_you_go_plans != blank -%}
+        <div class="subscription-card__option {% if requires_selling_plan %}subscription-card__option--active{% endif %}" data-purchase-type="autoship">
+          {%- if min_discount_autoship != '' -%}
+            {%- if min_discount_type_autoship == 'percentage' -%}
+              <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_autoship }}%</span>
+            {%- elsif min_discount_type_autoship == 'fixed' -%}
+              <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_autoship | times: 100 | money }}</span>
+            {%- endif -%}
+          {%- endif -%}
+          <input type="radio" name="purchase_type" value="autoship" class="subscription-card__radio-input" {% if requires_selling_plan %}checked{% endif %} />
+          
+          <div class="subscription-card__option-header">
+            <div class="subscription-card__option-left">
+              <span class="subscription-card__option-title">{{ autoship_title }}</span>
+            </div>
+          </div>
+
+          <div class="subscription-card__autoship-content">
+            {%- liquid
+              # Get first pay-as-you-go plan for initial pricing display
+              assign first_autoship_plan = pay_as_you_go_plans.first
+              
+              assign discounted_price = product_price
+              
+              if first_autoship_plan.enabledDiscount
+                if first_autoship_plan.discountType == 'percentage'
+                  assign discount_amount = product_price | times: first_autoship_plan.discountValue | divided_by: 100.0
+                  assign discounted_price = product_price | minus: discount_amount
+                elsif first_autoship_plan.discountType == 'fixed'
+                  assign discount_amount = first_autoship_plan.discountValue | times: 100
+                  assign discounted_price = product_price | minus: discount_amount
+                endif
+              endif
+            -%}
+            
+            <div class="subscription-card__price-row">
+              {%- if first_autoship_plan.enabledDiscount and discounted_price < product_price -%}
+                <span class="subscription-card__price-original">{{ product_price | money }} EUR</span>
+              {%- endif -%}
+              <span class="subscription-card__price-discounted">{{ discounted_price | money }} EUR</span>
+            </div>
+
+            <div class="subscription-card__benefits">
+              <div class="subscription-card__benefit subscription-card__benefit--discount" style="display: none;" data-card-type="autoship">
+                <span class="subscription-card__benefit-icon">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                    <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="subscription-card__benefit-text"></span>
+              </div>
+              {% comment %} <div class="subscription-card__benefit">
+                <span class="subscription-card__benefit-icon">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                    <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ benefit_packed_at_origin }}</span>
+              </div> {% endcomment %}
+              <div class="subscription-card__benefit">
+                <span class="subscription-card__benefit-icon">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                    <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ benefit_no_commitment }}</span>
+              </div>
+            </div>
+
+            {%- if learn_more_link != blank -%}
+              <a href="{{ learn_more_link }}" class="subscription-card__learn-more" target="_blank" rel="noopener noreferrer">{{ learn_more_text }}</a>
+            {%- else -%}
+              <span class="subscription-card__learn-more">{{ learn_more_text }}</span>
+            {%- endif -%}
+
+            <!-- Delivery Frequency Section (only visible when autoship is selected) -->
+            <div class="subscription-card__frequency" style="{% unless requires_selling_plan %}display: none;{% endunless %}">
+              <span class="subscription-card__frequency-title">{{ deliver_every_title }}</span>
+              <div class="subscription-card__frequency-options" data-payment-type="pay-as-you-go">
+                {%- for plan in pay_as_you_go_plans -%}
+                    {%- liquid
+                      # Render autoship frequency using the block setting template `autoship_frequency_text`.
+                      assign frequency_text = ''
+                      assign autoship_time_value = plan.frequencyValue
+
+                      if plan.frequency == 'week'
+                        if autoship_time_value == 1
+                          assign autoship_time_formatted = autoship_time_value | append: ' week'
+                        else
+                          assign autoship_time_formatted = autoship_time_value | append: ' weeks'
+                        endif
+                      else
+                        if autoship_time_value == 1
+                          assign autoship_time_formatted = autoship_time_value | append: ' month'
+                        else
+                          assign autoship_time_formatted = autoship_time_value | append: ' months'
+                        endif
+                      endif
+
+                      if autoship_frequency_text != blank
+                        assign frequency_text = autoship_frequency_text | replace: '{{ autoship_time }}', autoship_time_formatted
+                      else
+                        assign frequency_text = autoship_time_formatted
+                      endif
+
+                      # Calculate discount display — prefer discountConfig.tiers when enabled
+                      assign discount_text = ''
+                      if plan.enabledDiscount
+                        if plan.discountConfig != blank and plan.discountConfig.enabled
+                          assign tier_texts = ''
+                          assign discount_tiers_desc = ''
+                          for tier in plan.discountConfig.tiers
+                            if tier.type == 'percentage'
+                              assign this_part = tier.value | append: '%'
+                              else
+                              assign this_part = tier.value | times: 100 | money
+                                endif
+                            if forloop.first
+                              assign tier_texts = this_part
+                            else
+                              assign tier_texts = tier_texts | append: ', ' | append: this_part
+                                endif
+
+                            # Build human-friendly tier description using numeric ranges (e.g. "5% from 1–4 orders")
+                            assign from_ord = tier.fromOrder
+                            assign to_ord = tier.toOrder
+
+                            assign range_text = ''
+                            if to_ord == 'all' or to_ord == blank
+                              assign range_text = 'from ' | append: from_ord | append: ' orders'
+                            else
+                              assign range_text = 'from ' | append: from_ord | append: '–' | append: to_ord | append: ' orders'
+                          endif
+
+                            assign part_desc = this_part | append: ' ' | append: range_text
+                            if forloop.first
+                              assign discount_tiers_desc = part_desc
+                            else
+                              assign discount_tiers_desc = discount_tiers_desc | append: ', ' | append: part_desc
+                              endif
+                          endfor
+                              assign discount_text = 'save ' | append: tier_texts
+                        else
+                          if plan.discountType == 'percentage'
+                            assign discount_text = 'save ' | append: plan.discountValue | append: '%'
+                                assign discount_tiers_desc = discount_text
+                          elsif plan.discountType == 'fixed'
+                            assign discount_amount_money = plan.discountValue | times: 100 | money
+                            assign discount_text = 'save ' | append: discount_amount_money
+                                assign discount_tiers_desc = discount_text
+                          endif
+                        endif
+                      endif
+
+                      # Check if this is the first autoship plan (default selected)
+                      assign is_first_autoship_plan = false
+                      if first_autoship_plan.id == plan.id
+                        assign is_first_autoship_plan = true
+                      endif
+                    -%}
+                    
+                    <div class="subscription-card__frequency-pill {% if is_first_autoship_plan %}subscription-card__frequency-pill--selected{% endif %}" 
+                      data-frequency="{{ plan.id }}"
+                      data-plan-id="{{ plan.sellingPlanId }}"
+                      data-discount-enabled="{{ plan.enabledDiscount }}"
+                      data-discount-type="{{ plan.discountType }}"
+                      data-discount-value="{{ plan.discountValue }}"
+                      data-enabled-change-discount="{{ plan.enabledChangeDiscount }}"
+                      data-discount-value-changed="{{ plan.discountValueChanged }}"
+                      data-discount-tiers-desc="{{ discount_tiers_desc | escape }}"
+                      data-discount-tiers-max-value="{{ plan_max_discount_value }}"
+                      data-discount-tiers-max-type="{{ plan_max_discount_type }}"
+                      data-payment-type="pay-as-you-go">
+                      <div class="subscription-card__frequency-weeks">{{ frequency_text }}</div>
+                      {%- if discount_text != blank -%}
+                        <div class="subscription-card__frequency-save">{{ discount_text }}</div>
+                      {%- endif -%}
+                    </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Prepaid Content -->
+      {%- if prepaid_plans != blank -%}
+        <div class="subscription-card__option" data-purchase-type="prepaid">
+          {%- if min_discount_prepaid != '' -%}
+            {%- if min_discount_type_prepaid == 'percentage' -%}
+              <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_prepaid }}%</span>
+            {%- elsif min_discount_type_prepaid == 'fixed' -%}
+              <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_prepaid | times: 100 | money }}</span>
+            {%- endif -%}
+          {%- endif -%}
+          <input type="radio" name="purchase_type" value="prepaid" class="subscription-card__radio-input" />
+          
+          <div class="subscription-card__option-header">
+            <div class="subscription-card__option-left">
+              <span class="subscription-card__option-title">{{ prepaid_title }}</span>
+            </div>
+          </div>
+
+          <div class="subscription-card__autoship-content">
+            {%- liquid
+              # Get first prepaid plan for initial pricing display
+              assign first_prepaid_plan = prepaid_plans.first
+              
+              assign discounted_price_prepaid = product_price
+              
+              if first_prepaid_plan.enabledDiscount
+                if first_prepaid_plan.discountType == 'percentage'
+                  assign discount_amount = product_price | times: first_prepaid_plan.discountValue | divided_by: 100.0
+                  assign discounted_price_prepaid = product_price | minus: discount_amount
+                elsif first_prepaid_plan.discountType == 'fixed'
+                  assign discount_amount = first_prepaid_plan.discountValue | times: 100
+                  assign discounted_price_prepaid = product_price | minus: discount_amount
+                endif
+              endif
+            -%}
+            
+            <div class="subscription-card__price-row">
+              {%- if first_prepaid_plan.enabledDiscount and discounted_price_prepaid < product_price -%}
+                <span class="subscription-card__price-original">{{ product_price | money }} EUR</span>
+              {%- endif -%}
+              <span class="subscription-card__price-discounted">{{ discounted_price_prepaid | money }} EUR</span>
+            </div>
+
+            <div class="subscription-card__benefits">
+              <div class="subscription-card__benefit subscription-card__benefit--discount" style="display: none;" data-card-type="prepaid">
+                <span class="subscription-card__benefit-icon">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                    <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="subscription-card__benefit-text"></span>
+              </div>
+              <div class="subscription-card__benefit">
+                <span class="subscription-card__benefit-icon">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                    <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ benefit_pay_upfront }}</span>
+              </div>
+              {% comment %} <div class="subscription-card__benefit">
+                <span class="subscription-card__benefit-icon">
+                  <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                    <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ benefit_packed_at_origin }}</span>
+              </div> {% endcomment %}
+            </div>
+
+            {%- if learn_more_link != blank -%}
+              <a href="{{ learn_more_link }}" class="subscription-card__learn-more" target="_blank" rel="noopener noreferrer">{{ learn_more_text }}</a>
+            {%- else -%}
+              <span class="subscription-card__learn-more">{{ learn_more_text }}</span>
+            {%- endif -%}
+
+            <!-- Delivery Frequency Section for Prepaid -->
+            <div class="subscription-card__frequency" style="display: none;">
+              <span class="subscription-card__frequency-title">{{ prepaid_options_title }}</span>
+              <div class="subscription-card__frequency-options" data-payment-type="prepaid">
+                {%- for plan in prepaid_plans -%}
+                    {%- liquid
+                      # Format frequency display
+                      assign frequency_text = ''
+                      if plan.frequency == 'week'
+                        if plan.frequencyValue == 1
+                          assign frequency_text = '1 week'
+                        else
+                          assign frequency_text = plan.frequencyValue | append: ' weeks'
+                        endif
+                      elsif plan.frequency == 'month'
+                        if plan.frequencyValue == 1
+                          assign frequency_text = '1 month'
+                        else
+                          assign frequency_text = plan.frequencyValue | append: ' months'
+                        endif
+                      endif
+
+                      # Calculate discount display — prefer discountConfig.tiers when enabled
+                      assign discount_text = ''
+                      if plan.enabledDiscount
+                        if plan.discountConfig != blank and plan.discountConfig.enabled
+                          assign tier_texts = ''
+                          for tier in plan.discountConfig.tiers
+                            if tier.type == 'percentage'
+                              assign this_part = tier.value | append: '%'
+                              else
+                              assign this_part = tier.value | times: 100 | money
+                                endif
+                            if forloop.first
+                              assign tier_texts = this_part
+                            else
+                              assign tier_texts = tier_texts | append: ', ' | append: this_part
+                            endif
+                          endfor
+                          assign discount_text = 'save ' | append: tier_texts
+                        else
+                          if plan.discountType == 'percentage'
+                            assign discount_text = 'save ' | append: plan.discountValue | append: '%'
+                          elsif plan.discountType == 'fixed'
+                            assign discount_amount_money = plan.discountValue | times: 100 | money
+                            assign discount_text = 'save ' | append: discount_amount_money
+                          endif
+                        endif
+                      endif
+                    -%}
+                    
+                    <div class="subscription-card__frequency-pill" 
+                      data-frequency="{{ plan.id }}"
+                      data-plan-id="{{ plan.sellingPlanId }}"
+                      data-discount-enabled="{{ plan.enabledDiscount }}"
+                      data-discount-type="{{ plan.discountType }}"
+                      data-discount-value="{{ plan.discountValue }}"
+                      data-enabled-change-discount="{{ plan.enabledChangeDiscount }}"
+                      data-discount-value-changed="{{ plan.discountValueChanged }}"
+                      data-discount-tiers-desc="{{ discount_tiers_desc | escape }}"
+                      data-payment-type="prepaid">
+                      <div class="subscription-card__frequency-weeks">{{ frequency_text }}</div>
+                      {%- if discount_text != blank -%}
+                        <div class="subscription-card__frequency-save">{{ discount_text }}</div>
+                      {%- endif -%}
+                    </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    <!-- Default Card Layout -->
+
+  {%- unless requires_selling_plan -%}
+    <!-- One-time Purchase Card -->
+    <div class="subscription-card__option {% unless requires_selling_plan %}subscription-card__option--selected{% endunless %}" data-purchase-type="one-time">
+      <input type="radio" name="purchase_type" value="one-time" class="subscription-card__radio-input" checked />
+      <div class="subscription-card__option-header">
+        <div class="subscription-card__option-left">
+          <div class="subscription-card__radio"></div>
+          <span class="subscription-card__option-title">{{ one_time_title }}</span>
+        </div>
+        <span class="subscription-card__option-price">{{ product_price | money }} EUR</span>
+      </div>
+    </div>
+  {%- endunless -%}
+
+  {%- comment -%} Autoship (Pay-as-you-go) Plans {%- endcomment -%}
+  {%- if pay_as_you_go_plans != blank -%}
+    <!-- Autoship Card (Pay-as-you-go) -->
+    <div class="subscription-card__option {% if requires_selling_plan %}subscription-card__option--selected{% endif %}" data-purchase-type="autoship">
+      {% comment %} Has Tier Price {% endcomment %}
+      {%- if tier_price -%}
+          <span class="subscription-card__badge">{{ save_from_text }} {{ tier_price | money }}</span>
+      {%- else -%}
+        {%- if min_discount_autoship != '' -%}
+          {%- if min_discount_type_autoship == 'percentage' -%}
+            <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_autoship }}%</span>
+          {%- elsif min_discount_type_autoship == 'fixed' -%}
+            <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_autoship | times: 100 | money }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+      <input type="radio" name="purchase_type" value="autoship" class="subscription-card__radio-input" {% if requires_selling_plan %}checked{% endif %} />
+      
+      <div class="subscription-card__option-header">
+        <div class="subscription-card__option-left">
+          <div class="subscription-card__radio"></div>
+          <span class="subscription-card__option-title">{{ autoship_title }}</span>
+        </div>
+      </div>
+
+      <div class="subscription-card__autoship-content">
+        {%- liquid
+          # Get first pay-as-you-go plan for initial pricing display
+          assign first_autoship_plan = pay_as_you_go_plans.first
+          
+          assign discounted_price = product_price
+          
+          if first_autoship_plan.enabledDiscount
+            if first_autoship_plan.discountType == 'percentage'
+              assign discount_amount = product_price | times: first_autoship_plan.discountValue | divided_by: 100.0
+              assign discounted_price = product_price | minus: discount_amount
+            elsif first_autoship_plan.discountType == 'fixed'
+              assign discount_amount = first_autoship_plan.discountValue | times: 100
+              assign discounted_price = product_price | minus: discount_amount
+            endif
+          endif
+        -%}
+        
+        <div class="subscription-card__price-row">
+          {%- if first_autoship_plan.enabledDiscount and discounted_price < product_price -%}
+            <span class="subscription-card__price-original">{{ product_price | money }} EUR</span>
+          {%- endif -%}
+          {% comment %} Tier Price {% endcomment %}
+          {%- if tier_price > 0 -%}
+          <span class="subscription-card__price-discounted">{{ product_price | minus: tier_price | money }} EUR</span>
+          {%- else -%}
+          <span class="subscription-card__price-discounted">{{ discounted_price | money }} EUR</span>
+          {%- endif -%}
+        </div>
+
+        <div class="subscription-card__benefits">
+          <div class="subscription-card__benefit subscription-card__benefit--discount" style="display: none;" data-card-type="autoship">
+            <span class="subscription-card__benefit-icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="subscription-card__benefit-text"></span>
+          </div>
+          {% comment %} <div class="subscription-card__benefit">
+            <span class="subscription-card__benefit-icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>{{ benefit_packed_at_origin }}</span>
+          </div> {% endcomment %}
+          <div class="subscription-card__benefit">
+            <span class="subscription-card__benefit-icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>{{ benefit_no_commitment }}</span>
+          </div>
+        </div>
+
+        {%- if learn_more_link != blank -%}
+          <a href="{{ learn_more_link }}" class="subscription-card__learn-more" target="_blank" rel="noopener noreferrer">{{ learn_more_text }}</a>
+        {%- else -%}
+          <span class="subscription-card__learn-more">{{ learn_more_text }}</span>
+        {%- endif -%}
+
+        <!-- Delivery Frequency Section (only visible when autoship is selected) -->
+        <div class="subscription-card__frequency" style="{% unless requires_selling_plan %}display: none;{% endunless %}">
+          <span class="subscription-card__frequency-title">{{ deliver_every_title }}</span>
+          <div class="subscription-card__frequency-options" data-payment-type="pay-as-you-go">
+            {%- for plan in pay_as_you_go_plans -%}
+                {%- liquid
+                  # Render autoship frequency using the block setting template `autoship_frequency_text`.
+                  assign frequency_text = ''
+                  assign autoship_time_value = plan.frequencyValue
+
+                  if plan.frequency == 'week'
+                    if autoship_time_value == 1
+                      assign autoship_time_formatted = autoship_time_value | append: ' semana'
+                    else
+                      assign autoship_time_formatted = autoship_time_value | append: ' semanas'
+                    endif
+                  else
+                    if autoship_time_value == 1
+                      assign autoship_time_formatted = autoship_time_value | append: ' mes'
+                    else
+                      assign autoship_time_formatted = autoship_time_value | append: ' mes'
+                    endif
+                  endif
+
+                  if autoship_frequency_text != blank
+                    assign frequency_text = autoship_frequency_text | replace: '{{ autoship_time }}', autoship_time_formatted
+                  else
+                    assign frequency_text = autoship_time_formatted
+                  endif
+
+                  # Calculate discount display — prefer discountConfig.tiers when enabled
+                  assign discount_text = ''
+                  if plan.enabledDiscount
+                    if plan.discountType == 'percentage'
+                      assign discount_text = save_from_text | append: ' ' | append: plan.discountValue | append: '%'
+                    elsif plan.discountType == 'fixed'
+                      assign discount_amount_money = plan.discountValue | times: 100 | money
+                      assign discount_text =  save_from_text | append: ' ' | append: discount_amount_money
+                    endif
+                  endif
+
+                  # Check if this is the first autoship plan (default selected)
+                  assign is_first_autoship_plan = false
+                  if first_autoship_plan.id == plan.id
+                    assign is_first_autoship_plan = true
+                  endif
+                -%}
+                
+                 <div class="subscription-card__frequency-pill {% if is_first_autoship_plan %}subscription-card__frequency-pill--selected{% endif %}" 
+                   data-frequency="{{ plan.id }}"
+                   data-plan-id="{{ plan.sellingPlanId }}"
+                   data-discount-enabled="{{ plan.enabledDiscount }}"
+                   data-discount-type="{{ plan.discountType }}"
+                   data-discount-value="{{ plan.discountValue }}"
+                   data-enabled-change-discount="{{ plan.enabledChangeDiscount }}"
+                   data-discount-value-changed="{{ plan.discountValueChanged }}"
+                   data-discount-tiers-desc="{{ discount_tiers_desc | escape }}"
+                   data-payment-type="pay-as-you-go">
+                  <div class="subscription-card__frequency-weeks">{{ frequency_text }}</div>
+                  {%- if discount_text != blank -%}
+                    {% comment %} Has Tier Price  {% endcomment %}
+                    {%- if tier_price -%}
+                    <div class="subscription-card__frequency-save">Save up to {{ tier_price | money }}</div>
+                    {%- else -%}
+                    <div class="subscription-card__frequency-save">{{ discount_text }}</div>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} Prepaid Plans {%- endcomment -%}
+  {%- if prepaid_plans != blank -%}
+    <!-- Prepaid Card -->
+    <div class="subscription-card__option" data-purchase-type="prepaid">
+      {%- if min_discount_prepaid != '' -%}
+        {%- if min_discount_type_prepaid == 'percentage' -%}
+          <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_prepaid }}%</span>
+        {%- elsif min_discount_type_prepaid == 'fixed' -%}
+          <span class="subscription-card__badge">{{ save_from_text }} {{ min_discount_prepaid | times: 100 | money }}</span>
+        {%- endif -%}
+      {%- endif -%}
+      <input type="radio" name="purchase_type" value="prepaid" class="subscription-card__radio-input" />
+      
+      <div class="subscription-card__option-header">
+        <div class="subscription-card__option-left">
+          <div class="subscription-card__radio"></div>
+          <span class="subscription-card__option-title">{{ prepaid_title }}</span>
+        </div>
+      </div>
+
+      <div class="subscription-card__autoship-content">
+        {%- liquid
+          # Get first prepaid plan for initial pricing display
+          assign first_prepaid_plan = prepaid_plans.first
+          
+          assign discounted_price_prepaid = product_price
+          
+          if first_prepaid_plan.enabledDiscount
+            if first_prepaid_plan.discountType == 'percentage'
+              assign discount_amount = product_price | times: first_prepaid_plan.discountValue | divided_by: 100.0
+              assign discounted_price_prepaid = product_price | minus: discount_amount
+            elsif first_prepaid_plan.discountType == 'fixed'
+              assign discount_amount = first_prepaid_plan.discountValue | times: 100
+              assign discounted_price_prepaid = product_price | minus: discount_amount
+            endif
+          endif
+        -%}
+        
+        <div class="subscription-card__price-row">
+          {%- if first_prepaid_plan.enabledDiscount and discounted_price_prepaid < product_price -%}
+            <span class="subscription-card__price-original">{{ product_price | money }} EUR</span>
+          {%- endif -%}
+          <span class="subscription-card__price-discounted">{{ discounted_price_prepaid | money }} EUR</span>
+        </div>
+
+        <div class="subscription-card__benefits">
+          <div class="subscription-card__benefit subscription-card__benefit--discount" style="display: none;" data-card-type="prepaid">
+            <span class="subscription-card__benefit-icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="subscription-card__benefit-text"></span>
+          </div>
+          <div class="subscription-card__benefit">
+            <span class="subscription-card__benefit-icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>{{ benefit_pay_upfront }}</span>
+          </div>
+          {% comment %} <div class="subscription-card__benefit">
+            <span class="subscription-card__benefit-icon">
+              <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="10" fill="#14b8a6"/>
+                <path d="M6 10L8.5 12.5L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>{{ benefit_packed_at_origin }}</span>
+          </div> {% endcomment %}
+        </div>
+
+        <a href="#" class="subscription-card__learn-more">{{ learn_more_text }}</a>
+
+        <!-- Delivery Frequency Section for Prepaid -->
+        <div class="subscription-card__frequency" style="display: none;">
+          <span class="subscription-card__frequency-title">{{ prepaid_options_title }}</span>
+          <div class="subscription-card__frequency-options" data-payment-type="prepaid">
+                {%- for plan in prepaid_plans -%}
+                {%- liquid
+                  # Render prepaid frequency using the block setting template `prepaid_frequency_text`.
+                  # Replace placeholders `{{ prepaid_time }}` and `{{ delivery_time }}` with formatted values.
+                  assign frequency_text = ''
+                  assign prepaid_time_value = plan.prepaidFrequency
+                  assign delivery_time_value = plan.frequencyValue
+
+                  # Format with units (week(s) / month(s))
+                  if plan.frequency == 'week'
+                    if prepaid_time_value == 1
+                      assign prepaid_time_formatted = prepaid_time_value | append: '  semana'
+                      assign delivery_time_formatted = delivery_time_value | append: '  semana'
+                    else
+                      assign prepaid_time_formatted = prepaid_time_value | append: '  semanas'
+                      assign delivery_time_formatted = delivery_time_value | append: '  semanas'
+                    endif
+                  else
+                    if prepaid_time_value == 1
+                      assign prepaid_time_formatted = prepaid_time_value | append: ' mes'
+                      assign delivery_time_formatted = delivery_time_value | append: ' mes'
+                    else
+                      assign prepaid_time_formatted = prepaid_time_value | append: ' mes'
+                      assign delivery_time_formatted = delivery_time_value | append: ' mes'
+                    endif
+                  endif
+
+                  if prepaid_frequency_text != blank
+                    assign frequency_text = prepaid_frequency_text | replace: '{{ prepaid_time }}', prepaid_time_formatted | replace: '{{ delivery_time }}', delivery_time_formatted
+                  else
+                    assign frequency_text = 'Prepay every ' | append: prepaid_time_formatted | append: ', receive every ' | append: delivery_time_formatted
+                  endif
+
+                  # Calculate discount display — prefer discountConfig.tiers when enabled
+                  assign discount_text = ''
+                  if plan.enabledDiscount
+                    if plan.discountType == 'percentage'
+                      assign discount_text = save_from_text | append: ' ' | append: plan.discountValue | append: '%'
+                    elsif plan.discountType == 'fixed'
+                      assign discount_amount_money = plan.discountValue | times: 100 | money
+                      assign discount_text = save_from_text | append: ' ' | append: discount_amount_money
+                    endif
+                  endif
+
+                  # Check if this is the first prepaid plan (default selected)
+                  assign is_first_prepaid_plan = false
+                  if first_prepaid_plan.id == plan.id
+                    assign is_first_prepaid_plan = true
+                  endif
+                -%}
+                
+                 <div class="subscription-card__frequency-pill {% if is_first_prepaid_plan %}subscription-card__frequency-pill--selected{% endif %}" 
+                   data-frequency="{{ plan.id }}"
+                   data-plan-id="{{ plan.sellingPlanId }}"
+                   data-discount-enabled="{{ plan.enabledDiscount }}"
+                   data-discount-type="{{ plan.discountType }}"
+                   data-discount-value="{{ plan.discountValue }}"
+                   data-enabled-change-discount="{{ plan.enabledChangeDiscount }}"
+                   data-discount-value-changed="{{ plan.discountValueChanged }}"
+                   data-discount-tiers-desc="{{ discount_tiers_desc | escape }}"
+                   data-payment-type="prepaid">
+                  <div class="subscription-card__frequency-weeks">{{ frequency_text }}</div>
+                  {%- if discount_text != blank -%}
+                    <div class="subscription-card__frequency-save">{{ discount_text }}</div>
+                  {%- endif -%}
+                </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+  {%- endif -%}
+</div>
+
+<script>
+  (function() {
+    const wrapper = document.currentScript.previousElementSibling;
+    
+    // Get product data
+    const productPrice = {{ product_price | json }};
+    
+    // Function to get or create selling plan inputs for all cart forms
+    function updateSellingPlanInputs(value) {
+      const formEls = document.querySelectorAll('form[action*="/cart/add"]');
+      formEls.forEach(el => {
+        let sellingPlanInput = el.querySelector('input[name="selling_plan"]');
+        
+        if (!sellingPlanInput) {
+          sellingPlanInput = document.createElement('input');
+          sellingPlanInput.type = 'hidden';
+          sellingPlanInput.name = 'selling_plan';
+          el.appendChild(sellingPlanInput);
+        }
+        
+        sellingPlanInput.value = value || '';
+      });
+    }
+    
+    // Purchase type selection
+    const purchaseOptions = wrapper.querySelectorAll('.subscription-card__option');
+    const frequencySection = wrapper.querySelector('.subscription-card__frequency');
+    const priceOriginal = wrapper.querySelector('.subscription-card__price-original');
+    const priceDiscounted = wrapper.querySelector('.subscription-card__price-discounted');
+    
+    // Frequency selection
+    const frequencyPills = wrapper.querySelectorAll('.subscription-card__frequency-pill');
+    const frequencyOptions = wrapper.querySelector('.subscription-card__frequency-options');
+    
+    // Function to handle last row filling - refactored to work with any section
+    function adjustLastRowLayoutForSection(pills, options) {
+      if (!options || pills.length === 0) return;
+      
+      // Remove any previous last-row classes
+      pills.forEach(function(pill) {
+        pill.classList.remove('subscription-card__frequency-pill--last-row-2', 'subscription-card__frequency-pill--last-row-1');
+      });
+      
+      const totalItems = pills.length;
+      const itemsPerRow = 3;
+      const lastRowCount = totalItems % itemsPerRow;
+      
+      // Only adjust if last row is incomplete
+      if (lastRowCount === 0) return;
+      
+      const lastRowStartIndex = totalItems - lastRowCount;
+      
+      if (lastRowCount === 2) {
+        options.style.display = 'flex';
+        options.style.flexWrap = 'wrap';
+        
+        pills.forEach(function(pill, index) {
+          if (index < lastRowStartIndex) {
+            pill.style.flex = '0 0 calc((100% - 24px) / 3)';
+          } else {
+            pill.style.flex = '0 0 calc((100% - 12px) / 2)';
+            pill.classList.add('subscription-card__frequency-pill--last-row-2');
+          }
+        });
+      } else if (lastRowCount === 1) {
+        options.style.display = 'flex';
+        options.style.flexWrap = 'wrap';
+        
+        pills.forEach(function(pill, index) {
+          if (index < lastRowStartIndex) {
+            pill.style.flex = '0 0 calc((100% - 24px) / 3)';
+          } else {
+            pill.style.flex = '0 0 100%';
+            pill.classList.add('subscription-card__frequency-pill--last-row-1');
+          }
+        });
+      }
+    }
+    
+    // Call on load for all frequency sections
+    const allFrequencyOptions = wrapper.querySelectorAll('.subscription-card__frequency-options');
+    allFrequencyOptions.forEach(function(options) {
+      const pills = options.querySelectorAll('.subscription-card__frequency-pill');
+      adjustLastRowLayoutForSection(pills, options);
+    });
+    
+    // Initialize discount benefit for default selected plan on page load
+    const initialSelectedCard = wrapper.querySelector('.subscription-card__option--selected');
+    if (initialSelectedCard) {
+      const initialSelectedPill = initialSelectedCard.querySelector('.subscription-card__frequency-pill--selected');
+      if (initialSelectedPill) {
+        const discountEnabled = initialSelectedPill.getAttribute('data-discount-enabled');
+        const discountType = initialSelectedPill.getAttribute('data-discount-type');
+        const discountValue = parseFloat(initialSelectedPill.getAttribute('data-discount-value'));
+        const enabledChangeDiscount = initialSelectedPill.getAttribute('data-enabled-change-discount');
+        const discountValueChanged = initialSelectedPill.getAttribute('data-discount-value-changed');
+        const planId = initialSelectedPill.getAttribute('data-plan-id');
+        
+        // Set initial selling plan if it exists
+        if (planId) {
+          updateSellingPlanInputs(planId);
+        }
+        
+        // Calculate discounted price
+        let discountedPrice = productPrice;
+        if (discountEnabled === 'true' && discountType === 'percentage') {
+          discountedPrice = productPrice - (productPrice * discountValue / 100);
+        } else if (discountEnabled === 'true' && discountType === 'fixed') {
+          discountedPrice = productPrice - (discountValue * 100);
+        }
+        
+        // Show/hide original price
+        const initialPriceOriginal = initialSelectedCard.querySelector('.subscription-card__price-original');
+        if (initialPriceOriginal) {
+          if (discountEnabled === 'true' && discountedPrice < productPrice) {
+            initialPriceOriginal.style.display = 'inline';
+          } else {
+            initialPriceOriginal.style.display = 'none';
+          }
+        }
+        
+        updateDiscountBenefit(initialSelectedCard, discountEnabled, discountType, discountValue, enabledChangeDiscount, discountValueChanged);
+      }
+    } else {
+      // Clear selling plan for one-time purchase
+      updateSellingPlanInputs('');
+    }
+    
+    purchaseOptions.forEach(function(option) {
+      option.addEventListener('click', function() {
+        // Remove selected state from all options
+        purchaseOptions.forEach(function(opt) {
+          opt.classList.remove('subscription-card__option--selected');
+          const radio = opt.querySelector('.subscription-card__radio-input');
+          if (radio) radio.checked = false;
+        });
+        
+        // Add selected state to clicked option
+        option.classList.add('subscription-card__option--selected');
+        const radio = option.querySelector('.subscription-card__radio-input');
+        if (radio) radio.checked = true;
+        
+        // Show/hide frequency section based on selection
+        const purchaseType = option.getAttribute('data-purchase-type');
+        
+        // Hide all frequency sections first
+        const allFrequencySections = wrapper.querySelectorAll('.subscription-card__frequency');
+        allFrequencySections.forEach(function(section) {
+          section.style.display = 'none';
+        });
+        
+        // Show the appropriate frequency section
+        if (purchaseType === 'autoship' || purchaseType === 'prepaid') {
+          const currentFrequencySection = option.querySelector('.subscription-card__frequency');
+          if (currentFrequencySection) {
+            currentFrequencySection.style.display = 'flex';
+            
+            // Update selling plan input with selected plan from this section
+            const selectedPill = currentFrequencySection.querySelector('.subscription-card__frequency-pill--selected');
+            if (selectedPill) {
+              const planId = selectedPill.getAttribute('data-plan-id');
+              if (planId) {
+                updateSellingPlanInputs(planId);
+              }
+            }
+            
+            // Re-adjust layout when showing
+            setTimeout(function() {
+              const pills = currentFrequencySection.querySelectorAll('.subscription-card__frequency-pill');
+              const options = currentFrequencySection.querySelector('.subscription-card__frequency-options');
+              adjustLastRowLayoutForSection(pills, options);
+            }, 10);
+          }
+        } else if (purchaseType === 'one-time') {
+          // Clear selling plan for one-time purchase
+          updateSellingPlanInputs('');
+        }
+        
+        // Update pricing display for the selected option
+        const optionPriceDiscounted = option.querySelector('.subscription-card__price-discounted');
+        const selectedPill = option.querySelector('.subscription-card__frequency-pill--selected');
+        
+        // Hide discount benefit for one-time purchase, show for subscription if plan selected
+        const allDiscountBenefits = wrapper.querySelectorAll('.subscription-card__benefit--discount');
+        allDiscountBenefits.forEach(function(benefit) {
+          benefit.style.display = 'none';
+        });
+        
+        if (selectedPill && optionPriceDiscounted) {
+          const discountEnabled = selectedPill.getAttribute('data-discount-enabled');
+          const discountType = selectedPill.getAttribute('data-discount-type');
+          const discountValue = parseFloat(selectedPill.getAttribute('data-discount-value'));
+          const enabledChangeDiscount = selectedPill.getAttribute('data-enabled-change-discount');
+          const discountValueChanged = selectedPill.getAttribute('data-discount-value-changed');
+          
+          let discountedPrice = productPrice;
+          
+          if (discountEnabled === 'true' && discountType === 'percentage') {
+            discountedPrice = productPrice - (productPrice * discountValue / 100);
+          } else if (discountEnabled === 'true' && discountType === 'fixed') {
+            discountedPrice = productPrice - (discountValue * 100);
+          }
+          
+          optionPriceDiscounted.textContent = formatMoney(discountedPrice, {{ shop.money_format | json }});
+          
+          // Show/hide original price based on discount
+          const optionPriceOriginal = option.querySelector('.subscription-card__price-original');
+          if (optionPriceOriginal) {
+            if (discountEnabled === 'true' && discountedPrice < productPrice) {
+              optionPriceOriginal.style.display = 'inline';
+            } else {
+              optionPriceOriginal.style.display = 'none';
+            }
+          }
+          
+          // Update discount benefit for the selected card
+          updateDiscountBenefit(option, discountEnabled, discountType, discountValue, enabledChangeDiscount, discountValueChanged);
+        }
+      });
+    });
+    
+    // Function to update discount benefit display
+    function updateDiscountBenefit(card, discountEnabled, discountType, discountValue, enabledChangeDiscount, discountValueChanged) {
+      const discountBenefit = card.querySelector('.subscription-card__benefit--discount');
+      const benefitText = discountBenefit.querySelector('.subscription-card__benefit-text');
+      
+      // Hide if discount is not enabled or has no value
+      if (discountEnabled !== 'true' || !discountType || discountValue === 0 || discountValue === null) {
+        discountBenefit.style.display = 'none';
+        return;
+      }
+      
+      // Format text
+      let text = '';
+      if (discountType === 'percentage') {
+        text = '{{ save_from_text }} ' + discountValue + '%';
+      } else if (discountType === 'fixed') {
+        text = '{{ save_from_text }} ' + formatMoney(discountValue, {{ shop.money_format | json }});
+      }
+      
+      benefitText.textContent = text;
+      discountBenefit.style.display = 'flex';
+    }
+    
+    // Handle frequency pill selection for both autoship and prepaid
+    const allFrequencyPills = wrapper.querySelectorAll('.subscription-card__frequency-pill');
+    allFrequencyPills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        // Get the parent frequency options container to only deselect pills in the same group
+        const parentOptions = pill.closest('.subscription-card__frequency-options');
+        const paymentType = parentOptions.getAttribute('data-payment-type');
+        const parentCard = pill.closest('.subscription-card__option');
+        
+        // Deselect all pills in the same payment type group
+        const siblingPills = parentOptions.querySelectorAll('.subscription-card__frequency-pill');
+        siblingPills.forEach(function(p) {
+          p.classList.remove('subscription-card__frequency-pill--selected');
+        });
+        
+        // Select clicked pill
+        pill.classList.add('subscription-card__frequency-pill--selected');
+        
+        // Update pricing based on selected plan
+        const discountEnabled = pill.getAttribute('data-discount-enabled');
+        const discountType = pill.getAttribute('data-discount-type');
+        const discountValue = parseFloat(pill.getAttribute('data-discount-value'));
+        const enabledChangeDiscount = pill.getAttribute('data-enabled-change-discount');
+        const discountValueChanged = pill.getAttribute('data-discount-value-changed');
+        
+        let discountedPrice = productPrice;
+        
+        if (discountEnabled === 'true' && discountType === 'percentage') {
+          discountedPrice = productPrice - (productPrice * discountValue / 100);
+        } else if (discountEnabled === 'true' && discountType === 'fixed') {
+          discountedPrice = productPrice - (discountValue * 100);
+        }
+        
+        // Update displayed prices in the current card
+        const cardPriceDiscounted = parentCard.querySelector('.subscription-card__price-discounted');
+        const cardPriceOriginal = parentCard.querySelector('.subscription-card__price-original');
+        
+        if (cardPriceDiscounted) {
+          cardPriceDiscounted.textContent = formatMoney(discountedPrice, {{ shop.money_format | json }});
+        }
+        
+        // Show/hide original price based on discount
+        if (cardPriceOriginal) {
+          if (discountEnabled === 'true' && discountedPrice < productPrice) {
+            cardPriceOriginal.style.display = 'inline';
+          } else {
+            cardPriceOriginal.style.display = 'none';
+          }
+        }
+        
+        // Update discount benefit text
+        updateDiscountBenefit(parentCard, discountEnabled, discountType, discountValue, enabledChangeDiscount, discountValueChanged);
+        
+        // Update selling plan input
+        const planId = pill.getAttribute('data-plan-id');
+        if (planId) {
+          updateSellingPlanInputs(planId);
+        }
+      });
+    });
+    
+    // Toggle layout functionality
+    const toggleButtons = wrapper.querySelectorAll('.subscription-card__toggle-button');
+    const toggleOptions = wrapper.querySelectorAll('.subscription-card__shared-content .subscription-card__option');
+    
+    toggleButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const purchaseType = this.getAttribute('data-purchase-type');
+        
+        // Update toggle button selection
+        toggleButtons.forEach(function(btn) {
+          btn.classList.remove('subscription-card__toggle-button--selected');
+        });
+        this.classList.add('subscription-card__toggle-button--selected');
+        
+        // Update content visibility
+        toggleOptions.forEach(function(option) {
+          option.classList.remove('subscription-card__option--active');
+        });
+        
+        const activeOption = wrapper.querySelector('.subscription-card__shared-content .subscription-card__option[data-purchase-type="' + purchaseType + '"]');
+        if (activeOption) {
+          activeOption.classList.add('subscription-card__option--active');
+          
+          // Trigger the radio input selection
+          const radioInput = activeOption.querySelector('.subscription-card__radio-input');
+          if (radioInput) {
+            radioInput.checked = true;
+            radioInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+      });
+    });
+    
+  })();
+</script>

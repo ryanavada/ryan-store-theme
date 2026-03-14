@@ -1,0 +1,200 @@
+{
+  "sections": {
+    "1765174515ee08fa8c": {
+      "type": "apps",
+      "blocks": {
+        "chatty_product_ai_assistant_EWN6y9": {
+          "type": "shopify:\/\/apps\/chatty\/blocks\/product-ai-assistant\/1c0e135d-e8e1-4fe2-86be-1c36def46675",
+          "settings": {
+            "device": "all",
+            "container_width": 450,
+            "use_full_width": true,
+            "action_label": "Ask AI",
+            "action_label_color": "#ffffff",
+            "action_background_color": "#232323",
+            "placeholder": "Ask us anything",
+            "ask_ai_corner_radius": 8,
+            "show_suggested_questions": false,
+            "suggested_questions_text_color": "#232323"
+          }
+        }
+      },
+      "block_order": [
+        "chatty_product_ai_assistant_EWN6y9"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "body"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {}
+        },
+        "air_product_reviews_app_summary_block_DALqLR": {
+          "type": "shopify:\/\/apps\/air-product-reviews\/blocks\/app-summary-block\/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "joy_loyalty_program_joy_points_calculator_block_MtyQtf": {
+          "type": "shopify:\/\/apps\/joy-loyalty-program\/blocks\/joy-points-calculator-block\/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+          "settings": {
+            "points_calculator_alignment": "left"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "aov_ai_bundle_offer_volume_fmAGhQ": {
+          "type": "shopify:\/\/apps\/aov-ai-bundle\/blocks\/offer-volume\/0335d423-143c-4ad7-b224-99a1db74a9ee",
+          "settings": {}
+        },
+        "joy_subscription_app_subscription_widget_kVnCyM": {
+          "type": "shopify:\/\/apps\/joy-subscription-app\/blocks\/subscription-widget\/6aa30d9c-ff0b-4f29-a82d-a633d8e04b9a",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "rating",
+        "air_product_reviews_app_summary_block_DALqLR",
+        "price",
+        "joy_loyalty_program_joy_points_calculator_block_MtyQtf",
+        "variant_picker",
+        "quantity_selector",
+        "aov_ai_bundle_offer_volume_fmAGhQ",
+        "joy_subscription_app_subscription_widget_kVnCyM",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "17660090435f3234de": {
+      "type": "apps",
+      "blocks": {
+        "shopvid_mp_tiktok_block_e9iPpb": {
+          "type": "shopify:\/\/apps\/shopvid\/blocks\/mp_tiktok_block\/1216543a-6237-4445-a5f2-61991cd76022",
+          "settings": {
+            "mp_tiktok_feed_id": "1712-117111"
+          }
+        }
+      },
+      "block_order": [
+        "shopvid_mp_tiktok_block_e9iPpb"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17651741892468e102": {
+      "type": "apps",
+      "blocks": {
+        "air_product_reviews_app_block_review_list_eikEjc": {
+          "type": "shopify:\/\/apps\/air-product-reviews\/blocks\/app-block-review-list\/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {
+            "air_blockreviews_summaryHeading": "Reviews",
+            "air_blockreviews_layout": "list",
+            "air_blockreviews_singleStarColor": "#16a086",
+            "air_blockreviews_primaryColor": "#121212"
+          }
+        },
+        "air_product_reviews_app_carousel_review_list_3yFGDY": {
+          "type": "shopify:\/\/apps\/air-product-reviews\/blocks\/app-carousel-review-list\/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {
+            "air_carouselreviews_carouselHeading": "See what our customers said"
+          }
+        }
+      },
+      "block_order": [
+        "air_product_reviews_app_block_review_list_eikEjc",
+        "air_product_reviews_app_carousel_review_list_3yFGDY"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "1765174515ee08fa8c",
+    "main",
+    "17660090435f3234de",
+    "17651741892468e102",
+    "related-products"
+  ]
+}

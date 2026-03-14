@@ -1,0 +1,1135 @@
+
+    <div
+      
+      id=""
+      class="gem-slider-item gp-w-full gem-slider-item-g_22n9uMmw gp-child-item-g_22n9uMmw gpNWjYZo8p"
+      style="--minw:calc(100% / 3 - 20px);--minw-tablet:calc(100% / 3 - 20px);--minw-mobile:calc(100% / 1 - 0px);--maxw:calc(100% / 3 - 20px);--maxw-tablet:calc(100% / 3 - 20px);--maxw-mobile:calc(100% / 1 - 0px);--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT"
+      data-index="2"
+      grid-index="{{forloop.index}}"
+      external-id="{{media.external_id}}"
+      media-type="{{media.media_type}}"
+      media-poster="{{media.preview_image.src}}"
+      media-source-url="{{media.sources.first.url}}"
+      media-last-source-url="{{mediaSourceUrl}}"
+    >
+      <div
+        class="gp-w-full gp-h-full"
+        
+      >
+      
+    
+      {%- assign gpBkProduct = product -%}
+      
+      {%- liquid
+        if request.page_type == 'product'
+          if 'static' == 'static'
+            if 'latest' == 'latest'
+              paginate collections.all.products by 100000
+                assign product = collections.all.products | sort: 'created_at' | reverse | first
+              endpaginate
+            else
+              assign product = all_products['']
+              assign productId = 'latest' | times: 1
+              if product == empty or product == null
+                paginate collections.all.products by 100000
+                  for item in collections.all.products
+                    if item.id == productId
+                      assign product = item
+                    endif
+                  endfor
+                endpaginate
+              endif
+            endif
+          endif
+        else
+          if 'latest' == 'latest'
+            paginate collections.all.products by 100000
+              assign product = collections.all.products | sort: 'created_at'| reverse | first
+            endpaginate
+          else
+            assign product = all_products['']
+            assign productId = 'latest' | times: 1
+            if product == empty or product == null
+              paginate collections.all.products by 100000
+                for item in collections.all.products
+                  if item.id == productId
+                    assign product = item
+                  endif
+                endfor
+              endpaginate
+            endif
+          endif
+        endif
+      -%}
+    
+    
+    {% if product != empty and product != null %}
+      
+      {%- assign initVariantId =  -%}
+      {%- assign product_form_id = 'product-form-' | append: "g04YHPrpxD" -%}
+      {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%-if productSelectedVariant == empty or productSelectedVariant == null -%}
+        {%- assign productSelectedVariant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+      {%-if variant == empty or variant == null -%}
+        {%- assign variant = product.selected_or_first_available_variant -%}
+      {%- endif -%}
+    
+      <gp-product
+        data-uid="g04YHPrpxD"
+        data-id="g04YHPrpxD"
+        
+        
+        gp-context='{"productId": {{ product.id }}, "preSelectedOptionIds": [], "isSyncProduct": "", "variantSelected": {{ variant | json | escape }},  "inventory_management": {{ variant.inventory_management | json | escape  }}, "inventory_policy": {{ variant.inventory_policy | json | escape }}, "inventoryQuantity": {{ variant.inventory_quantity }}, "quantity": 1, "formId": "{{ product_form_id }}" }'
+        gp-data='{"variantSelected": {{ variant | json | escape }}, "quantity": 1, "productUrl":{{ product.url | json | escape }}, "productHandle":{{ product.handle | json | escape }}, "collectionUrl": {{ collection.url | json | escape }}, "collectionHandle": {{ collection.handle | json | escape }}}'
+      >
+        <product-form class="product-form">
+          {%- form 'product', product, id: product_form_id, class: 'form contents', data-type: 'add-to-cart-form', autocomplete: 'off'  -%}
+            <input type="hidden" name="id" value="{{ variant.id }}" />
+            <input type="hidden" name="quantity" value="{{ quantity }}" />
+            <button type="submit" onclick="return false;" style="display:none;"></button>
+            
+    
+
+    
+
+    
+    <gp-row gp-data='{"uid":"g04YHPrpxD"}' data-id="g04YHPrpxD-row" id="g04YHPrpxD" data-same-height-subgrid-container class="g04YHPrpxD gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:solid;--bw:1px 1px 1px 1px;--bc:#E0E0E0;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--pt:32px;--pl:32px;--pb:32px;--pr:32px;--cg:30px;--rg:0px;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--pc:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:start"
+      class="g_K5TLxCp2 gp-relative gp-flex gp-flex-col"
+    >
+      
+  {% if product.media.size > 1 %}<style>
+    .gem-slider-item-gDNQOcqh4C-{{product.id}}.gp-gallery-image-item::after, .gem-slider-item-gp-gallery-gDNQOcqh4C-{{product.id}}.gp-gallery-image-item::after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      
+  border-width: 1px 1px 1px 1px;
+  border-color: #000000;
+  
+      
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      
+    }
+    .gem-slider-item-gDNQOcqh4C-{{product.id}}.gp-gallery-image-item[data-outline=active]:after, .gem-slider-item-gp-gallery-gDNQOcqh4C-{{product.id}}.gp-gallery-image-item[data-outline=active]:after {
+      pointer-events: none;
+    }
+  </style>{% endif %}
+  
+    {% assign featured_image = product.featured_image %}
+    {% if variant != null and variant.featured_image != null %}{% assign featured_image = variant.featured_image %}{% endif %}
+  
+    <gp-product-images
+      gp-data='
+    {
+      "id":"gDNQOcqh4C",
+      "pageContext": {"pageType":"GP_PRODUCT","sectionName":"","isPreviewing":false,"isOptimizePlan":false,"isTranslateWithLocale":false,"isLazyLoadSection":true,"isLazyLoadImage":false,"hasCollectionHandle":true,"numberOfProductOfProductList":0,"pageBackground":"","fontType":"google","primaryLocale":"","showPriceCurrency":false,"enableLazyLoadImage":false},
+      "setting":{"arrowIcon":"<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z\" fill=\"currentColor\"/>\n    </svg>","arrowIconColor":"#000000","borderActive":{"borderType":"none","borderWidth":"1px","color":"#000000","isCustom":"false","width":"1px 1px 1px 1px"},"clickOpenLightBox":{"desktop":false},"dragToScroll":true,"ftArrowIcon":"<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z\" fill=\"currentColor\"/>\n    </svg>","ftArrowIconColor":"#000000","ftClickOpenLightBox":{"desktop":"none"},"ftDotActiveColor":{"desktop":"line-3"},"ftDotColor":{"desktop":"bg-1"},"ftDotGapToCarousel":{"desktop":16},"ftDotSize":{"desktop":12},"ftDotStyle":{"desktop":"none"},"ftDragToScroll":false,"ftLoop":{"desktop":false},"ftNavigationPosition":{"desktop":"none"},"ftPauseOnHover":true,"ftSpeed":1,"galleryHoverEffect":"none","galleryZoom":150,"galleryZoomType":"default","hoverEffect":"none","loop":{"desktop":true},"navigationPosition":{"desktop":"inside"},"otherImage":0,"pauseOnHover":true,"speed":1,"type":{"desktop":"slider"},"typeDisplay":"all-images","zoom":150,"zoomType":"default"},
+      "styles":{"align":{"desktop":"flex-start"},"corner":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"ftCorner":{"bblr":"0px","bbrr":"0px","btlr":"0px","btrr":"0px","radiusType":"none"},"ftLayout":{"desktop":"cover"},"ftShape":{"desktop":{"shape":"square","shapeLinked":true,"shapeValue":"1/1","width":"100%"}},"itemSpacing":{"desktop":"var(--g-s-s)","mobile":"var(--g-s-s)"},"layout":{"desktop":"cover"},"position":{"desktop":"only-feature","mobile":"bottom-center"},"ratioLayout":{"desktop":[2,10]},"ratioLayoutRight":{"desktop":[10,2]},"shape":{"desktop":{"shape":"square","shapeLinked":true,"shapeValue":"1/1","width":"100%"}},"shapeFor1Col":{"desktop":{"shape":"square","shapeLinked":true,"shapeValue":"1/1","width":"100%"}},"shapeFor2Col":{"desktop":{"shape":"square","shapeLinked":true,"shapeValue":"1/1","width":"50%"}},"shapeForBottom":{"desktop":{"shape":"square","shapeLinked":true,"shapeValue":"1/1","width":"20%"}},"shapeForFtOnly":{"desktop":{"shape":"square","shapeLinked":true,"shapeValue":"1/1","width":"100%"}},"spacing":{"desktop":"var(--g-s-s)","mobile":"var(--g-s-s)"}},
+      "productUrl":{{product.url | json | escape}},
+      "product":{{product | json | escape}},
+      "collectionUrl": {{ collection.url | json | escape }},
+      "collection": {{ collection | json | escape}}
+    }
+  '
+      section-id="{{section.id}}" data-id="gDNQOcqh4C"
+      style="--bs:none;--bw:1px 1px 1px 1px;--bc:#121212;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl)"
+      class="gp-relative gp-w-full gDNQOcqh4C "
+    >
+      <div
+        class="{% if product.media.size > 1 %}gp-grid gp-w-full !gp-m-0 gp-relative{% else %}gp-w-full !gp-m-0 gp-relative{% endif %}"
+        style="{% if product.media.size > 1 %}--gtc: minmax(0, 12fr);--gtc-tablet: minmax(0, 12fr);--gtc-mobile: minmax(0, 12fr);--gg: var(--g-s-s);--gg-mobile: var(--g-s-s);{% else %}--gtc: minmax(0, 12fr);--gg: var(--g-s-s);--gg-mobile: var(--g-s-s);{% endif %}"
+      >
+        
+    {% capture featureImageOnlyOne %}
+      
+        {% assign featureMedia = variant.featured_media %}
+        {% unless featureMedia %}
+        {% assign featureMedia = product.featured_media %}
+        {% endunless %}
+        {% if product.media.size > 1 %}
+          {% assign featureMedia = variant.featured_media %}
+          {% unless featureMedia %}
+          {% assign featureMedia = product.featured_media %}
+          {% endunless %}
+        {% endif %}
+        {% assign largestRatio = 0 %}
+        {% assign height = featureMedia.height | times: 1.0 %}
+        {% assign width = featureMedia.width | times: 1.0 %}
+        {% assign ratio = height | divided_by: width %}
+        {% if ratio > largestRatio %}{% assign largestRatio = ratio %}{% endif %}
+        {% assign productImageWidth = 0 %}
+        {% case featureMedia.media_type %}
+          {% when 'image' %}
+            {% assign productImageWidth = featureMedia.width %}
+          {% else %}
+            {% assign productImageWidth = featureMedia.preview_image.width %}
+        {% endcase %}
+        {% if featureMedia == null %}{% assign productImageWidth = 1600 %}{% endif %}
+        <div
+          class='gp-feature-image-carousel gp-feature-image-only'
+          style="--jc: flex-start;--o: 0;--o-tablet: 0;--o-mobile: 0;--d: flex;--d-mobile: flex;--d-tablet: flex;"
+        >
+          <div
+            class="gp-relative"
+            style="--w: 100%;--w-tablet: 100%;--w-mobile: 100%;--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;--h: auto;--h-tablet: auto;--h-mobile: auto;"
+          >
+            
+      
+    
+            <div
+              type="gp-feature-image-only"
+              product-id="{{product.id}}"
+              product-media="{{product.media.size}}"
+              class="gp-group gp-z-0 gp-flex !gp-min-w-full !gp-max-w-full gp-w-full gp-relative gp-items-start gp-justify-center gp-overflow-hidden gp-outline-1 -gp-outline-offset-1 gp-image-item gp-ft-image-item data-[outline=active]:gp-outline gp-featured-image-wrapper"
+              style="max-width: 100%;outline-color: var(--g-c-brand, brand);--bblr: 0px;--bbrr: 0px;--btlr: 0px;--btrr: 0px;--hvr-bblr: 0px;--hvr-bbrr: 0px;--hvr-btlr: 0px;--hvr-btrr: 0px;--focus-bblr: 0px;--focus-bbrr: 0px;--focus-btlr: 0px;--focus-btrr: 0px;-undefined-bblr: 0px;-undefined-bbrr: 0px;-undefined-btlr: 0px;-undefined-btrr: 0px;--h: auto;--h-tablet: auto;--h-mobile: auto;width: {{productImageWidth}}px;"
+            >
+              <div
+                class="gp-w-full gp-relative {% if featureMedia == null or featureMedia.media_type == 'image' %}{{ 'gp-h-0' }}{% else %}{{ 'gp-h-full !gp-pb-0' }}{% endif %}"
+                style="--pb: calc((1/1)*100%);--pb-tablet: calc((1/1)*100%);--pb-mobile: calc((1/1)*100%); {% if featureMedia.media_type == 'video' or featureMedia.media_type == 'external_video' %}{{ 'display: flex; align-items: center; justify-content: center' }}{% endif %}"
+              >
+                
+    {% case featureMedia.media_type %}
+      {% when 'image' %}
+        
+      
+    {% assign src = featureMedia.src %}
+    
+    
+    <img
+      alt="{{featureMedia.alt | escape}}" width="{{featureMedia.width}}" height="{{featureMedia.height}}" draggable="false" quality-type quality-percent data-sizes="auto" sizes="(max-width: 768px) 50vw, 100vw" src="{{src | image_url}}" isNotLazyload="true" srcset="{{src | image_url: width: 480}} 480w, {{src | image_url: width: 768}} 768w, {{src | image_url: width: 1024}} 1024w, {{src | image_url: width: 1440}} 1440w" base-src="{{src | image_url}}" loading="lazy"
+      id="{% if featureMedia != null %}{{featureMedia.id}}{% endif %}"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="gp-w-full gp-h-full gp-absolute gp-top-0 gp-left-0 featured-image-only gp-cursor-pointer !gp-rounded-none gp-w-full gp-transition-opacity {{shouldHidden}}"
+    />
+       
+       
+    
+      {% when 'external_video' %}
+        {% assign mediaSourceVideo = featureMedia | external_video_url %}
+        
+    <iframe
+      src="{{mediaSourceVideo}}" alt="{{featureMedia.alt | escape}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" width="100%" height="100%" controls="true" allowfullscreen="true"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1"
+      class="feature-video gp-w-full gp-h-full gp-relative"
+    >
+    </iframe>
+  
+      {% when 'video' %}
+        {% assign mediaSourceVideo = featureMedia.sources.last.url %}
+        
+  <gp-lite-html5-embed is-check-loaded="true" >
+    
+    <video
+    id="gp-video-undefined" title="{{featureMedia.alt | escape}}" preload="none" data-src="{{mediaSourceVideo}}" poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" data-poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}"
+      style="width:100%;max-height:100%"
+      class="gp-w-full gp-invisible gp-lazyload-video"
+      controls
+      
+      
+      
+      playsinline
+      
+    ></video>
+    
+     <div
+        role="presentation"
+        style="width:100%;max-height:100%"
+        class="gp-absolute gp-top-0 gp-left-0  gp-w-full gp-thumbnail-video gp-h-full"
+        >
+           
+    <img
+      width="2237" height="1678" draggable="false" quality-type quality-percent data-sizes="auto" sizes="100vw" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIzNyIgaGVpZ2h0PSIxNjc4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPGRlZnM+CiAgICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZy0yMjM3LTE2NzgiPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYmEoNTEsIDUxLCA1MSwgMCkiIG9mZnNldD0iMjAlIiAvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYmEoNTEsIDUxLCA1MSwgMCkiIG9mZnNldD0iNTAlIiAvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYmEoNTEsIDUxLCA1MSwgMCkiIG9mZnNldD0iNzAlIiAvPgogICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjIyMzciIGhlaWdodD0iMTY3OCIgZmlsbD0icmdiYSg1MSwgNTEsIDUxLCAwKSIgLz4KICAgIDxyZWN0IGlkPSJyIiB3aWR0aD0iMjIzNyIgaGVpZ2h0PSIxNjc4IiBmaWxsPSJ1cmwoI2ctMjIzNy0xNjc4KSIgLz4KICAgIDxhbmltYXRlIHhsaW5rOmhyZWY9IiNyIiBhdHRyaWJ1dGVOYW1lPSJ4IiBmcm9tPSItMjIzNyIgdG89IjIyMzciIGR1cj0iMXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAgLz4KICA8L3N2Zz4=" base-src="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" data-src="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" data-srcset="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}"
+      id="video-thumbnail"
+      
+      class="gp-w-full gp-h-full gp-object-cover gp_lazyload"
+    />
+          <button type="button" class="gp-absolute gp-left-1/2 gp-top-1/2 gp-flex gp-aspect-[56/32] gp-w-14 -gp-translate-x-1/2 -gp-translate-y-1/2 gp-items-center gp-justify-center gp-rounded gp-bg-black/80 gp-transition-colors hover:gp-bg-[#ef0800]" aria-label="Play">
+            <svg class="gp-w-5 gp-text-white" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M5 5.274c0-1.707 1.826-2.792 3.325-1.977l12.362 6.726c1.566.853 1.566 3.101 0 3.953L8.325 20.702C6.826 21.518 5 20.432 5 18.726V5.274Z"
+              />
+            </svg>
+          </button>
+        </div>
+  
+  </gp-lite-html5-embed>
+        <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-lite-html5-embed-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+      {% when 'model' %}
+        
+    <model-viewer
+      src="{% if featureMedia.sources.first.url contains '.glb' %}{{ featureMedia.sources.first.url }}{% else %}{{featureMedia.sources.last.url}}{% endif %}" alt="{{featureMedia.preview_image.alt}}" data-shopify-feature="1.12" width="100%" poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" ar-status="not-presenting" camera-controls="true"
+      class="gp-w-full gp-h-full model-viewer gp-z-[90]"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1">
+    </model-viewer>
+  
+      {% else %}
+        
+    
+    <img
+      alt="No Image" width="2237" height="1678" draggable="false" quality-type quality-percent data-sizes="auto" sizes="(max-width: 768px) 50vw, 100vw" src isNotLazyload="true" srcset loading="lazy"
+      id=""
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="gp-w-full gp-h-full gp-absolute gp-top-0 gp-left-0 featured-image-only gp-cursor-pointer !gp-rounded-none"
+    />
+    {% endcase %}
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      
+    {% endcapture %}
+    {% if product.media.size > 1 %}
+        
+      
+    <gp-carousel gp-data='{"id":"ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}","isHiddenArrowWhenDisabled":true,"setting":{"loop":{"desktop":false},"itemNumber":{"desktop":1},"dot":{"desktop":true,"tablet":true,"mobile":true},"dotStyle":{"desktop":"none","tablet":"none","mobile":"none"},"dotSize":{"desktop":12},"dotGapToCarousel":{"desktop":16},"dotColor":{"desktop":"bg-1"},"dotActiveColor":{"desktop":"line-3"},"controlOverContent":{"desktop":false,"tablet":false,"mobile":false},"arrowCustom":"<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z\" fill=\"currentColor\"/>\n    </svg>","arrowIconSize":{"desktop":24},"arrowCustomColor":"#000000","sneakPeakType":{"desktop":"center"},"arrowGapToEachSide":"16","navigationStyle":{"desktop":"none"},"navigationEnable":{"desktop":false},"arrowButtonSize":{"desktop":{}},"enableAction":{"desktop":true}},"styles":{"sizeSetting":{"desktop":{"width":"100%","height":"auto"},"tablet":{"width":"100%","height":"auto"},"mobile":{"width":"100%","height":"auto"}},"align":{"desktop":"flex-start","tablet":"flex-start","mobile":"flex-start"}}}' data-id="gp-carousel-gDNQOcqh4C" id="gp-root-carousel-ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}" type="gp-feature-image-carousel" product-id="{{product.id}}" product-media="{{product.media.size}}" style="--jc:flex-start;--jc-tablet:flex-start;--jc-mobile:flex-start;--o:0;--o-tablet:0;--o-mobile:0;--d:flex;--d-mobile:flex;--d-tablet:flex" class="gp-group/carousel gp-w-full gp-flex `gp-flex-1 gp-w-full gp-feature-image-carousel gp-product-images-gallery-undefined">
+      <div
+        
+        class="gp-carousel-gDNQOcqh4C gp-featured-image-wrapper gp-relative gp-my-0 tablet:gp-px-0 gp-max-w-full mobile:gp-px-0 gp-carousel-wrapper mobile:gp-block tablet:gp-block gp-block"
+        style="playSpeed:600;--h:auto;--h-tablet:auto;--h-mobile:auto;--w:100%;--w-tablet:100%;--w-mobile:100%"
+      >
+        <div class="gp-relative gp-flex gp-items-center gp-justify-between mobile:!gp-flex-row tablet:!gp-flex-row !gp-flex-row" style="--h:100%;--h-tablet:100%;--h-mobile:100%;gap:16px">
+          
+    <button
+      type="button"
+      aria-label='Carousel Back Arrow'
+      class="gp-z-1 gp-items-center gp-justify-center gp-overflow-hidden gp-shrink-0 gp-carousel-arrow-gp-carousel-gDNQOcqh4C ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}} gp-carousel-action-back gem-slider-previous gp-cursor-pointer gp-text-gray-500 !gp-hidden tablet:!gp-hidden mobile:!gp-hidden"
+      style="--d:none;--d-tablet:none;--d-mobile:none;--left:3px;--right:initial;--top:initial;--bottom:;--left-tablet:3px;--right-tablet:initial;--top-tablet:initial;--bottom-tablet:;--left-mobile:3px;--right-mobile:initial;--top-mobile:initial;--bottom-mobile:"
+    >
+      <style type="text/css">
+      .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C {
+        
+      }
+      .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        pointer-events: none;
+        z-index: 10;
+        
+        
+      }
+      @media only screen and (max-width: 1024px) and (min-width: 768px) {
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C {
+          
+        }
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C {
+          
+        }
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+    </style>
+      
+    <div
+      class="gp-flex gp-items-center gp-justify-center [&>svg]:gp-h-full [&>svg]:gp-w-full gp-rotate-180 tablet:gp-rotate-180 mobile:gp-rotate-180"
+      style="--c:#000000;--w:24px;--w-tablet:24px;--w-mobile:24px;--h:24px;--h-tablet:24px;--h-mobile:24px"
+    >
+        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z" fill="currentColor"/>
+    </svg>
+    </div>
+  
+    </button>
+  
+          <div id="gp-carousel-ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}" class="gem-slider gp-h-full gp-overflow-hidden gp-select-none gp-carousel-slider-gp-carousel-gDNQOcqh4C mobile:!gp-flex-nowrap tablet:!gp-flex-nowrap !gp-flex-nowrap mobile:!gp-min-h-full tablet:!gp-min-h-full !gp-min-h-full" style="--cg-mobile:0px;--cg-tablet:0px;--cg:0px">
+            
+    {% if product.media.size > 0 %}
+      
+     {% assign largestRatio = 0 %}
+      {% for featureMedia in product.media %}
+          {% assign height = featureMedia.height | times: 1.0 %}
+          {% assign width = featureMedia.width | times: 1.0 %}
+          {% assign ratio = height | divided_by: width %}
+          {% if ratio > largestRatio %}{% assign largestRatio = ratio %}{% endif %}
+        {% endfor %}
+      {% for featureMedia in product.media %}{% if featureMedia.media_type == 'image' %}{% for image in product.images %}{% if image.src == featureMedia.src %}{% assign imageID = image.id %}{% break %}{% endif %}{% endfor %}{% else %}{% assign imageID = '' %}{% endif %}
+        
+    {% assign productImageWidth = 0 %}
+    {% case featureMedia.media_type %}
+      {% when 'image' %}
+        {% assign productImageWidth = featureMedia.width %}
+      {% else %}
+        {% assign productImageWidth = featureMedia.preview_image.width %}
+    {% endcase %}
+    
+    <div
+      
+      id="{{section.id}}-{{imageID}}"
+      class="gem-slider-item gp-w-full gem-slider-item-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}} gp-image-item gp-flex gp-items-center gp-justify-center gp-group gp-relative gp-overflow-hidden gp-cursor-pointer data-[outline=deactive]:after:!gp-border-transparent gp-ft-image-item !gp-min-w-full !gp-max-w-full' undefined"
+      style="width:{{productImageWidth}}px;--minw:calc(100% / 4 - 33px);--minw-tablet:calc(100% / 4 - 33px);--minw-mobile:calc(100% / 4 - 33px);--maxw:calc(100% / 4 - 33px);--maxw-tablet:calc(100% / 4 - 33px);--maxw-mobile:calc(100% / 4 - 33px);max-width:100%;outline-color:var(--g-c-brand, brand);--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+      data-index=""
+      grid-index="{{forloop.index}}"
+      external-id="{{media.external_id}}"
+      media-type="{{media.media_type}}"
+      media-poster="{{media.preview_image.src}}"
+      media-source-url="{{media.sources.first.url}}"
+      media-last-source-url="{{mediaSourceUrl}}"
+    >
+      <div
+        class="gp-w-full gp-h-full"
+        
+      >
+      
+      <div
+        class="gp-w-full gp-relative {% if featureMedia == null or featureMedia.media_type == 'image' %}{{ 'gp-h-0' }}{% else %}{{ 'gp-h-full !gp-pb-0' }}{% endif %}"
+        style="--pb: calc((1/1)*100%);--pb-tablet: calc((1/1)*100%);--pb-mobile: calc((1/1)*100%); {% if featureMedia.media_type == 'video' or featureMedia.media_type == 'external_video' %}{{ 'display: flex; align-items: center; justify-content: center' }}{% endif %}"
+      >
+        
+    {% case featureMedia.media_type %}
+      {% when 'image' %}
+        
+      
+    {% assign src = featureMedia.src %}
+    
+    
+    <img
+      alt="{{featureMedia.alt | escape}}" width="{{featureMedia.width}}" height="{{featureMedia.height}}" draggable="false" quality-type quality-percent data-sizes="auto" sizes="(max-width: 768px) 50vw, 100vw" src="{{src | image_url}}" isNotLazyload="true" srcset="{{src | image_url: width: 480}} 480w, {{src | image_url: width: 768}} 768w, {{src | image_url: width: 1024}} 1024w, {{src | image_url: width: 1440}} 1440w" base-src="{{src | image_url}}" loading="lazy"
+      id="{% if featureMedia != null %}{{featureMedia.id}}{% endif %}"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="gp-w-full gp-h-full gp-absolute gp-top-0 gp-left-0 featured-image-only gp-cursor-pointer !gp-rounded-none gp-w-full gp-transition-opacity {{shouldHidden}}"
+    />
+       
+       
+    
+      {% when 'external_video' %}
+        {% assign mediaSourceVideo = featureMedia | external_video_url %}
+        
+    <iframe
+      src="{{mediaSourceVideo}}" alt="{{featureMedia.alt | escape}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" width="100%" height="100%" controls="true" allowfullscreen="true"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1"
+      class="feature-video gp-w-full gp-h-full gp-relative"
+    >
+    </iframe>
+  
+      {% when 'video' %}
+        {% assign mediaSourceVideo = featureMedia.sources.last.url %}
+        
+  <gp-lite-html5-embed is-check-loaded="true" >
+    
+    <video
+    id="gp-video-undefined" title="{{featureMedia.alt | escape}}" preload="none" data-src="{{mediaSourceVideo}}" poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" data-poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}"
+      style="width:100%;max-height:100%"
+      class="gp-w-full gp-invisible gp-lazyload-video"
+      controls
+      
+      
+      
+      playsinline
+      
+    ></video>
+    
+     <div
+        role="presentation"
+        style="width:100%;max-height:100%"
+        class="gp-absolute gp-top-0 gp-left-0  gp-w-full gp-thumbnail-video gp-h-full"
+        >
+           
+    <img
+      width="2237" height="1678" draggable="false" quality-type quality-percent data-sizes="auto" sizes="100vw" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIzNyIgaGVpZ2h0PSIxNjc4IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPGRlZnM+CiAgICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZy0yMjM3LTE2NzgiPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYmEoNTEsIDUxLCA1MSwgMCkiIG9mZnNldD0iMjAlIiAvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYmEoNTEsIDUxLCA1MSwgMCkiIG9mZnNldD0iNTAlIiAvPgogICAgICAgIDxzdG9wIHN0b3AtY29sb3I9InJnYmEoNTEsIDUxLCA1MSwgMCkiIG9mZnNldD0iNzAlIiAvPgogICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjIyMzciIGhlaWdodD0iMTY3OCIgZmlsbD0icmdiYSg1MSwgNTEsIDUxLCAwKSIgLz4KICAgIDxyZWN0IGlkPSJyIiB3aWR0aD0iMjIzNyIgaGVpZ2h0PSIxNjc4IiBmaWxsPSJ1cmwoI2ctMjIzNy0xNjc4KSIgLz4KICAgIDxhbmltYXRlIHhsaW5rOmhyZWY9IiNyIiBhdHRyaWJ1dGVOYW1lPSJ4IiBmcm9tPSItMjIzNyIgdG89IjIyMzciIGR1cj0iMXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAgLz4KICA8L3N2Zz4=" base-src="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" data-src="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" data-srcset="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}"
+      id="video-thumbnail"
+      
+      class="gp-w-full gp-h-full gp-object-cover gp_lazyload"
+    />
+          <button type="button" class="gp-absolute gp-left-1/2 gp-top-1/2 gp-flex gp-aspect-[56/32] gp-w-14 -gp-translate-x-1/2 -gp-translate-y-1/2 gp-items-center gp-justify-center gp-rounded gp-bg-black/80 gp-transition-colors hover:gp-bg-[#ef0800]" aria-label="Play">
+            <svg class="gp-w-5 gp-text-white" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M5 5.274c0-1.707 1.826-2.792 3.325-1.977l12.362 6.726c1.566.853 1.566 3.101 0 3.953L8.325 20.702C6.826 21.518 5 20.432 5 18.726V5.274Z"
+              />
+            </svg>
+          </button>
+        </div>
+  
+  </gp-lite-html5-embed>
+        <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-lite-html5-embed-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+      {% when 'model' %}
+        
+    <model-viewer
+      src="{% if featureMedia.sources.first.url contains '.glb' %}{{ featureMedia.sources.first.url }}{% else %}{{featureMedia.sources.last.url}}{% endif %}" alt="{{featureMedia.preview_image.alt}}" data-shopify-feature="1.12" width="100%" poster="{{featureMedia.preview_image.src | product_img_url: '1024x1024'}}" ar-status="not-presenting" camera-controls="true"
+      class="gp-w-full gp-h-full model-viewer gp-z-[90]"
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1">
+    </model-viewer>
+  
+      {% else %}
+        
+    
+    <img
+      alt="No Image" width="2237" height="1678" draggable="false" quality-type quality-percent data-sizes="auto" sizes="(max-width: 768px) 50vw, 100vw" src isNotLazyload="true" srcset loading="lazy"
+      id=""
+      style="--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="gp-w-full gp-h-full gp-absolute gp-top-0 gp-left-0 featured-image-only gp-cursor-pointer !gp-rounded-none"
+    />
+    {% endcase %}
+    
+      </div>
+      
+      </div>
+    </div>
+  {% endfor %}
+    {% else %}
+    <img
+      alt="no image" width="480" height="480" draggable="false" quality-type quality-percent data-sizes="auto" sizes="100vw" src="https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif" isNotLazyload="true" srcset base-src="https://cdn.shopify.com/s/assets/no-image-2048-5e88c1b20e087fb7bbe9a3771824e743c244f437e4f8ba93bbf7b11b53f7824c_large.gif" loading="lazy"
+      id="noImageError"
+      style="height:100%;--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="gp-w-full featured-image-only !gp-rounded-none"
+    />{% endif %}
+          </div>
+          
+    <button
+      type="button"
+      aria-label='Carousel Next Arrow'
+      class="gp-z-1 gp-items-center gp-justify-center gp-overflow-hidden gp-shrink-0 gp-carousel-arrow-gp-carousel-gDNQOcqh4C ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}} gp-carousel-action-next gem-slider-next gp-cursor-pointer gp-text-gray-500 !gp-hidden tablet:!gp-hidden mobile:!gp-hidden"
+      style="--d:none;--d-tablet:none;--d-mobile:none;--right:3px;--left:initial;--top:;--bottom:initial;--right-tablet:3px;--left-tablet:initial;--top-tablet:;--bottom-tablet:initial;--right-mobile:3px;--left-mobile:initial;--top-mobile:;--bottom-mobile:initial"
+    >
+      <style type="text/css">
+      .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C {
+        
+      }
+      .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        pointer-events: none;
+        z-index: 10;
+        
+        
+      }
+      @media only screen and (max-width: 1024px) and (min-width: 768px) {
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C {
+          
+        }
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C {
+          
+        }
+        .ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}}.gp-carousel-arrow-gp-carousel-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+    </style>
+      
+    <div
+      class="gp-flex gp-items-center gp-justify-center [&>svg]:gp-h-full [&>svg]:gp-w-full gp-rotate-0 tablet:gp-rotate-0 mobile:gp-rotate-0"
+      style="--c:#000000;--w:24px;--w-tablet:24px;--w-mobile:24px;--h:24px;--h-tablet:24px;--h-mobile:24px"
+    >
+        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z" fill="currentColor"/>
+    </svg>
+    </div>
+  
+    </button>
+  
+        </div>
+        
+    
+        <div class="gp-carousel-dot-container gp-carousel-dot-container-ft-gp-carousel-gDNQOcqh4C-{{section.id}}-{{product.id}} gp-z-2 gp-flex gp-flex-1 gp-items-center gp-justify-center gp-gap-2 gp-text-center gp-static gp-flex-row gp-left-0 gp-right-0 tablet:gp-static tablet:gp-flex-row tablet:gp-left-0 tablet:gp-right-0 mobile:gp-static mobile:gp-flex-row mobile:gp-left-0 mobile:gp-right-0" style="--bottom:16px;--bottom-tablet:16px;--bottom-mobile:16px;--d:none;--d-tablet:none;--d-mobile:none">
+          <!-- item render by js -->
+        </div>
+      
+  
+      </div>
+    </gp-carousel>
+    {% if product.media.size > 1 %} <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-carousel-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script> {% endif %}
+
+  
+    
+         
+      {% else %}{{ featureImageOnlyOne }}{% endif %}
+  
+        
+      <div
+        class="gallery-wrapper gp-product-images-gallery gp-flex gp-overflow-hidden gp-max-w-full gp-max-h-full data-[only-image=true]:gp-hidden"
+        style="--h: auto;--h-tablet: auto;--h-mobile: auto;--jc: flex-start;--o: 1;--o-tablet: 1;--o-mobile: 1;--pos: static;--pos-tablet: static;--pos-mobile: static;--w: 100%;--w-tablet: 100%;--w-mobile: 100%;--bottom: auto;--bottom-tablet: auto;--bottom-mobile: auto;--top: auto;--top-tablet: auto;--top-mobile: auto;--left: auto;--left-tablet: auto;--left-mobile: auto;--right: auto;--right-tablet: auto;--right-mobile: auto;"
+        data-only-image="{% if product.media.size > 1 %}false{% else %}true{% endif %}"
+      >
+        {% if product.media.size > 1 %}
+    
+    <gp-carousel gp-data='{"id":"gp-gallery-gDNQOcqh4C-{{product.id}}","isHiddenArrowWhenDisabled":true,"setting":{"loop":{"desktop":true},"itemNumber":{"desktop":"auto","tablet":"auto","mobile":5},"dot":{"desktop":false,"tablet":false,"mobile":false},"dotStyle":{"desktop":"none","tablet":"none","mobile":"none"},"controlOverContent":{"desktop":true,"tablet":true,"mobile":true},"enableDrag":{"desktop":true,"tablet":true,"mobile":true},"vertical":{"desktop":false,"mobile":false,"tablet":false},"arrowCustom":"<svg width=\"100%\" height=\"100%\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z\" fill=\"currentColor\"/>\n    </svg>","arrowIconSize":{"desktop":24},"arrowCustomColor":"#000000","sneakPeakType":{"desktop":"center"},"arrowGapToEachSide":"16","navigationStyle":{"desktop":"inside"},"navigationEnable":{"desktop":true},"arrowButtonSize":{"desktop":{}},"enableAction":{"desktop":true}},"styles":{"spacing":{"desktop":5,"tablet":5,"mobile":5},"sizeSetting":{"desktop":{"width":"100%","height":"100%"},"tablet":{"width":"100%","height":"100%"},"mobile":{"width":"100%","height":"100%"}}}}' data-id="gp-gallery-gDNQOcqh4C" id="gp-root-carousel-gp-gallery-gDNQOcqh4C-{{product.id}}" type="grid-carousel" product-media="{{product.media.size}}" style="--d:none;--d-mobile:flex;--d-tablet:none" class="gp-group/carousel gp-w-full gp-flex gp-flex-1 gp-w-full carousel-gallery gp-px-0 tablet:gp-px-0 mobile:gp-px-0">
+      <div
+        
+        class="gp-gallery-gDNQOcqh4C  gp-py-0 tablet:gp-py-0 mobile:gp-py-0 gp-relative gp-my-0 tablet:gp-px-0 gp-max-w-full mobile:gp-px-0 gp-carousel-wrapper mobile:gp-block tablet:gp-block gp-block"
+        style="--h:100%;--h-tablet:100%;--h-mobile:100%;--w:100%;--w-tablet:100%;--w-mobile:100%"
+      >
+        <div class="gp-relative gp-flex gp-items-center gp-justify-between mobile:!gp-flex-row tablet:!gp-flex-row !gp-flex-row" style="--h:100%;--h-tablet:100%;--h-mobile:100%;gap:16px">
+          
+    <button
+      type="button"
+      aria-label='Carousel Back Arrow'
+      class="gp-z-1 gp-items-center gp-justify-center gp-overflow-hidden gp-shrink-0 gp-carousel-arrow-gp-gallery-gDNQOcqh4C gp-gallery-gDNQOcqh4C-{{product.id}} gp-carousel-action-back gem-slider-previous gp-cursor-pointer gp-text-gray-500 !gp-flex !gp-absolute gp-z-2 tablet:!gp-flex tablet:!gp-absolute tablet:gp-z-2 mobile:!gp-flex mobile:!gp-absolute mobile:gp-z-2"
+      style="--d:flex;--d-tablet:flex;--d-mobile:flex;--left:16px;--right:initial;--top:initial;--bottom:;--left-tablet:16px;--right-tablet:initial;--top-tablet:initial;--bottom-tablet:;--left-mobile:16px;--right-mobile:initial;--top-mobile:initial;--bottom-mobile:"
+    >
+      <style type="text/css">
+      .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C {
+        
+      }
+      .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        pointer-events: none;
+        z-index: 10;
+        
+        
+      }
+      @media only screen and (max-width: 1024px) and (min-width: 768px) {
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C {
+          
+        }
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C {
+          
+        }
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+    </style>
+      
+    <div
+      class="gp-flex gp-items-center gp-justify-center [&>svg]:gp-h-full [&>svg]:gp-w-full gp-rotate-180 tablet:gp-rotate-180 mobile:gp-rotate-180"
+      style="--c:#000000;--w:24px;--w-tablet:24px;--w-mobile:24px;--h:24px;--h-tablet:24px;--h-mobile:24px"
+    >
+        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z" fill="currentColor"/>
+    </svg>
+    </div>
+  
+    </button>
+  
+          <div id="gp-carousel-gp-gallery-gDNQOcqh4C-{{product.id}}" class="gem-slider gp-h-full gp-overflow-hidden gp-select-none gp-carousel-slider-gp-gallery-gDNQOcqh4C !gp-min-h-full mobile:!gp-min-h-full tablet:!gp-min-h-full mobile:!gp-flex-nowrap tablet:!gp-flex-nowrap !gp-flex-nowrap mobile:!gp-min-h-full tablet:!gp-min-h-full !gp-min-h-full" style="--cg-mobile:5px;--cg-tablet:5px;--cg:5px">
+            
+    {% if product.media.size > 1 %}{% for media in product.media %}{% if media.media_type == 'image' %}{% for image in product.images %}{% if image.src == media.src %}{% assign imageID = image.id %}{% break %}{% endif %}{% endfor %}{% else %}{% assign imageID = '' %}{% endif %}
+          {% if media.id == product.featured_media.id  %}
+    {% if media.media_type == 'video' %}{% assign mediaSourceUrl = media.sources.last.url %}{% endif %}
+    {% if media.media_type == 'external_video' %}{% assign mediaSourceUrl = media | external_video_url %}{% endif %}
+    {% if media.media_type == 'image' %}{% assign mediaSourceUrl = media.src %}{% endif %}
+    
+    <div
+      data-outline="active"
+      id="{{imageID}}"
+      class="gem-slider-item gp-w-full gem-slider-item-gp-gallery-gDNQOcqh4C-{{product.id}} gp-image-item gp-flex gp-items-center gp-justify-center gp-group gp-relative gp-overflow-hidden gp-cursor-pointer data-[outline=deactive]:after:!gp-border-transparent gp-gallery-image-item active"
+      style="--minw:100%;--minw-tablet:100%;--minw-mobile:calc(20% - 4px);--maxw:100%;--maxw-tablet:100%;--maxw-mobile:calc(20% - 4px);outline-color:var(--g-c-brand, brand);--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px"
+      data-index=""
+      grid-index="{{forloop.index}}"
+      external-id="{{media.external_id}}"
+      media-type="{{media.media_type}}"
+      media-poster="{{media.preview_image.src}}"
+      media-source-url="{{media.sources.first.url}}"
+      media-last-source-url="{{mediaSourceUrl}}"
+    >
+      <div
+        class="gp-w-full gp-h-full"
+        
+      >
+      
+      <div class="gp-w-full gp-relative"
+        style="--pb: calc((1/1)*100%);--pb-tablet: calc((1/1)*100%);--pb-mobile: calc((1/1)*100%);;"
+      >
+      
+    <img
+      alt="{{media.alt | escape}}" width="{{media.width}}" height="{{media.height}}" draggable="false" quality-type quality-percent data-sizes="auto" sizes="100vw" src="{{media.preview_image | image_url}}" isNotLazyload="true" srcset base-src="{{media.preview_image | image_url}}" loading="lazy"
+      id=""
+      style="width:100%;height:100%;cursor:pointer;--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="!gp-rounded-none gp-w-full gp-h-full gp-absolute gp-top-0 gp-left-0 gp-cursor-pointer"
+    />
+
+    {% if media.media_type == 'video' or media.media_type == 'external_video' %}<div class="gp-absolute gp-pb-1 gp-pr-1 gp-right-0 gp-bottom-0" >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+        <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+      </svg>
+    </div>{% endif %}
+    {% if media.media_type == 'model' %}<div class="gp-absolute gp-pb-1 gp-pr-1 gp-right-0 gp-bottom-0">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+      </svg>
+    </div>{% endif %}
+
+    <div class="gp-absolute gp-inset-0 gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-bg-black/50 gp-opacity-0 gp-transition-opacity gp-duration-100 group-hover:gp-opacity-100"
+    style="--d: none;--d-mobile: none;--d-tablet: none;"
+    >
+      <svg
+        height="100%"
+        width="100%"
+        xmlns="http://www.w3.org/2000/svg"
+        class="gp-h-6 gp-w-6"
+        viewBox="0 0 512 512"
+        color="#fff"
+      ><path
+          fill="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+        />
+      </svg>
+    </div>
+    </div>
+    
+      </div>
+    </div>
+  {% else %}
+    {% if media.media_type == 'video' %}{% assign mediaSourceUrl = media.sources.last.url %}{% endif %}
+    {% if media.media_type == 'external_video' %}{% assign mediaSourceUrl = media | external_video_url %}{% endif %}
+    {% if media.media_type == 'image' %}{% assign mediaSourceUrl = media.src %}{% endif %}
+    
+    <div
+      data-outline="deactive"
+      id="{{imageID}}"
+      class="gem-slider-item gp-w-full gem-slider-item-gp-gallery-gDNQOcqh4C-{{product.id}} gp-image-item gp-flex gp-items-center gp-justify-center gp-group gp-relative gp-overflow-hidden gp-cursor-pointer data-[outline=deactive]:after:!gp-border-transparent gp-gallery-image-item undefined"
+      style="--minw:100%;--minw-tablet:100%;--minw-mobile:calc(20% - 4px);--maxw:100%;--maxw-tablet:100%;--maxw-mobile:calc(20% - 4px);outline-color:var(--g-c-brand, brand);--w:100%;--w-tablet:100%;--w-mobile:100%;--h:auto;--h-tablet:auto;--h-mobile:auto;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--hvr-bblr:0px;--hvr-bbrr:0px;--hvr-btlr:0px;--hvr-btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px"
+      data-index=""
+      grid-index="{{forloop.index}}"
+      external-id="{{media.external_id}}"
+      media-type="{{media.media_type}}"
+      media-poster="{{media.preview_image.src}}"
+      media-source-url="{{media.sources.first.url}}"
+      media-last-source-url="{{mediaSourceUrl}}"
+    >
+      <div
+        class="gp-w-full gp-h-full"
+        
+      >
+      
+      <div class="gp-w-full gp-relative"
+        style="--pb: calc((1/1)*100%);--pb-tablet: calc((1/1)*100%);--pb-mobile: calc((1/1)*100%);;"
+      >
+      
+    <img
+      alt="{{media.alt | escape}}" width="{{media.width}}" height="{{media.height}}" draggable="false" quality-type quality-percent data-sizes="auto" sizes="100vw" src="{{media.preview_image | image_url}}" isNotLazyload="true" srcset base-src="{{media.preview_image | image_url}}" loading="lazy"
+      id=""
+      style="width:100%;height:100%;cursor:pointer;--aspect:1/1;--aspect-tablet:1/1;--aspect-mobile:1/1;--objf:cover"
+      class="!gp-rounded-none gp-w-full gp-h-full gp-absolute gp-top-0 gp-left-0 gp-cursor-pointer"
+    />
+
+    {% if media.media_type == 'video' or media.media_type == 'external_video' %}<div class="gp-absolute gp-pb-1 gp-pr-1 gp-right-0 gp-bottom-0" >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+        <path d="M17.6869 12.2646L17.6868 12.2646L6.78379 18.4464C6.78378 18.4464 6.78376 18.4464 6.78374 18.4464C6.52931 18.5903 6.1665 18.4179 6.1665 18.0416V5.95844C6.1665 5.58218 6.52917 5.40981 6.7836 5.55354C6.78366 5.55357 6.78373 5.55361 6.78379 5.55365L17.6868 11.7354L17.6869 11.7354C17.8819 11.846 17.8819 12.154 17.6869 12.2646Z" stroke="#F9F9F9" stroke-miterlimit="10"/>
+      </svg>
+    </div>{% endif %}
+    {% if media.media_type == 'model' %}<div class="gp-absolute gp-pb-1 gp-pr-1 gp-right-0 gp-bottom-0">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.9" width="24" height="24" rx="3" fill="#212121"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7441 4.57034C11.9017 4.47655 12.098 4.47655 12.2555 4.57034L18.5889 8.33957C18.7404 8.42971 18.8332 8.59296 18.8332 8.76923V15.2308C18.8332 15.407 18.7404 15.5703 18.5889 15.6604L12.2555 19.4297C12.098 19.5234 11.9017 19.5234 11.7441 19.4297L5.41079 15.6604C5.25932 15.5703 5.1665 15.407 5.1665 15.2308V8.76923C5.1665 8.59296 5.25932 8.42971 5.41079 8.33957L11.7441 4.57034ZM6.1665 9.64865V14.9465L11.4998 18.1206V12.8227L6.1665 9.64865ZM12.4998 12.8227V18.1206L17.8332 14.9465V9.64865L12.4998 12.8227ZM17.3555 8.76923L11.9998 11.9566L6.64417 8.76923L11.9998 5.58185L17.3555 8.76923Z" fill="#F9F9F9"/>
+      </svg>
+    </div>{% endif %}
+
+    <div class="gp-absolute gp-inset-0 gp-flex gp-cursor-pointer gp-items-center gp-justify-center gp-bg-black/50 gp-opacity-0 gp-transition-opacity gp-duration-100 group-hover:gp-opacity-100"
+    style="--d: none;--d-mobile: none;--d-tablet: none;"
+    >
+      <svg
+        height="100%"
+        width="100%"
+        xmlns="http://www.w3.org/2000/svg"
+        class="gp-h-6 gp-w-6"
+        viewBox="0 0 512 512"
+        color="#fff"
+      ><path
+          fill="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M62.2467 345.253C43.7072 326.714 29.1474 305.116 18.9714 281.057C8.42839 256.13 3.08301 229.671 3.08301 202.418C3.08301 175.165 8.43012 148.707 18.974 123.78C29.15 99.7213 43.7098 78.123 62.2485 59.5834C80.788 41.0439 102.386 26.4841 126.445 16.3081C151.372 5.76422 177.831 0.417969 205.084 0.417969C232.337 0.417969 258.794 5.76421 283.722 16.3064C307.78 26.4823 329.379 41.0422 347.918 59.5817C366.458 78.1212 381.017 99.7196 391.194 123.778C401.737 148.706 407.083 175.163 407.083 202.417C407.083 229.671 401.737 256.129 391.194 281.056C388.406 287.648 385.277 294.048 381.839 300.257L493.397 411.815C514.091 432.511 514.091 466.187 493.395 486.883L484.272 496.006C474.245 506.032 460.915 511.553 446.738 511.553C432.559 511.553 419.228 506.032 409.202 496.006L296.022 382.824C291.996 384.854 287.898 386.762 283.721 388.528C258.794 399.073 232.336 404.419 205.082 404.419C177.828 404.419 151.371 399.071 126.443 388.528C102.385 378.352 80.7863 363.793 62.2467 345.253ZM301.699 336.166C313.928 327.317 324.896 316.835 334.282 305.034C342.149 295.142 348.9 284.325 354.355 272.775C364.433 251.432 370.076 227.586 370.076 202.419C370.076 111.296 296.206 37.4253 205.083 37.4253C113.96 37.4253 40.0895 111.294 40.0895 202.418C40.0895 293.541 113.96 367.411 205.084 367.411C227.413 367.411 248.701 362.967 268.126 354.928C280.091 349.976 291.347 343.658 301.699 336.166ZM467.229 460.716C473.507 454.439 473.507 444.26 467.229 437.982L360.595 331.348C356.601 336.153 352.378 340.794 347.919 345.253C341.671 351.502 335.068 357.286 328.147 362.615L435.371 469.839C438.511 472.977 442.624 474.547 446.739 474.547C450.853 474.547 454.967 472.978 458.106 469.839L467.229 460.716ZM223.582 183.91H281.071C291.292 183.91 299.574 192.194 299.575 202.414C299.575 206.778 298.062 210.786 295.533 213.951C292.143 218.195 286.926 220.916 281.072 220.916H228.303H223.583V225.63V278.406C223.583 287.081 217.613 294.358 209.559 296.361C208.124 296.717 206.625 296.909 205.08 296.909C194.861 296.909 186.577 288.625 186.577 278.406V220.917H129.087C118.868 220.917 110.584 212.633 110.584 202.414C110.584 192.195 118.868 183.911 129.087 183.911H186.576V126.421C186.576 116.202 194.86 107.918 205.079 107.918C215.298 107.918 223.582 116.202 223.582 126.421V183.91Z"
+        />
+      </svg>
+    </div>
+    </div>
+    
+      </div>
+    </div>
+  {% endif %}{% endfor %}{% endif %}
+          </div>
+          
+    <button
+      type="button"
+      aria-label='Carousel Next Arrow'
+      class="gp-z-1 gp-items-center gp-justify-center gp-overflow-hidden gp-shrink-0 gp-carousel-arrow-gp-gallery-gDNQOcqh4C gp-gallery-gDNQOcqh4C-{{product.id}} gp-carousel-action-next gem-slider-next gp-cursor-pointer gp-text-gray-500 !gp-flex !gp-absolute gp-z-2 tablet:!gp-flex tablet:!gp-absolute tablet:gp-z-2 mobile:!gp-flex mobile:!gp-absolute mobile:gp-z-2"
+      style="--d:flex;--d-tablet:flex;--d-mobile:flex;--right:16px;--left:initial;--top:;--bottom:initial;--right-tablet:16px;--left-tablet:initial;--top-tablet:;--bottom-tablet:initial;--right-mobile:16px;--left-mobile:initial;--top-mobile:;--bottom-mobile:initial"
+    >
+      <style type="text/css">
+      .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C {
+        
+      }
+      .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        pointer-events: none;
+        z-index: 10;
+        
+        
+      }
+      @media only screen and (max-width: 1024px) and (min-width: 768px) {
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C {
+          
+        }
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+      @media only screen and (max-width: 768px) {
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C {
+          
+        }
+        .gp-gallery-gDNQOcqh4C-{{product.id}}.gp-carousel-arrow-gp-gallery-gDNQOcqh4C::before {
+          
+          
+        }
+      }
+    </style>
+      
+    <div
+      class="gp-flex gp-items-center gp-justify-center [&>svg]:gp-h-full [&>svg]:gp-w-full gp-rotate-0 tablet:gp-rotate-0 mobile:gp-rotate-0"
+      style="--c:#000000;--w:24px;--w-tablet:24px;--w-mobile:24px;--h:24px;--h-tablet:24px;--h-mobile:24px"
+    >
+        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM10.6828 8.13017C10.5266 7.95661 10.2734 7.95661 10.1172 8.13017C9.96095 8.30374 9.96095 8.58515 10.1172 8.75871L13.0343 12L10.1172 15.2413C9.96095 15.4149 9.96095 15.6963 10.1172 15.8698C10.2734 16.0434 10.5266 16.0434 10.6828 15.8698L13.8828 12.3143C14.0391 12.1407 14.0391 11.8593 13.8828 11.6857L10.6828 8.13017Z" fill="currentColor"/>
+    </svg>
+    </div>
+  
+    </button>
+  
+        </div>
+        
+    
+        <div class="gp-carousel-dot-container gp-carousel-dot-container-gp-gallery-gDNQOcqh4C-{{product.id}} gp-z-2 gp-flex gp-flex-1 gp-items-center gp-justify-center gp-gap-2 gp-text-center gp-static gp-flex-row gp-left-0 gp-right-0 tablet:gp-static tablet:gp-flex-row tablet:gp-left-0 tablet:gp-right-0 mobile:gp-static mobile:gp-flex-row mobile:gp-left-0 mobile:gp-right-0" style="--bottom:0px;--bottom-tablet:0px;--bottom-mobile:0px;--d:none;--d-tablet:none;--d-mobile:none">
+          <!-- item render by js -->
+        </div>
+      
+  
+      </div>
+    </gp-carousel>
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-carousel-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+
+  
+  {% endif %}
+        
+      </div>
+    
+      </div>
+    </gp-product-images>
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-images-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-s)" class="g36hjNRMmW ">
+      {% unless product %}<p>{{ 'gempages.ProductTitle.product_not_found' | t }}</p>{% else %}
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div data-id="g36hjNRMmW"
+        class="g36hjNRMmW"
+        style="--dynamic-source-color:#F4F4F4"
+      >
+      <div  >
+        <h2
+          data-gp-text
+          class=" gp-text-instant"
+          style="--w:100%;--tdt:auto;--ta:left;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset;--c:#242424;--fs:normal;--ff:var(--g-font-heading, heading);--weight:700;--size:21px;--size-tablet:21px;--size-mobile:21px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden"
+        >
+          {{ product.title }}
+        </h2>
+      </div>
+    </div>
+    {% endunless %}
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:var(--g-s-2xl)" class="gTXg6Gi1wU ">
+      {% if product.description == blank %}{% else %}
+    <gp-product-description
+      data-id="gTXg6Gi1wU"
+      class="gp-product-description undefined"
+      gp-data='{"setting":{"lineClamp":{"desktop":3},"hasLineClamp":{"desktop":false},"viewMoreText":"Show more","viewLessText":"Show less","enableViewMoreIcon":true},"textStyle":{"--c":"#424242","--maxh":"none","--maxh-tablet":"none","--maxh-mobile":"none","--line-clamp":"unset","--line-clamp-tablet":"unset","--line-clamp-mobile":"unset"}}'
+      data-view-more-text="{{ section.settings.ggTXg6Gi1wU_viewMoreText }}"
+      data-view-less-text="{{ section.settings.ggTXg6Gi1wU_viewLessText }}"
+    >
+      <style>
+      .p-description-wrapper.gp-p-description-text * {
+        color: inherit;
+        line-height: inherit !important;
+      }</style>
+      <style>
+   .gp-p-description-text > :not(ol, ul, table, div, style, script) {
+      display: inline !important;
+    }
+
+    .gp-p-description-text > :not(ol, ul, table, div, style, script)::after {
+      content: "";
+      display: block; /* đảm bảo xuống dòng trên Safari/iOS */
+    }
+    .gp-p-description-text > table {
+      box-shadow: none;
+    }
+  </style>
+      <div class="gp-rotate-180 gp-hidden" ></div>
+      {% unless product %}<p>Product not found</p>{% else %}<div data-gp-text class="gp-relative  gp-p-description-text gp-break-words safari:[&_p]:gp-inline safari:[&_p]:after:gp-whitespace-pre p-description-wrapper gp-g-paragraph-1 gp-text-g-text-2 data-[browser=safari]:after:gp-content-[' '] data-[browser=safari]:after:gp-absolute data-[browser=safari]:after:gp-left-0 data-[browser=safari]:after:gp-right-0 data-[browser=safari]:after:gp-bottom-0 data-[browser=safari]:after:gp-w-full data-[browser=safari]:after:gp-h-1/2 data-[browser=safari]:after:gp-bg-gradient-to-t data-[browser=safari]:after:gp-from-white" style="--c:#424242;--maxh:none;--maxh-tablet:none;--maxh-mobile:none;--line-clamp:unset;--line-clamp-tablet:unset;--line-clamp-mobile:unset">
+          {{product.description}}
+        </div>
+        {% unless product.description == blank %}<button type="button" class="p-description-show-more gp-items-center gp-mt-4 gp-w-full gp-transition-all hover:gp-opacity-80 gp-g-paragraph-1 " style="--c:#424242;--d:none;--d-mobile:inline-flex;--d-tablet:inline-flex">
+          <span class="gp-show-more-text">
+            {{ section.settings.ggTXg6Gi1wU_viewMoreText }}
+          </span>
+          <span class="gp-show-more-icon gp-ml-1"><svg height="1em" width="1em" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg" ><path d="M1.70711 0.292893C1.31658 -0.0976311 0.683417 -0.0976311 0.292893 0.292893C-0.0976311 0.683417 -0.0976311 1.31658 0.292893 1.70711L1.70711 0.292893ZM11 11L10.2929 11.7071C10.6834 12.0976 11.3166 12.0976 11.7071 11.7071L11 11ZM21.7071 1.70711C22.0976 1.31658 22.0976 0.683417 21.7071 0.292893C21.3166 -0.0976311 20.6834 -0.0976311 20.2929 0.292893L21.7071 1.70711ZM0.292893 1.70711L10.2929 11.7071L11.7071 10.2929L1.70711 0.292893L0.292893 1.70711ZM11.7071 11.7071L21.7071 1.70711L20.2929 0.292893L10.2929 10.2929L11.7071 11.7071Z"
+              fill="currentColor"/>
+        </svg></span>
+          </button>{% endunless %}{% endunless %}
+    </gp-product-description>
+
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-description-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  {% endif %}
+      </div>
+    
+
+    
+
+    
+    <gp-row gp-data='{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"ge_Yk2DAQR"}' data-id="ge_Yk2DAQR" id="ge_Yk2DAQR" data-same-height-subgrid-container class="ge_Yk2DAQR gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--cg:var(--g-s-2xl);--gtc:minmax(0, 7fr) minmax(0, 5fr);--gtc-tablet:minmax(0, 12fr);--gtc-mobile:minmax(0, 6fr) minmax(0, 6fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gqxxpZAsyR gp-relative gp-flex gp-flex-col"
+    >
+      
+    
+
+    
+
+    
+    <gp-row gp-data='{"background":{"desktop":{"attachment":"scroll","color":"transparent","image":{"height":0,"src":"","width":0},"position":{"x":50,"y":50},"repeat":"no-repeat","size":"cover","type":"color"}},"uid":"gZzFnLrtyi"}' data-id="gZzFnLrtyi" id="gZzFnLrtyi" data-same-height-subgrid-container class="gZzFnLrtyi gp-relative gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full gp-grid-rows-[1fr]" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb-mobile:0px;--mb-tablet:var(--g-s-s);--cg:var(--g-s-s);--gtc:minmax(0, auto) minmax(0, auto);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pc:start;--pc-tablet:center;--pc-mobile:start">
+      
+
+      <div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gTZYSRiaKe gp-relative gp-flex gp-flex-col"
+    >
+      
+      <gp-product-price
+        id="shopify-text-element-g5EzFrtn0l" data-id="g5EzFrtn0l"
+        class="gp-product-price group-data-[state=loading]:gp-invisible data-[hidden=true]:!gp-hidden g5EzFrtn0l"
+        style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:0px"
+        gp-data='{"priceType":"regular","uid":"g5EzFrtn0l","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+      >
+        
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div id="p-price-g5EzFrtn0l" data-id
+        
+        style="--dynamic-source-color:#F4F4F4"
+      >
+      <div  >
+        <div
+          data-gp-text
+          class="gp-price gp-money  gp-text-instant"
+          style="--w:100%;--tdc:#242424;--tdt:1px;--ta:left;--c:#242424;--fs:normal;--ff:var(--g-font-heading, heading);--weight:700;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:"
+        >
+          
+     {% if variant.price %}
+       {{ variant.price | money}}
+     {% endif %}
+   
+        </div>
+      </div>
+    </div>
+    
+      </gp-product-price>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-price-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+    </div><div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gy5Iazo6X2 gp-relative gp-flex gp-flex-col"
+    >
+      
+      <gp-product-price
+        id="shopify-text-element-guA_axDfBj" data-id="guA_axDfBj" data-hidden="{% if variant.compare_at_price > variant.price and variant.compare_at_price >= 0 %}false{% else %}true{% endif %}"
+        class="gp-product-price group-data-[state=loading]:gp-invisible data-[hidden=true]:!gp-hidden guA_axDfBj"
+        style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:0px"
+        gp-data='{"priceType":"compare","uid":"guA_axDfBj","locale":"{{shop.locale}}","currency":"{{shop.currency}}","moneyFormat":"{{ shop.money_format | replace: '"', '\\"' | escape }}"}'
+      >
+        
+    {% assign locationOrigin = request.origin | append: routes.root_url | split: '/' | join: '/' %}
+    <div id="p-price-guA_axDfBj" data-id
+        
+        style="--dynamic-source-color:#F4F4F4"
+      >
+      <div  >
+        <div
+          data-gp-text
+          class="gp-price gp-product-compare-price  gp-text-instant"
+          style="--w:100%;--tdc:#B4B4B4;--tdt:auto;--ta:left;--c:#B4B4B4;--fs:normal;--ff:var(--g-font-body, body);--weight:400;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;--ls:normal;word-break:break-word;overflow:hidden;--tdl:line-through"
+        >
+          
+      {% if variant.compare_at_price  %}
+        {{ variant.compare_at_price | money}}
+      {% else %}
+
+      {% endif %}
+    
+        </div>
+      </div>
+    </div>
+    
+      </gp-product-price>
+      <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-price-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+    </div>
+
+      
+    </gp-row>
+  
+  
+    </div><div
+      data-same-height-display-contents
+      style="--jc:center"
+      class="gei3HVZsW3 gp-relative gp-flex gp-flex-col"
+    >
+      
+    
+    <div data-id="gyZR_Va4sc"  style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--mb:0px;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll">
+      <div class="gp-flex gp-flex-wrap" style="--cg:var(--g-s-xxs);--jc:right;--jc-tablet:center;--jc-mobile:right">
+            <div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="g3nmQ7VrPT ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="gOicIsiQgX" class="gp-leading-[0] gOicIsiQgX" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="gOicIsiQgX" class="icon-wrapper gp-inline-flex gp-overflow-hidden gOicIsiQgX " style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:16px;--h:16px;--minw:16px;--height-desktop:16px;--height-tablet:16px;--height-mobile:16px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gZGLx1lxmM ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="g3VZQBZx21" class="gp-leading-[0] g3VZQBZx21" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="g3VZQBZx21" class="icon-wrapper gp-inline-flex gp-overflow-hidden g3VZQBZx21 " style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:16px;--h:16px;--minw:16px;--height-desktop:16px;--height-tablet:16px;--height-mobile:16px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="g1hPkdnFy3 ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="gR88CIOgrN" class="gp-leading-[0] gR88CIOgrN" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="gR88CIOgrN" class="icon-wrapper gp-inline-flex gp-overflow-hidden gR88CIOgrN " style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:16px;--h:16px;--minw:16px;--height-desktop:16px;--height-tablet:16px;--height-mobile:16px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gl2PR8-LUp ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="gNir4La7EO" class="gp-leading-[0] gNir4La7EO" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="gNir4La7EO" class="icon-wrapper gp-inline-flex gp-overflow-hidden gNir4La7EO " style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:16px;--h:16px;--minw:16px;--height-desktop:16px;--height-tablet:16px;--height-mobile:16px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div><div gp-el-wrapper style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px" class="gQeU2PUx5m ">
+      
+    <div  class="gp-flex gp-w-full gp-flex-col gp-items-center">
+      
+    <div id="gMkis9DMDB" class="gp-leading-[0] gMkis9DMDB" style="--bs:none;--bw:0px;--bc:transparent;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--pageType:GP_PRODUCT;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--ta:left">
+      <div data-id="gMkis9DMDB" class="icon-wrapper gp-inline-flex gp-overflow-hidden gMkis9DMDB " style="--pl:0px;--pr:0px;--pt:0px;--pb:0px;--bs:none;--bw:0px;--bc:transparent;--bblr:0px;--bbrr:0px;--btlr:0px;--btrr:0px;--focus-bblr:0px;--focus-bbrr:0px;--focus-btlr:0px;--focus-btrr:0px;-undefined-bblr:0px;-undefined-bbrr:0px;-undefined-btlr:0px;-undefined-btrr:0px;--bg:transparent">
+      
+        <div >
+          <span style="--c:#FAAD14;--t:rotate(0deg);--w:16px;--h:16px;--minw:16px;--height-desktop:16px;--height-tablet:16px;--height-mobile:16px" class="gp-inline-flex gp-items-center gp-justify-center gp-overflow-hidden [&>svg]:!gp-h-[var(--height-desktop)] [&>svg]:!gp-w-auto tablet:[&>svg]:!gp-h-[var(--height-tablet)] mobile:[&>svg]:!gp-h-[var(--height-mobile)] "><svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6"  viewBox="0 0 512 512" fill="currentColor">
+              <path fill="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" d="M115.584 494.176c-12.352 6.336 -26.368 -4.768 -23.872 -18.944l26.56 -151.36L5.536 216.48c-10.528 -10.048 -5.056 -28.416 9.056 -30.4l156.736 -22.272L241.216 25.344c6.304 -12.48 23.36 -12.48 29.664 0l69.888 138.464 156.736 22.272c14.112 1.984 19.584 20.352 9.024 30.4l-112.704 107.392 26.56 151.36c2.496 14.176 -11.52 25.28 -23.872 18.944L256 421.984l-140.448 72.192z" /></svg></span>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  
+      </div>
+          </div>
+    </div>
+  
+    </div>
+
+      
+    </gp-row>
+  
+  
+    </div>
+
+      
+    </gp-row>
+  
+  
+          {%- endform -%}
+        </product-form>
+      </gp-product>
+      {%- assign product = gpBkProduct -%}
+    {% else %}
+      <div class="gp-text-center">{{ 'gempages.Product.product_not_found' | t }}</div>
+    {% endif %}
+    <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://assets.gemcommerce.com/assets-v2/gp-product-v7-5.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  
+      </div>
+    </div>
+  

@@ -1,0 +1,351 @@
+{
+  "sections": {
+    "rich_text_QxGeJB": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_JX3x7N": {
+          "type": "heading",
+          "settings": {
+            "heading": "30% Off Sitewide",
+            "heading_size": "h1"
+          }
+        },
+        "text_mHB7gN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Plus free shipping + 50% off faves<br\/><\/p>"
+          }
+        },
+        "button_UVDVc3": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOW MEN",
+            "button_link": "shopify:\/\/collections\/men-s-collection",
+            "button_style_secondary": false,
+            "button_label_2": "SHOP WOMEN",
+            "button_link_2": "shopify:\/\/collections\/women-s-collection",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_JX3x7N",
+        "text_mHB7gN",
+        "button_UVDVc3"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "collection_list_GCwGhV": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_MpznNw": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "new-arrivals"
+          }
+        },
+        "featured_collection_7WYtAG": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "bestseller"
+          }
+        },
+        "featured_collection_w7pzUF": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "men-s-collection"
+          }
+        },
+        "featured_collection_DiC4VL": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "women-s-collection"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_MpznNw",
+        "featured_collection_7WYtAG",
+        "featured_collection_w7pzUF",
+        "featured_collection_DiC4VL"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_3tMNqL": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "new-arrivals",
+        "products_to_show": 4,
+        "title": "Featured products",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "17655234056c6e8b9e": {
+      "type": "apps",
+      "blocks": {
+        "shopvid_mp_tiktok_block_TfPMff": {
+          "type": "shopify:\/\/apps\/shopvid\/blocks\/mp_tiktok_block\/1216543a-6237-4445-a5f2-61991cd76022",
+          "settings": {
+            "mp_tiktok_feed_id": "2112-742875"
+          }
+        }
+      },
+      "block_order": [
+        "shopvid_mp_tiktok_block_TfPMff"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "featured_product_HLVW7h": {
+      "type": "featured-product",
+      "blocks": {
+        "text_WFQ96Y": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_qNjbQ4": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_nYBd8K": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_qCQXCb": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_qmCecc": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "avada_subscription_card_gxrEXN": {
+          "type": "avada_subscription_card",
+          "settings": {
+            "layout_style": "vertical_cards",
+            "vertical_margin": 24,
+            "horizontal_margin": 0,
+            "card_spacing": "normal",
+            "border_radius": 8,
+            "badge_border_radius": 8,
+            "card_background": "#ffffff",
+            "card_border": "#e5e7eb",
+            "card_selected_background": "#f0fdfa",
+            "card_selected_border": "#14b8a6",
+            "accent_color": "#14b8a6",
+            "title_color": "#1a1a1a",
+            "text_color": "#1a1a1a",
+            "muted_text_color": "#6b7280",
+            "badge_background": "#dc2626",
+            "badge_text_color": "#ffffff",
+            "title_heading": "h3",
+            "title_heading_size": 20,
+            "widget_title": "Choose your plan",
+            "one_time_title": "One-time",
+            "autoship_title": "Autoship",
+            "prepaid_title": "Prepaid",
+            "deliver_every_title": "Deliver every:",
+            "prepaid_options_title": "Prepaid options:",
+            "learn_more_text": "Learn more",
+            "learn_more_link": "\/",
+            "save_from_text": "Save from",
+            "benefit_packed_at_origin": "Packed and roasted at origin",
+            "benefit_no_commitment": "No commitment. Cancel anytime",
+            "benefit_pay_upfront": "Pay upfront and save more"
+          }
+        },
+        "buy_buttons_cTMiPa": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_ri4yRf": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_WFQ96Y",
+        "title_qNjbQ4",
+        "price_nYBd8K",
+        "variant_picker_qCQXCb",
+        "quantity_selector_qmCecc",
+        "avada_subscription_card_gxrEXN",
+        "buy_buttons_cTMiPa",
+        "share_ri4yRf"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "mens-golf-dasher",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1765175250fc3b9ac1": {
+      "type": "apps",
+      "blocks": {
+        "air_product_reviews_app_block_testimonials_kMfiJW": {
+          "type": "shopify:\/\/apps\/air-product-reviews\/blocks\/app-block-testimonials\/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "air_product_reviews_app_block_testimonials_kMfiJW"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "multicolumn_Etge8c": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_YfJyMp": {
+          "type": "column",
+          "settings": {
+            "title": "Wear All Day Comfort",
+            "text": "<p>Lightweight, bouncy, and wildly comfortable, Allbirds shoes make any outing feel effortless. Slip in, lace up, or slide them on and enjoy the comfy support.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_mncHnC": {
+          "type": "column",
+          "settings": {
+            "title": "Sustainability In Every Step",
+            "text": "<p>From materials to transport, we’re working to reduce our carbon footprint to near zero. Holding ourselves accountable and striving for climate goals isn’t a 30-year goal—it’s now.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_QB7QUE": {
+          "type": "column",
+          "settings": {
+            "title": "Materials From The Earth",
+            "text": "<p>We replace petroleum-based synthetics with natural alternatives wherever we can. Like using wool, tree fiber, and sugarcane. They’re soft, breathable, and better for the planet—win, win, win.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_YfJyMp",
+        "column_mncHnC",
+        "column_QB7QUE"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Multicolumn",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1767496365c57e8d81": {
+      "type": "apps",
+      "blocks": {
+        "air_product_reviews_app_block_all_review_GH7FDi": {
+          "type": "shopify:\/\/apps\/air-product-reviews\/blocks\/app-block-all-review\/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "settings": {
+            "air_allReviewsBlock_heading": "",
+            "air_allReviewsBlock_useSimpleSummary": false,
+            "air_allReviewsBlock_maxReview": 20,
+            "air_allReviewsBlock_summaryBgColor": "#f8f8f8",
+            "air_allReviewsBlock_bgColor": "#ffffff",
+            "air_allReviewsBlock_onlyMedia": false,
+            "air_allReviewsBlock_onlyPositive": false,
+            "air_allReviewsBlock_hideProductThumbnails": false,
+            "air_allReviewsBlock_selectedProduct": []
+          }
+        }
+      },
+      "block_order": [
+        "air_product_reviews_app_block_all_review_GH7FDi"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "rich_text_QxGeJB",
+    "collection_list_GCwGhV",
+    "featured_collection_3tMNqL",
+    "17655234056c6e8b9e",
+    "featured_product_HLVW7h",
+    "1765175250fc3b9ac1",
+    "multicolumn_Etge8c",
+    "1767496365c57e8d81"
+  ]
+}

@@ -1,0 +1,206 @@
+{%- comment -%}
+  Joy Subscription — Product Card with Plan Selector
+  Paste vào card-product.liquid, bên trong hoặc ngay trước form ATC.
+  Yêu cầu: form ATC phải có action="/cart/add"
+{%- endcomment -%}
+
+{%- liquid
+  assign sub_data = product.metafields.avada_subscription_plan.data.value
+  if sub_data == blank
+    break
+  endif
+  assign plans = sub_data.subscriptionProduct.plans
+  assign has_plans = false
+  for plan in plans
+    assign has_plans = true
+    break
+  endfor
+  if has_plans == false
+    break
+  endif
+
+  assign requires_selling_plan = product.requires_selling_plan
+  assign product_price = product.selected_or_first_available_variant.price
+-%}
+
+{%- capture uid -%}joy-{{ product.id }}{%- endcapture -%}
+
+<div class="joy-card" id="{{ uid }}" data-product-price="{{ product_price }}">
+
+  {%- unless requires_selling_plan -%}
+  <div class="joy-card__tabs">
+    <button type="button" class="joy-card__tab joy-card__tab--active" data-type="one-time">One-time</button>
+    <button type="button" class="joy-card__tab" data-type="subscribe">Subscribe</button>
+  </div>
+  {%- endunless -%}
+
+  <div class="joy-card__sub-section" {% unless requires_selling_plan %}style="display:none"{% endunless %}>
+    <select class="joy-card__select" aria-label="Subscription plan">
+      {%- for plan in plans -%}
+        {%- liquid
+          assign v = plan.frequencyValue
+          if plan.frequency == 'week'
+            assign unit = 'week'
+            if v > 1
+              assign unit = 'weeks'
+            endif
+          else
+            assign unit = 'month'
+            if v > 1
+              assign unit = 'months'
+            endif
+          endif
+          assign label = 'Every ' | append: v | append: ' ' | append: unit
+          if plan.enabledDiscount
+            if plan.discountType == 'percentage'
+              assign label = label | append: ' — save ' | append: plan.discountValue | append: '%'
+            elsif plan.discountType == 'fixed'
+              assign fixed_money = plan.discountValue | times: 100 | money
+              assign label = label | append: ' — save ' | append: fixed_money
+            endif
+          endif
+        -%}
+        <option
+          value="{{ plan.sellingPlanId }}"
+          data-discount-type="{{ plan.discountType }}"
+          data-discount-enabled="{{ plan.enabledDiscount }}"
+          data-discount-value="{{ plan.discountValue }}">
+          {{ label }}
+        </option>
+      {%- endfor -%}
+    </select>
+    <span class="joy-card__price"></span>
+  </div>
+
+  <input type="hidden" name="selling_plan" class="joy-card__selling-plan-input" value="">
+</div>
+
+<style>
+  .joy-card { margin: 8px 0; }
+
+  .joy-card__tabs {
+    display: flex;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .joy-card__tab {
+    flex: 1;
+    padding: 7px 4px;
+    font-size: 12px;
+    font-weight: 500;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .joy-card__tab--active {
+    background: #14b8a6;
+    color: #fff;
+  }
+
+  .joy-card__select {
+    width: 100%;
+    padding: 7px 8px;
+    border: 1.5px solid #99f6e4;
+    border-radius: 8px;
+    font-size: 12px;
+    background: #f0fdfa;
+    color: #0f766e;
+    cursor: pointer;
+    margin-bottom: 4px;
+  }
+
+  .joy-card__price {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f766e;
+  }
+</style>
+
+<script>
+  (function() {
+  var card  = document.getElementById('{{ uid }}');
+  if (!card) return;
+
+  var productPrice  = parseInt(card.dataset.productPrice, 10);
+  var select        = card.querySelector('.joy-card__select');
+  var priceEl       = card.querySelector('.joy-card__price');
+  var subSection    = card.querySelector('.joy-card__sub-section');
+  var tabs          = card.querySelectorAll('.joy-card__tab');
+
+  // Find selling_plan input in the closest ATC form
+  function getSpInput() {
+    var form = card.closest('form[action*="/cart/add"]')
+            || card.parentElement.querySelector('form[action*="/cart/add"]');
+    if (!form) return null;
+    var inp = form.querySelector('input[name="selling_plan"]');
+    if (!inp) {
+      inp = document.createElement('input');
+      inp.type = 'hidden';
+      inp.name = 'selling_plan';
+      form.appendChild(inp);
+    }
+    return inp;
+  }
+
+  function formatMoney(cents) {
+    return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: '{{ shop.currency }}' });
+  }
+
+  function applyPlan(option) {
+    var enabled  = option.dataset.discountEnabled === 'true';
+    var type     = option.dataset.discountType;
+    var value    = parseFloat(option.dataset.discountValue) || 0;
+    var price    = productPrice;
+
+    if (enabled && value > 0) {
+      if (type === 'percentage') {
+        price = Math.round(productPrice * (1 - value / 100));
+      } else if (type === 'fixed') {
+        price = productPrice - value * 100;
+      }
+    }
+
+    priceEl.textContent = enabled && price < productPrice
+      ? formatMoney(price) + ' / delivery'
+      : '';
+
+    var inp = getSpInput();
+    if (inp) inp.value = option.value;
+  }
+
+  function setSubscribe(active) {
+    subSection.style.display = active ? 'block' : 'none';
+    var inp = getSpInput();
+    if (!active) {
+      if (inp) inp.value = '';
+    } else {
+      applyPlan(select.options[select.selectedIndex]);
+    }
+  }
+
+  // Tabs
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('joy-card__tab--active'); });
+      tab.classList.add('joy-card__tab--active');
+      setSubscribe(tab.dataset.type === 'subscribe');
+    });
+  });
+
+  // Select change
+  select.addEventListener('change', function() {
+    applyPlan(select.options[select.selectedIndex]);
+  });
+
+  // Init
+  if ({{ requires_selling_plan | json }}) {
+    setSubscribe(true);
+  }
+})();
+</script>
