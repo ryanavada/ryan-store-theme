@@ -65,7 +65,7 @@
         "joy_loyalty_program_joy_points_calculator_block_MtyQtf": {
           "type": "shopify://apps/joy-loyalty-program/blocks/joy-points-calculator-block/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
           "settings": {
-            "points_calculator_alignment": "left"
+            "points_calculator_alignment": "center"
           }
         },
         "variant_picker": {
