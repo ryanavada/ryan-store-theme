@@ -76,6 +76,35 @@
             "joy-how-it-work-max-width": 100
           }
         },
+        "joy_loyalty_program_customer_account_78ayi7": {
+          "type": "shopify://apps/joy-loyalty-program/blocks/customer-account/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
+          "settings": {
+            "joy-customer-account-available-point": "Available points:",
+            "joy-customer-account-expiration-point": "Expired on:",
+            "joy-customer-account-pending-point": "Pending points:",
+            "joy-customer-account-coupon-list": "My coupons",
+            "joy-customer-account-earn-point-list": "Points history",
+            "joy-customer-account-coupon-code": "Coupon code",
+            "joy-customer-account-discount-value": "Discount value",
+            "joy-customer-account-discount-program": "Discount program",
+            "joy-customer-account-conditions": "Conditions",
+            "joy-customer-account-stackable-with": "Stackable with",
+            "joy-customer-account-expiration-date": "Expiration date",
+            "joy-customer-account-action": "Action",
+            "joy-customer-account-hide-coupon": false,
+            "joy-customer-account-hide-history": false,
+            "joy-customer-account-scroll-view-history": true,
+            "joy-customer-account-view-reward": "Apply",
+            "joy-customer-account-empty-message": "No data found",
+            "joy-customer-account-bg-color": "#FFFFFF",
+            "joy-customer-account-primary-text-color": "#000000",
+            "joy-customer-account-secondary-text-color": "#707070",
+            "joy-customer-account-button-text-color": "#000000",
+            "joy-customer-account-divider-color": "#DEDEDE",
+            "joy-customer-account-wallet-modal-title": "Scan QR Code",
+            "joy-customer-account-wallet-modal-subtitle": "Scan this QR code with your phone to add the pass to your wallet"
+          }
+        },
         "joy_loyalty_program_joy_way_to_earn_block_zMXXfH": {
           "type": "shopify://apps/joy-loyalty-program/blocks/joy-way-to-earn-block/555c55c9-9a3d-4fe0-a7a8-2c256984a371",
           "settings": {
@@ -152,12 +181,12 @@
             "joy-redeem-discount-amount-thumbnail": "",
             "joy-redeem-free-gift-thumbnail": "",
             "joy-redeem-bg-color": "#FFFFFF",
-            "joy-redeem-program-color": "#002E6A",
+            "joy-redeem-program-color": "#002e6a",
             "joy-redeem-point-color": "#000000",
-            "joy-redeem-card-color": "#FDFDFF",
-            "joy-redeem-button-color": "#1A1A1A",
-            "joy-redeem-button-text-color": "#FFFFFF",
-            "joy-redeem-divider-color": "#DEDEDE"
+            "joy-redeem-card-color": "#fdfdff",
+            "joy-redeem-button-color": "#1a1a1a",
+            "joy-redeem-button-text-color": "#ffffff",
+            "joy-redeem-divider-color": "#dedede"
           }
         },
         "joy_loyalty_program_joy_vip_tier_block_baDrUK": {
@@ -230,6 +259,7 @@
       "block_order": [
         "joy_loyalty_program_joy_hero_banner_BfqKGp",
         "joy_loyalty_program_joy_how_it_works_ngnMYk",
+        "joy_loyalty_program_customer_account_78ayi7",
         "joy_loyalty_program_joy_way_to_earn_block_zMXXfH",
         "joy_loyalty_program_joy_way_to_redeem_block_9ppNkx",
         "joy_loyalty_program_joy_redeem_program_yTwaTw",
