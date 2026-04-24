@@ -248,9 +248,14 @@
         "disabled": false,
         "settings": {}
       },
+      "9805538440657070816": {
+        "type": "shopify://apps/avada-order-tracking/blocks/app-embed/019a28a2-c3f8-77df-87cc-235ec40f9a58",
+        "disabled": false,
+        "settings": {}
+      },
       "4275615285897611771": {
         "type": "shopify://apps/fera/blocks/embed/2fbfcfa7-8a04-479f-89a8-0621fa099c51",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     },
