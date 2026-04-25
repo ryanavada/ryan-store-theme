@@ -257,6 +257,11 @@
         "type": "shopify://apps/fera/blocks/embed/2fbfcfa7-8a04-479f-89a8-0621fa099c51",
         "disabled": true,
         "settings": {}
+      },
+      "16265478094627758095": {
+        "type": "shopify://apps/avada-estimated-delivery-date/blocks/app-embed/019d9af8-5592-7f52-a533-082d8f06d58b",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
