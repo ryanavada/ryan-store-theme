@@ -186,11 +186,6 @@
           "points_calculator_alignment": "left"
         }
       },
-      "2783554875815837874": {
-        "type": "shopify://apps/sea-accessibility-ada-wcag/blocks/app-embed/0ab9368b-426b-42b4-93ea-63d9c8e88707",
-        "disabled": false,
-        "settings": {}
-      },
       "4379643256173503040": {
         "type": "shopify://apps/joy-subscription-app/blocks/app-embed/6aa30d9c-ff0b-4f29-a82d-a633d8e04b9a",
         "disabled": false,
@@ -261,6 +256,11 @@
       "16265478094627758095": {
         "type": "shopify://apps/avada-estimated-delivery-date/blocks/app-embed/019d9af8-5592-7f52-a533-082d8f06d58b",
         "disabled": false,
+        "settings": {}
+      },
+      "2783554875815837874": {
+        "type": "shopify://apps/avada-accessibility/blocks/app-embed/0ab9368b-426b-42b4-93ea-63d9c8e88707",
+        "disabled": true,
         "settings": {}
       }
     },
