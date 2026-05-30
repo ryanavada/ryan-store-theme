@@ -169,11 +169,6 @@
         "disabled": false,
         "settings": {}
       },
-      "15472879455061085326": {
-        "type": "shopify://apps/avada-order-limits/blocks/app-embed/d3021427-4f7b-49c8-8963-29d1d52b8956",
-        "disabled": false,
-        "settings": {}
-      },
       "16605207545338212596": {
         "type": "shopify://apps/aov-ai-bundle/blocks/aov-offer/0335d423-143c-4ad7-b224-99a1db74a9ee",
         "disabled": false,
@@ -243,11 +238,6 @@
         "disabled": false,
         "settings": {}
       },
-      "9805538440657070816": {
-        "type": "shopify://apps/avada-order-tracking/blocks/app-embed/019a28a2-c3f8-77df-87cc-235ec40f9a58",
-        "disabled": false,
-        "settings": {}
-      },
       "4275615285897611771": {
         "type": "shopify://apps/fera/blocks/embed/2fbfcfa7-8a04-479f-89a8-0621fa099c51",
         "disabled": true,
@@ -260,6 +250,16 @@
       },
       "2783554875815837874": {
         "type": "shopify://apps/avada-accessibility/blocks/app-embed/0ab9368b-426b-42b4-93ea-63d9c8e88707",
+        "disabled": true,
+        "settings": {}
+      },
+      "9805538440657070816": {
+        "type": "shopify://apps/avada-order-tracking/blocks/app-embed/019a28a2-c3f8-77df-87cc-235ec40f9a58",
+        "disabled": false,
+        "settings": {}
+      },
+      "15472879455061085326": {
+        "type": "shopify://apps/avada-order-limits/blocks/app-embed/d3021427-4f7b-49c8-8963-29d1d52b8956",
         "disabled": true,
         "settings": {}
       }
