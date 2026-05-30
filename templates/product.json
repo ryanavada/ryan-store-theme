@@ -55,7 +55,7 @@
           "settings": {}
         },
         "air_product_reviews_app_summary_block_DALqLR": {
-          "type": "shopify://apps/avada-product-reviews/blocks/app-summary-block/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "type": "shopify://apps/ag-product-reviews/blocks/app-summary-block/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
           "settings": {}
         },
         "price": {
@@ -102,6 +102,10 @@
             "show_gift_card_recipient": true
           }
         },
+        "avada_appointment_booking_avada_block_jCtf6f": {
+          "type": "shopify://apps/avada-appointment-booking/blocks/avada-block/b7adf690-fcc8-4bc3-a184-1973bc73f070",
+          "settings": {}
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -127,6 +131,7 @@
         "joy_subscription_app_subscription_widget_kVnCyM",
         "joy_subscription_app_product_bundle_widget_UmQCFQ",
         "buy_buttons",
+        "avada_appointment_booking_avada_block_jCtf6f",
         "description",
         "share"
       ],
@@ -171,7 +176,7 @@
       "type": "apps",
       "blocks": {
         "shopvid_mp_tiktok_block_e9iPpb": {
-          "type": "shopify://apps/shopvid/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
+          "type": "shopify://apps/ag-shoppable-video/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
           "settings": {
             "mp_tiktok_feed_id": "1712-117111"
           }
@@ -188,7 +193,7 @@
       "type": "apps",
       "blocks": {
         "air_product_reviews_app_block_review_list_eikEjc": {
-          "type": "shopify://apps/avada-product-reviews/blocks/app-block-review-list/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "type": "shopify://apps/ag-product-reviews/blocks/app-block-review-list/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
           "settings": {
             "air_blockreviews_summaryHeading": "Reviews",
             "air_blockreviews_layout": "list",
@@ -197,7 +202,7 @@
           }
         },
         "air_product_reviews_app_carousel_review_list_3yFGDY": {
-          "type": "shopify://apps/avada-product-reviews/blocks/app-carousel-review-list/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "type": "shopify://apps/ag-product-reviews/blocks/app-carousel-review-list/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
           "settings": {
             "air_carouselreviews_carouselHeading": "See what our customers said"
           }
