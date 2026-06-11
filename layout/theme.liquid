@@ -398,7 +398,7 @@ window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, l
     var estHour = (utcHour + estOffset + 24) % 24;
     
     // Business hours: 9AM to 6PM EST
-    var isBusinessHours = estHour >= 9 && estHour < 18;
+    var isBusinessHours = estHour >= 7 && estHour < 18;
     
     if (!isBusinessHours) {
       document.addEventListener('DOMContentLoaded', function() {
