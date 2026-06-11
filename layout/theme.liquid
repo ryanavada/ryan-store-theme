@@ -384,6 +384,36 @@
 window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, localeCode}) => new Intl.NumberFormat(localeCode,{style:'currency',currency:currencyCode, minimumFractionDigits:0, currencyDisplay: 'narrowSymbol'}).format(price) }
 </script>
 
+<script>
+  (function() {
+    // Business hours: 9AM - 6PM EST (UTC-5, or UTC-4 during DST)
+    // Adjust UTC offset accordingly: EST = UTC-5, EDT = UTC-4
+    var now = new Date();
+    var utcHour = now.getUTCHours();
+    var utcMinute = now.getUTCMinutes();
+    
+    // Determine EST offset (simplified: use -5 year-round, or handle DST)
+    // For accuracy, use a fixed offset. EST = UTC-5
+    var estOffset = -5;
+    var estHour = (utcHour + estOffset + 24) % 24;
+    
+    // Business hours: 9AM to 6PM EST
+    var isBusinessHours = estHour >= 9 && estHour < 18;
+    
+    if (!isBusinessHours) {
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof ChattyJS !== 'undefined') {
+          ChattyJS.closeWidget();
+        }
+        // Hide the floating button entirely
+        var style = document.createElement('style');
+        style.innerHTML = '#Avada-FAQ_Widget { display: none !important; }';
+        document.head.appendChild(style);
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>
 
