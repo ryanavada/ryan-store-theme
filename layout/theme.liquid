@@ -385,33 +385,37 @@ window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, l
 </script>
 
 <script>
-  (function() {
-    // Business hours: 9AM - 6PM EST (UTC-5, or UTC-4 during DST)
-    // Adjust UTC offset accordingly: EST = UTC-5, EDT = UTC-4
+(function() {
+  var customerTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  function isBusinessHours() {
     var now = new Date();
-    var utcHour = now.getUTCHours();
-    var utcMinute = now.getUTCMinutes();
-    
-    // Determine EST offset (simplified: use -5 year-round, or handle DST)
-    // For accuracy, use a fixed offset. EST = UTC-5
-    var estOffset = -5;
-    var estHour = (utcHour + estOffset + 24) % 24;
-    
-    // Business hours: 9AM to 6PM EST
-    var isBusinessHours = estHour >= 7 && estHour < 18;
-    
-    if (!isBusinessHours) {
-      document.addEventListener('DOMContentLoaded', function() {
-        if (typeof ChattyJS !== 'undefined') {
-          ChattyJS.closeWidget();
-        }
-        // Hide the floating button entirely
-        var style = document.createElement('style');
-        style.innerHTML = '#Avada-FAQ_Widget { display: none !important; }';
-        document.head.appendChild(style);
-      });
-    }
-  })();
+
+    // Lấy giờ theo timezone của khách
+    var customerTime = new Intl.DateTimeFormat('en-US', {
+      timeZone: customerTimezone,
+      hour: 'numeric',
+      hour12: false
+    }).format(now);
+
+    var hour = parseInt(customerTime, 10);
+
+    // Business hours: 7AM - 6PM theo timezone khách
+    return hour >= 7 && hour < 18;
+  }
+
+  if (!isBusinessHours()) {
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof ChattyJS !== 'undefined') {
+        ChattyJS.closeWidget();
+      }
+
+      var style = document.createElement('style');
+      style.innerHTML = '#Avada-FAQ_Widget { display: none !important; }';
+      document.head.appendChild(style);
+    });
+  }
+})();
 </script>
 
 </body>
