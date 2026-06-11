@@ -103,7 +103,11 @@
           }
         },
         "avada_appointment_booking_avada_block_jCtf6f": {
-          "type": "shopify://apps/avada-appointment-booking/blocks/avada-block/b7adf690-fcc8-4bc3-a184-1973bc73f070",
+          "type": "shopify://apps/avada-appointment/blocks/avada-block/b7adf690-fcc8-4bc3-a184-1973bc73f070",
+          "settings": {}
+        },
+        "joy_wishlist_wishlist_button_w4aAkz": {
+          "type": "shopify://apps/joy-wishlist/blocks/wishlist-button/5f342ce6-6247-4fa7-a60c-2f9ca38eb160",
           "settings": {}
         },
         "description": {
@@ -132,6 +136,7 @@
         "joy_subscription_app_product_bundle_widget_UmQCFQ",
         "buy_buttons",
         "avada_appointment_booking_avada_block_jCtf6f",
+        "joy_wishlist_wishlist_button_w4aAkz",
         "description",
         "share"
       ],
