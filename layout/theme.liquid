@@ -384,7 +384,7 @@
 window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, localeCode}) => new Intl.NumberFormat(localeCode,{style:'currency',currency:currencyCode, minimumFractionDigits:0, currencyDisplay: 'narrowSymbol'}).format(price) }
 </script>
 
-<script>
+{% comment %} /* <script>
 (function() {
   var customerTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -416,7 +416,7 @@ window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, l
     });
   }
 })();
-</script>
+</script>  {% endcomment %}
 
 </body>
 </html>
