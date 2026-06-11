@@ -401,7 +401,7 @@ window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, l
     var hour = parseInt(customerTime, 10);
 
     // Business hours: 7AM - 6PM theo timezone khách
-    return hour >= 7 && hour < 18;
+    return hour >= 9 && hour < 18;
   }
 
   if (!isBusinessHours()) {
