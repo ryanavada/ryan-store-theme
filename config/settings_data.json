@@ -238,11 +238,6 @@
         "disabled": false,
         "settings": {}
       },
-      "4275615285897611771": {
-        "type": "shopify://apps/fera/blocks/embed/2fbfcfa7-8a04-479f-89a8-0621fa099c51",
-        "disabled": true,
-        "settings": {}
-      },
       "16265478094627758095": {
         "type": "shopify://apps/avada-estimated-delivery-date/blocks/app-embed/019d9af8-5592-7f52-a533-082d8f06d58b",
         "disabled": false,
@@ -261,6 +256,11 @@
       "15472879455061085326": {
         "type": "shopify://apps/avada-order-limits/blocks/app-embed/d3021427-4f7b-49c8-8963-29d1d52b8956",
         "disabled": true,
+        "settings": {}
+      },
+      "4673782817859531333": {
+        "type": "shopify://apps/avada-withdrawal-form/blocks/app-embed/019e7349-1624-7833-af1e-7486925c42df",
+        "disabled": false,
         "settings": {}
       }
     },
