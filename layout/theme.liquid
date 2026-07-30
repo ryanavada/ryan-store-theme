@@ -419,8 +419,30 @@ window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, l
   }
 })();
 </script>  {% endcomment %}
+<script>
+(function() {
+  function patchViewAccountBtn() {
+    const widget = document.querySelector('joy-loyalty-widget');
+    if (!widget || !widget.shadowRoot) return;
 
+    const btns = widget.shadowRoot.querySelectorAll('button.joy-profile-edit-btn');
+    btns.forEach(function(btn) {
+      if (btn.dataset.patched) return;
+      // Chỉ target button có text "View account" (hoặc text tương tự)
+      if (!btn.textContent.trim().toLowerCase().includes('view account')) return;
+      btn.dataset.patched = 'true';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.location.href = 'https://loveunlimited.com/a/customerhub#account:a:dashboard';
+      });
+    });
+  }
 
+  const observer = new MutationObserver(patchViewAccountBtn);
+  observer.observe(document.body, { childList: true, subtree: true });
+  patchViewAccountBtn();
+})();
+</script>
 
 </body>
 </html>
