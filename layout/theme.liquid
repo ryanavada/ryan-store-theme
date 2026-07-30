@@ -421,25 +421,22 @@ window.JoySdk = {...window.JoySdk,formatPriceCurrency : ({price, currencyCode, l
 </script>  {% endcomment %}
 <script>
 (function() {
-  function patchViewAccountBtn() {
-    const widget = document.querySelector('joy-loyalty-widget');
-    if (!widget || !widget.shadowRoot) return;
-
-    const btns = widget.shadowRoot.querySelectorAll('button.joy-profile-edit-btn');
-    // Lấy button đầu tiên (index 0 = "View account", index 1 = "View activity")
-    const viewAccountBtn = btns[0];
-    if (!viewAccountBtn || viewAccountBtn.dataset.patched) return;
-
-    viewAccountBtn.dataset.patched = 'true';
-    viewAccountBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      window.location.href = 'https://loveunlimited.com/a/customerhub#account:a:dashboard';
-    });
+  function overrideAccountUrl() {
+    if (window.AVADA_JOY && window.AVADA_JOY.account_url) {
+      window.AVADA_JOY.account_url = 'https://loveunlimited.com/a/customerhub#account:a:dashboard';
+      return true;
+    }
+    return false;
   }
 
-  const observer = new MutationObserver(patchViewAccountBtn);
-  observer.observe(document.body, { childList: true, subtree: true });
-  patchViewAccountBtn();
+  // Thử override ngay nếu AVADA_JOY đã load
+  if (!overrideAccountUrl()) {
+    // Nếu chưa load, dùng MutationObserver chờ widget mount
+    const observer = new MutationObserver(function() {
+      if (overrideAccountUrl()) observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
 })();
 </script>
 
