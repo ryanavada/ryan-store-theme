@@ -262,6 +262,11 @@
         "type": "shopify://apps/avada-accessibility/blocks/app-embed/0ab9368b-426b-42b4-93ea-63d9c8e88707",
         "disabled": false,
         "settings": {}
+      },
+      "1467547354962066714": {
+        "type": "shopify://apps/avada-online-course/blocks/avada-embed/019d8f2f-0abf-7d0f-9fe7-67e6d49e9d3a",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
