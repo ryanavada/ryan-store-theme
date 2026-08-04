@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -6,9 +15,27 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "178585271523348269": {
+      "type": "apps",
+      "blocks": {
+        "avada_online_course_course_info_wCDCpB": {
+          "type": "shopify://apps/avada-online-course/blocks/course-info/019d8f2f-0abf-7d0f-9fe7-67e6d49e9d3a",
+          "settings": {
+            "curriculum_title": "Course Curriculum"
+          }
+        }
+      },
+      "block_order": [
+        "avada_online_course_course_info_wCDCpB"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "178585271523348269"
   ]
 }
