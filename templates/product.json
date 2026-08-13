@@ -91,6 +91,10 @@
           "type": "shopify://apps/joy-subscription-app/blocks/subscription-widget/6aa30d9c-ff0b-4f29-a82d-a633d8e04b9a",
           "settings": {}
         },
+        "recharge_subscriptions_subscription_widget_v2_VwahTy": {
+          "type": "shopify://apps/recharge-subscriptions/blocks/subscription-widget-v2/371eed76-0b44-4869-9813-730372ea378e",
+          "settings": {}
+        },
         "joy_subscription_app_product_bundle_widget_UmQCFQ": {
           "type": "shopify://apps/joy-subscription-app/blocks/product-bundle-widget/6aa30d9c-ff0b-4f29-a82d-a633d8e04b9a",
           "disabled": true,
@@ -134,6 +138,7 @@
         "quantity_selector",
         "aov_ai_bundle_offer_volume_fmAGhQ",
         "joy_subscription_app_subscription_widget_kVnCyM",
+        "recharge_subscriptions_subscription_widget_v2_VwahTy",
         "joy_subscription_app_product_bundle_widget_UmQCFQ",
         "buy_buttons",
         "avada_appointment_booking_avada_block_jCtf6f",
@@ -242,17 +247,6 @@
     },
     "1785852559a264e1b9": {
       "type": "apps",
-      "blocks": {
-        "avada_online_course_course_info_Ntpa7L": {
-          "type": "shopify://apps/avada-online-course/blocks/course-info/019d8f2f-0abf-7d0f-9fe7-67e6d49e9d3a",
-          "settings": {
-            "curriculum_title": "Course Curriculum"
-          }
-        }
-      },
-      "block_order": [
-        "avada_online_course_course_info_Ntpa7L"
-      ],
       "settings": {
         "include_margins": true
       }
