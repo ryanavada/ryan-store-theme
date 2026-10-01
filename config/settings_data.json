@@ -160,9 +160,7 @@
       "14710238943034738919": {
         "type": "shopify://apps/air-product-reviews/blocks/app-embed/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
         "disabled": false,
-        "settings": {
-          "air_reviews_json_ld_v2": "{\n\"@context\": \"http://schema.org\",\n\"@type\": \"Product\",\n\"name\": {{ product.title | json }},\n\"description\": {{ product.description | escape | truncate: 150 | json }},\n\"image\": {{ product.featured_image | json }},\n\"aggregateRating\": {\n  \"@type\": \"AggregateRating\",\n  \"ratingValue\": {{ product.metafields.reviews.rating.value.rating | default: product.metafields.air_reviews_product.review_avg | json }},\n  \"bestRating\": {{ product.metafields.reviews.rating.value.scale_max | json }},\n  \"reviewCount\": {{ product.metafields.air_reviews_product.review_count | json }}\n }{% if shop.metafields.air_reviews_has_ugc_content.data.value == true %}, \n  \"review\":[{% assign reviewsData = product.metafields.air_reviews_product.data.value.reviews %}\n  {% for review in reviewsData limit: 10 %}\n    {\n      \"@type\": \"Review\",\n      \"author\": {\n        \"@type\": \"Person\",\n        \"name\": {{ review.firstName | json }}\n      },\n      \"reviewRating\": {\n          \"@type\": \"Rating\",\n          \"bestRating\": {{ product.metafields.reviews.rating.value.scale_max | json }},\n          \"ratingValue\": {{ review.rate | json }},\n          \"worstRating\": {{ product.metafields.reviews.rating.value.scale_min | json }}\n      },\n      \"reviewBody\": {{ review.content | json }},\n      \"datePublished\": {{ review.createdAt | date: \"%Y-%m-%d %H:%M:%S\" | json }}\n    }{% unless forloop.last %},{% endunless %} \n  {% endfor %}]{% endif %}\n}"
-        }
+        "settings": {}
       },
       "14876220180117712452": {
         "type": "shopify://apps/sea-post-purchase-survey/blocks/app-embed/c7c6d466-0f8e-412d-b0b9-db9b3387aa92",
@@ -248,11 +246,6 @@
         "disabled": false,
         "settings": {}
       },
-      "15472879455061085326": {
-        "type": "shopify://apps/avada-order-limits/blocks/app-embed/d3021427-4f7b-49c8-8963-29d1d52b8956",
-        "disabled": true,
-        "settings": {}
-      },
       "4673782817859531333": {
         "type": "shopify://apps/avada-withdrawal-form/blocks/app-embed/019e7349-1624-7833-af1e-7486925c42df",
         "disabled": false,
@@ -270,6 +263,11 @@
       },
       "6986023734925475395": {
         "type": "shopify://apps/avada-affiliate-marketing/blocks/avada-affiliate/019d766f-ee92-73f3-9dcc-936a05227dd6",
+        "disabled": false,
+        "settings": {}
+      },
+      "15472879455061085326": {
+        "type": "shopify://apps/avada-order-limits/blocks/app-embed/d3021427-4f7b-49c8-8963-29d1d52b8956",
         "disabled": false,
         "settings": {}
       }
