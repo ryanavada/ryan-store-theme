@@ -18,11 +18,8 @@
             "device": "all",
             "container_width": 450,
             "use_full_width": true,
-            "action_label": "Ask AI",
-            "action_label_color": "#ffffff",
             "action_background_color": "#232323",
             "placeholder": "Ask us anything",
-            "ask_ai_corner_radius": 8,
             "show_suggested_questions": true,
             "suggested_questions_text_color": "#232323"
           }
@@ -113,7 +110,9 @@
         },
         "joy_wishlist_wishlist_button_w4aAkz": {
           "type": "shopify://apps/joy-wishlist/blocks/wishlist-button/5f342ce6-6247-4fa7-a60c-2f9ca38eb160",
-          "settings": {}
+          "settings": {
+            "inline_atc": false
+          }
         },
         "description": {
           "type": "description",
@@ -205,6 +204,7 @@
       "blocks": {
         "air_product_reviews_app_block_review_list_eikEjc": {
           "type": "shopify://apps/ag-product-reviews/blocks/app-block-review-list/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+          "disabled": true,
           "settings": {
             "air_blockreviews_summaryHeading": "Reviews",
             "air_blockreviews_layout": "list",
