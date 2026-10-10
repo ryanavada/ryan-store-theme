@@ -157,11 +157,6 @@
         "disabled": true,
         "settings": {}
       },
-      "14710238943034738919": {
-        "type": "shopify://apps/air-product-reviews/blocks/app-embed/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
-        "disabled": false,
-        "settings": {}
-      },
       "14876220180117712452": {
         "type": "shopify://apps/sea-post-purchase-survey/blocks/app-embed/c7c6d466-0f8e-412d-b0b9-db9b3387aa92",
         "disabled": false,
@@ -270,6 +265,13 @@
         "type": "shopify://apps/avada-order-limits/blocks/app-embed/d3021427-4f7b-49c8-8963-29d1d52b8956",
         "disabled": false,
         "settings": {}
+      },
+      "14710238943034738919": {
+        "type": "shopify://apps/ag-product-reviews/blocks/app-embed/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+        "disabled": false,
+        "settings": {
+          "air_reviews_json_ld_v3": ""
+        }
       }
     },
     "color_schemes": {
